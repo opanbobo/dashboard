@@ -1,0 +1,55 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.media-list-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 100%;
+
+	@include res.media(phone) {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	@include res.media(tablet) {
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	.list-item {
+		text-align: center;
+		margin-bottom: 1rem;
+
+		@include res.media(phone) {
+			margin-bottom: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.item {
+			&-image {
+				width: 50px;
+				height: 50px;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: rgba($color: $background, $alpha: 1);
+				margin: auto;
+				border-radius: 10px;
+			}
+
+			&-label {
+				text-transform: capitalize;
+			}
+
+			&-total {
+				font-weight: 600;
+			}
+		}
+	}
+}

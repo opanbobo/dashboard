@@ -1,0 +1,70 @@
+@use '../media' as res;
+@use '../color' as *;
+
+.widget {
+	background: rgba($color: #484f6c, $alpha: 0.5);
+
+	.inner-widget {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+
+		.widget-item {
+			.item-label {
+				font-weight: 500;
+				text-transform: capitalize;
+			}
+
+			.item-description {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				flex-wrap: wrap;
+
+				.item-percent {
+					font-weight: bolder;
+				}
+
+				span {
+					margin: 0 4px;
+
+					&:last-child {
+						margin-left: 0;
+					}
+				}
+			}
+
+			&.info {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				min-width: 100%;
+
+				.info-total {
+					font-size: 21px;
+					font-weight: 600;
+				}
+
+				.info-icon {
+					font-size: 21px;
+
+					.icon-status {
+						filter: drop-shadow(2px 2px 5px rgba($color: color(black, dark), $alpha: 0.2));
+					}
+				}
+			}
+		}
+	}
+
+	&.neutral {
+		background: rgba($color: $blue, $alpha: 0.8);
+	}
+
+	&.positive {
+		background: rgba($color: $green, $alpha: 0.8);
+	}
+
+	&.negative {
+		background: rgba($color: $red, $alpha: 0.8);
+	}
+}

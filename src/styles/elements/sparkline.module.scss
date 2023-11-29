@@ -1,0 +1,49 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.spark-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	@include res.media(tablet) {
+		flex-direction: column-reverse;
+	}
+
+	.spark-chart {
+		flex: 1;
+	}
+
+	.spark-info {
+		flex: 0.5;
+		display: flex;
+		flex-direction: column;
+		padding: 0 12px;
+
+		@include res.media(tablet) {
+			flex: 1;
+			width: 100%;
+		}
+
+		.info-title {
+			text-transform: capitalize;
+		}
+		.info-stats {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-direction: row;
+
+			.stats-total {
+				color: $black;
+				margin: 0;
+			}
+
+			.stats-sub {
+				.icon-sub {
+					margin-left: 3px;
+				}
+			}
+		}
+	}
+}

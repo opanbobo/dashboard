@@ -1,0 +1,118 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.menu-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	height: 100%;
+	width: auto;
+	flex-direction: column;
+
+	.menu-head {
+		margin-bottom: 1rem;
+		padding: 12px 0;
+		border-bottom: 2px solid rgba($color: $background, $alpha: 1);
+
+		.head-item {
+			position: relative;
+			width: 35px;
+			height: 35px;
+		}
+
+		@include res.media(tablet) {
+			display: none;
+		}
+	}
+
+	@include res.media(tablet) {
+		width: 100%;
+		padding: 12px 12px;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+	@media screen and (max-width: 370px) {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.menu-feature {
+		margin-bottom: 1rem;
+		border-bottom: 2px solid rgba($color: $background, $alpha: 1);
+
+		.feature-item {
+			margin-bottom: 12px;
+
+			.feature-button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 8px;
+				border: none;
+			}
+		}
+
+		@include res.media(tablet) {
+			border: none;
+			display: flex;
+			align-items: center;
+			margin: 0 8px 0 0;
+			border-right: 2px solid rgba($color: $background, $alpha: 1);
+
+			.feature-item {
+				margin: 0 12px 0 0;
+			}
+		}
+
+		@media screen and (max-width: 370px) {
+			width: 100%;
+			justify-content: space-around;
+			margin: 0 0 6px;
+			border-right: none;
+			border-bottom: 2px solid rgba($color: $background, $alpha: 1);
+
+			.feature-item {
+				margin: 0 6px 6px;
+			}
+		}
+	}
+
+	.menu-list {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding: 8px 6px;
+		border-radius: 12px;
+		background: rgba($color: $background, $alpha: 1);
+
+		.menu-item {
+			margin: 6px 0;
+
+			.menu-button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 8px;
+				border: none;
+			}
+		}
+
+		@include res.media(tablet) {
+			flex-direction: row;
+			padding: 0;
+			background: transparent;
+
+			.menu-item {
+				margin: 0 6px;
+			}
+		}
+
+		@media screen and (max-width: 370px) {
+			padding: 3;
+			width: 100%;
+			justify-content: space-around;
+		}
+	}
+}

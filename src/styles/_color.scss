@@ -1,0 +1,60 @@
+$background: #f2f2f7;
+$white: #fff;
+$black: #36414c;
+$blue: #1990ff;
+$green: #06d6a0;
+$red: #ff6b6b;
+$yellow: #ffe66d;
+$orange: #e76f51;
+$border: #495867;
+
+$colors: (
+	black: (
+		base: $black,
+		light: #44525f,
+		dark: darken($black, 8%),
+		background:
+			darken(
+				$color: $black,
+				$amount: 6%,
+			),
+	),
+	blue: (
+		base: $blue,
+		light: #4b79be,
+		dark: darken($blue, 15%),
+	),
+	white: (
+		base: $white,
+		light: lighten($white, 15%),
+		dark: darken($white, 15%),
+	),
+	red: (
+		base: $red,
+		light: lighten($red, 15%),
+		dark: darken($red, 15%),
+	),
+	green: (
+		base: $green,
+		light: lighten($green, 15%),
+		dark: darken($green, 15%),
+	),
+	yellow: (
+		base: $yellow,
+		light: lighten($yellow, 15%),
+		dark: darken($yellow, 15%),
+	),
+	orange: (
+		base: $orange,
+		light: lighten($orange, 15%),
+		dark: darken($orange, 15%),
+	),
+);
+
+@function color($color-name, $color-variant: null) {
+	@if ($color-variant != null) {
+		@return map-get(map-get($colors, $color-name), $color-variant);
+	} @else {
+		@return map-get($colors, $color-name);
+	}
+}

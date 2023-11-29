@@ -1,0 +1,97 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.loading-wrap {
+	display: flex;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 999;
+	border-radius: 5;
+
+	.child-wrap {
+		padding: 6px;
+		margin: auto;
+		text-align: center;
+
+		.child-text {
+			text-align: center;
+			color: color(black, light);
+			// opacity: 0;
+			// animation: textAnim 2.5s ease-in-out infinite 0.5s;
+		}
+
+		.logo {
+			height: 45px;
+			width: 45px;
+			margin: auto;
+			filter: drop-shadow(2px 2px 5px rgba($color: color(black, dark), $alpha: 0.1));
+
+			path {
+				&:nth-child(1) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite;
+				}
+				&:nth-child(2) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.2s;
+				}
+				&:nth-child(3) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.3s;
+				}
+				&:nth-child(4) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.4s;
+				}
+				&:nth-child(5) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.5s;
+				}
+				&:nth-child(6) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.6s;
+				}
+				&:nth-child(7) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.7s;
+				}
+				&:nth-child(8) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.8s;
+				}
+				&:nth-child(9) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.9s;
+				}
+				&:nth-child(10) {
+					fill-opacity: 0;
+					animation: fillAnim 2s ease-in-out infinite 0.99s;
+				}
+			}
+		}
+	}
+}
+
+@keyframes fillAnim {
+	0% {
+		fill-opacity: 1;
+	}
+
+	100% {
+		fill-opacity: 0;
+	}
+}
+
+@keyframes textAnim {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

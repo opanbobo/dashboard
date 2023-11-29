@@ -1,0 +1,63 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.head-wrap {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.head-item {
+		&-logo {
+			position: relative;
+			width: 18%;
+			height: 35px;
+			min-width: 90px;
+			max-width: 100px;
+		}
+
+		&-toolbar {
+			display: flex;
+			align-items: center;
+
+			.toolbar-item {
+				margin: 0 6px;
+
+				.toolbar-button {
+					border: none;
+					border-radius: 6px;
+
+					&-search {
+						background: rgba($color: color(blue, base), $alpha: 0.2);
+						border: none;
+						border-radius: 3px;
+					}
+				}
+
+				.toolbar-avatar {
+					display: flex;
+					align-items: center;
+					margin-right: 0;
+
+					.avatar-img {
+						position: relative;
+						width: 35px;
+						height: 35px;
+						border-radius: 10px;
+
+						img {
+							border-radius: 10px;
+						}
+					}
+
+					.avatar-icon {
+						margin-left: 6px;
+						font-size: 10px;
+						color: $black;
+					}
+				}
+			}
+		}
+	}
+}

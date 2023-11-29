@@ -1,0 +1,90 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.layout-wrap {
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: grid;
+	grid-template: 1fr / 60px 1fr;
+	grid-template-areas: 'sidebar main';
+	background: $background;
+	overflow: auto;
+	scrollbar-width: none;
+	column-gap: 1px;
+
+	@include res.media(tablet) {
+		grid-template: 1fr auto / 1fr;
+		grid-template-areas:
+			'main'
+			'sidebar';
+	}
+
+	.layout-side {
+		grid-area: sidebar;
+		position: fixed;
+		height: 100%;
+		width: auto;
+		background: $white;
+		padding: 0 12px;
+
+		@include res.media(tablet) {
+			z-index: 999;
+			bottom: 0;
+			height: auto;
+			width: 100%;
+			padding: 0;
+			border-radius: 12px 12px 0 0;
+			filter: drop-shadow(0 9px 12px rgba($color: color(blue, base), $alpha: 0.5));
+		}
+	}
+
+	.layout-main {
+		grid-area: main;
+		height: 100vh;
+		width: 100%;
+		display: grid;
+		grid-template: auto 1fr / 1fr;
+		grid-template-areas:
+			'header'
+			'content';
+		row-gap: 2px;
+
+		&.command-content {
+			width: 100%;
+			gap: 0;
+
+			.main-content {
+				background: $background;
+			}
+		}
+
+		.main-head {
+			grid-area: header;
+			position: sticky;
+			top: 0;
+			padding: 12px;
+			background: $white;
+		}
+
+		.main-content {
+			grid-area: content;
+			height: 100%;
+			padding: 12px;
+			overflow: auto;
+			background: $white;
+
+			@include res.media(tablet) {
+				padding: 10px 10px 60px;
+			}
+
+			@media screen and (max-width: 320px) {
+				padding: 10px 10px 110px;
+			}
+		}
+	}
+}

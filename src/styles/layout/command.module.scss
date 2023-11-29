@@ -1,0 +1,84 @@
+@use '../color' as *;
+@use '../media' as res;
+
+.command-wrapper {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template: 1fr auto / 1fr;
+	row-gap: 12px;
+	grid-template-areas:
+		'toprow'
+		'botrow';
+
+	@include res.media(tablet) {
+		row-gap: 10px;
+	}
+
+	@include res.media(phone) {
+		row-gap: 8px;
+	}
+
+	@media screen and (max-width: 1024px) {
+		max-height: calc(100vh - 12px);
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.toprow {
+		grid-area: toprow;
+		width: 100%;
+
+		grid-template: auto 1fr / auto 1fr;
+		row-gap: 12px;
+		display: grid;
+		grid-template-areas:
+			'leftcol topcol'
+			'leftcol midcol';
+
+		@media screen and (max-width: 1024px) {
+			grid-template-areas:
+				'topcol topcol'
+				'leftcol midcol';
+		}
+
+		@include res.media(tablet) {
+			grid-template: auto 1fr auto / 1fr;
+			grid-template-areas:
+				'topcol'
+				'midcol'
+				'leftcol';
+		}
+
+		.topcol {
+			grid-area: topcol;
+		}
+
+		.leftcol {
+			grid-area: leftcol;
+			margin-right: 12px;
+
+			@include res.media(tablet) {
+				margin-right: 0;
+			}
+		}
+
+		.midcol {
+			grid-area: midcol;
+
+			.chart-word {
+				height: 200px;
+				width: 100%;
+			}
+		}
+
+		.rightcol {
+			grid-area: rightcol;
+		}
+	}
+
+	.botrow {
+		grid-area: botrow;
+	}
+}
