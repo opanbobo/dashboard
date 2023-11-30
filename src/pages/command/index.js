@@ -796,7 +796,7 @@ const CommandCenter = () => {
             </Col>
             <Col xs={24} md={24} lg={11} xl={8}>
               <Row style={{ height: "100%" }}>
-                <Col span={24}>
+                <Col span={24} style={{ display: 'none' }}>
                   <Card
                     title="top issue"
                     style={{ height: "100%" }}
