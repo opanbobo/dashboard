@@ -11,6 +11,8 @@
 	right: 0;
 	display: grid;
 	grid-template: 1fr / 60px 1fr;
+	// YUDI
+	grid-template: 1fr/140px 1fr;
 	grid-template-areas: 'sidebar main';
 	background: $background;
 	overflow: auto;

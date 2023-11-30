@@ -84,6 +84,7 @@
 		align-items: center;
 		flex-direction: column;
 		padding: 8px 6px;
+		width: 100%;
 		border-radius: 12px;
 		background: rgba($color: $background, $alpha: 1);
 
@@ -114,5 +115,38 @@
 			width: 100%;
 			justify-content: space-around;
 		}
+	}
+}
+
+// YUDI
+.feature-item{
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	gap: 6px;
+
+	.feature-button {
+		background-color: transparent !important;
+		color: #333 !important;
+		box-shadow: unset !important;
+	}
+}
+
+.menu-active {
+	background-color: #00d4ff !important;
+	color: #fff !important;
+	padding-right: 8px !important;
+
+	.feature-button {
+		color: #fff !important;
+	}
+}
+
+.menu-wrapper {
+	.menu-head {
+		width: 100%;
+		display: flex;
+		justify-content: center;
 	}
 }
