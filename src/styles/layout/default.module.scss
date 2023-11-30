@@ -33,6 +33,9 @@
 		width: auto;
 		background: $white;
 		padding: 0 12px;
+		box-shadow: 0 4px 12px 0 rgba(131, 146, 165, 0.15);
+  	border-right: 1px solid rgba(224, 225, 235, 0.85);
+		z-index: 1;
 
 		@include res.media(tablet) {
 			z-index: 999;
