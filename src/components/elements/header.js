@@ -42,7 +42,7 @@ const MainHeader = ({
           url={url ? url : null}
           layout="fill"
           objectFit="contain"
-          alt="headLogo client"
+          alt="headLogo"
           height={120}
           width={120}
           priority="true"
@@ -124,7 +124,7 @@ const MainHeader = ({
                 </Button>
 
                 <Button size="small" type="text" icons="MailOutlined">
-                  info@digivla.id
+                  info@skema.co.id
                 </Button>
               </>
             )}
