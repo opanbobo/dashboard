@@ -16,6 +16,7 @@ const MainHeader = ({
   showlogo = true,
   avatar,
   loginHeader = false,
+  showToggleMenu = true,
   ...props
 }) => {
   const logoType = useMemo(() => {
@@ -29,7 +30,12 @@ const MainHeader = ({
 
   return (
     <div className={`${className} ${styles["head-wrap"]}`} {...props}>
-      <MenuOutlined className={styles["head-anticon-menu"]} onClick={onClick}/>
+      {
+      showToggleMenu ?
+        <MenuOutlined className={styles["head-anticon-menu"]} onClick={onClick}/>
+      :
+        null
+      }
       <div className={styles["head-item-logo"]}>
         <Image
           src={logo}
