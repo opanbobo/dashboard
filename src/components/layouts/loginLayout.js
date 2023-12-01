@@ -33,7 +33,7 @@ const LoginLayout = ({ children, logo }) => {
 						{children}
 					</div>
 				</div>
-				<div className={styles.right}>
+				{/* <div className={styles.right}>
 					<div className={styles['vector-wrap']}>
 						<Image
 							src={logoType}
@@ -45,7 +45,7 @@ const LoginLayout = ({ children, logo }) => {
 							priority='true'
 						/>
 					</div>
-				</div>
+				</div> */}
 			</div>
 			<div className={styles['auth-foot']}>
 				<div className={styles['inner-foot']}>

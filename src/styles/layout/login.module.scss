@@ -10,12 +10,19 @@
 	grid-template-areas:
 		'head'
 		'content';
+	background: rgb(2,0,36);
+	background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+	background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);		
 
 	.auth-head {
 		position: relative;
 		grid-area: head;
 		background: transparent;
 		padding: 18px;
+		color: #fff;
+
 
 		@include res.media(phone) {
 			padding: 12px;
@@ -66,9 +73,11 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		display: grid;
-		grid-template-columns: 0.5fr 1fr;
-		grid-template-areas: 'left right';
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		// grid-template-columns: 0.5fr 1fr;
+		// grid-template-areas: 'left right';
 
 		@include res.media(tablet) {
 			grid-template: 0.5fr 1fr / 1fr;
@@ -91,10 +100,18 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
+			
 			.box-form {
 				width: 320px;
 				min-height: 10px;
+				
+				margin: auto;
+				background-color: #fff;
+				border: 1px solid transparent;
+				border-radius: 30px;
+				-webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+				box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+				padding: 15px;
 
 				@include res.media(phone) {
 					padding: 0 12px;
