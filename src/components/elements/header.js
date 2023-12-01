@@ -124,7 +124,7 @@ const MainHeader = ({
                 </Button>
 
                 <Button size="small" type="text" icons="MailOutlined">
-                  info@digivla.id
+                  info@skema.co.id
                 </Button>
               </>
             )}
