@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { forwardRef, useState, useEffect } from 'react';
-import { Button, Image, Tooltip } from 'components';
+import { Button, Tooltip } from 'components';
 // import { Tooltip } from 'antd';
 import styles from 'styles/elements/menu.module.scss';
+import Image from 'next/image';
 
 import breakPointOberver from 'constant/mediaQuery';
+import logotai from '../../../public/images/logo-icon.png';
 
 const breakPoints = {
 	tablet: '(min-width: 300px) and (max-width: 1023px)',
@@ -28,7 +30,8 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 		<div className={`${styles['menu-wrapper']} ${className}`} {...props}>
 			<div className={styles['menu-head']}>
 				<div className={styles['head-item']}>
-					<Image src={logo} objectFit='cover' alt='headLogo' height={40} width={40} priority='true' />
+					{/* <Image src={logotai} objectFit='cover' alt='headLogo bos' height={40} width={40} priority='true' /> */}
+					<Image src={logotai} alt='logo' style={{width: "40px"}} />
 				</div>
 			</div>
 			<div className={styles['menu-feature']}>
