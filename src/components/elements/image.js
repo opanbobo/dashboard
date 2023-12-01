@@ -9,7 +9,7 @@ const Image = ({ type, className, src, url, ...props }) => {
 		}
 		default: {
 			return <Images loader={({ src, width, quality }) => {
-				return url ? `${url}${src}?w=${width}&q=${quality || 75}` : `https://formed.digivla.id${src}?w=${width}&q=${quality || 75}`
+				return url ? `${url}${src}?w=${width}&q=${quality || 75}` : `${src}?w=${width}&q=${quality || 75}`
 			}} className={className} src={src} {...props} />;
 		}
 	}

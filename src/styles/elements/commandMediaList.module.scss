@@ -4,9 +4,9 @@
 .media-list-wrapper {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	flex-direction: column;
-	height: 100%;
+	justify-content: space-around;
+	flex-direction: row;
+	// height: 100%;
 
 	@include res.media(phone) {
 		flex-direction: row;

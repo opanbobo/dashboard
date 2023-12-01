@@ -21,8 +21,8 @@ const SpokeList = ({ className, title, data, ...props }) => {
 									layout='fill'
 									objectFit='cover'
 									alt='headLogo'
-									height={40}
-									width={40}
+									height={120}
+									width={120}
 									priority='true'
 								/>
 							</div>

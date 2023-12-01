@@ -621,7 +621,99 @@ const CommandCenter = () => {
         <div className={styles.topcol}>
           <Row>
             <Col xs={24} md={24} lg={14} xl={16}>
+              {/* <Row style={{ height: "100%" }}> */}
+                {/* <Col xs={24} md={24} lg={13} xl={16}> */}
+                  <MediaList
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    data={
+                      mediaListCount.result.data
+                        ? mediaListCount.result.data.map((item) => {
+                            return item;
+                          })
+                        : []
+                    }
+                  />
+                  <p style={{marginBottom: '12px'}}></p>
+                  <Card
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    className={styles["dcc-card"]}
+                    onLoading={!doneCheck}
+                  >
+                    {!backtrackStatus ? (
+                      <Row align="middle">
+                        <Col>Please select date for backtrack:</Col>
+                        <Col>
+                          <DatePicker
+                            onChange={(e) => setBtDate(e.format("YYYY-MM-DD"))}
+                          />
+                          <Button
+                            onClick={() => {
+                              postBacktrack({
+                                backtrack_date: btDate,
+                              })
+                                .then((data) => data.json())
+                                .then((data) => {
+                                  if (
+                                    data.message ==
+                                    "client_id is successfully registered"
+                                  ) {
+                                    notification.success({
+                                      message: "Success backtrack",
+                                    });
+
+                                    dispatch(
+                                      getGeo({
+                                        ...defaultFilter,
+                                        ...filter.result,
+                                      })
+                                    );
+
+                                    setBacktrackStatus(true);
+                                  } else {
+                                    notification.error({
+                                      message:
+                                        "Error happen when add backtrack date!",
+                                    });
+                                  }
+                                });
+                              // .catch((err) =>
+                              // 	notification.error({
+                              // 		message: 'Error happen when add backtrack date!',
+                              // 	}),
+                              // );
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    ) : (
+                      <Geo
+                        className={styles["chart-geo"]}
+                        options={geo.result.data ? geo.result.data : []}
+                        clickEvent={(e) => {
+                          handleAnalyticDetail({
+                            type: "geo",
+                            page: 0,
+                            maxSize: 10,
+                            order_by: "datee",
+                            order: "desc",
+                            type_location: "article",
+                            geo_loc: e,
+                          });
+                        }}
+                      />
+                    )}
+                  </Card>
+                {/* </Col> */}
+                {/* <Col xs={24} md={24} lg={11} xl={8}>
+                </Col> */}
+              {/* </Row> */}
+              <p style={{marginBottom: '12px'}}></p>
               <ImageList
+                bodyStyle={{ padding: 6}}
                 spokepersonStatistic={spokepersonStatistic}
                 getSpokepersonStatisticClick={getSpokepersonStatisticClick}
                 setDataList={setDataList}
@@ -629,8 +721,8 @@ const CommandCenter = () => {
                 filter={filter}
                 dataList={dataList}
               />
-            </Col>
-            <Col xs={24} md={24} lg={10} xl={8}>
+              <p style={{marginBottom: '12px'}}></p>
+              
               <Sparkline
                 onLoading={coverageTonality.loading}
                 bodyStyle={{ padding: 6 }}
@@ -703,104 +795,151 @@ const CommandCenter = () => {
                 }}
               />
             </Col>
-          </Row>
-        </div>
-        <div className={styles.leftcol}>
-          <MediaList
-            style={{ height: "100%" }}
-            bodyStyle={{ height: "100%" }}
-            data={
-              mediaListCount.result.data
-                ? mediaListCount.result.data.map((item) => {
-                    return item;
-                  })
-                : []
-            }
-          />
-        </div>
-        <div className={styles.midcol}>
-          <Row style={{ height: "100%" }}>
-            <Col xs={24} md={24} lg={13} xl={16}>
-              <Card
-                style={{ height: "100%" }}
-                bodyStyle={{ height: "100%" }}
-                className={styles["dcc-card"]}
-                onLoading={!doneCheck}
-              >
-                {!backtrackStatus ? (
-                  <Row align="middle">
-                    <Col>Please select date for backtrack:</Col>
-                    <Col>
-                      <DatePicker
-                        onChange={(e) => setBtDate(e.format("YYYY-MM-DD"))}
-                      />
-                      <Button
-                        onClick={() => {
-                          postBacktrack({
-                            backtrack_date: btDate,
-                          })
-                            .then((data) => data.json())
-                            .then((data) => {
-                              if (
-                                data.message ==
-                                "client_id is successfully registered"
-                              ) {
-                                notification.success({
-                                  message: "Success backtrack",
+            <Col xs={24} md={24} lg={10} xl={8}>
+              
+              <div className={styles.botrow}>
+                <Row>
+                  <Col xs={24} md={24} lg={24} xl={24}>
+                    <Card onLoading={toneMedia.loading}>
+                      <MediaTone
+                        charts={{
+                          series: toneMedia.result.data
+                            ? getMediaSelection(toneMedia.result.data)
+                            : [],
+                          chartOptions: {
+                            stacked: true,
+                            events: {
+                              dataPointSelection(e, chart, config) {
+                                handleAnalyticDetail({
+                                  type: "media",
+                                  page: 0,
+                                  maxSize: 10,
+                                  order_by: "datee",
+                                  order: "desc",
+                                  data: {
+                                    x: config.dataPointIndex,
+                                    y: config.seriesIndex,
+                                  },
                                 });
-
-                                dispatch(
-                                  getGeo({
-                                    ...defaultFilter,
-                                    ...filter.result,
-                                  })
-                                );
-
-                                setBacktrackStatus(true);
-                              } else {
-                                notification.error({
-                                  message:
-                                    "Error happen when add backtrack date!",
-                                });
-                              }
-                            });
-                          // .catch((err) =>
-                          // 	notification.error({
-                          // 		message: 'Error happen when add backtrack date!',
-                          // 	}),
-                          // );
+                              },
+                            },
+                          },
+                          options: {
+                            title: {
+                              text: "Top 10 Media",
+                              floating: false,
+                              offsetY: 5,
+                              align: "left",
+                              style: BarHorizontal.title.style,
+                            },
+                            colors: [...BarHorizontal.colors, "#A020F0"],
+                            plotOptions: BarHorizontal.plotOptions,
+                            xaxis: {
+                              categories: toneMedia.result.data
+                                ? toneMedia.result.data.map((item) => item.media_name)
+                                : [],
+                            },
+                            legend: {
+                              position: "top",
+                              horizontalAlign: "right",
+                              markers: {
+                                height: 10,
+                                width: 10,
+                                offsetY: 0,
+                              },
+                            },
+                          },
                         }}
-                      >
-                        Submit
-                      </Button>
-                    </Col>
-                  </Row>
-                ) : (
-                  <Geo
-                    className={styles["chart-geo"]}
-                    options={geo.result.data ? geo.result.data : []}
-                    clickEvent={(e) => {
-                      handleAnalyticDetail({
-                        type: "geo",
-                        page: 0,
-                        maxSize: 10,
-                        order_by: "datee",
-                        order: "desc",
-                        type_location: "article",
-                        geo_loc: e,
-                      });
-                    }}
-                  />
-                )}
-              </Card>
-            </Col>
-            <Col xs={24} md={24} lg={11} xl={8}>
-              <Row style={{ height: "100%" }}>
+                      />
+                    </Card>
+                  {/* </Col>
+                  <Col xs={24} md={24} lg={12} xl={12}> */}
+                  {/* <p style={{marginBottom: '12px'}}></p> */}
+                    {/* <Card onLoading={ews.loading}>
+                      <EarlyWarning
+                        charts={{
+                          series: ews.result.series || [],
+                          events: {
+                            markerClick(e, chart, config) {
+                              handleAnalyticDetail({
+                                type: "ews",
+                                page: 0,
+                                maxSize: 10,
+                                order_by: "datee",
+                                order: "desc",
+                                data: {
+                                  x: config.dataPointIndex,
+                                  y: config.seriesIndex,
+                                },
+                              });
+                            },
+                          },
+                          options: {
+                            title: {
+                              text: "Early Warning System",
+                              floating: false,
+                              offsetY: 5,
+                              align: "left",
+                              style: LineOptions.title.style,
+                            },
+                            tooltip: {
+                              shared: true,
+                              enabled: true,
+                            },
+                            markers: LineOptions.markers,
+                            stroke: LineOptions.stroke,
+                            colors: LineOptions.colors,
+                            xaxis: {
+                              categories: ews.result.date || [],
+                            },
+                            legend: {
+                              show: false,
+                            },
+                            yaxis: {
+                              show: true,
+                              tickAmount: 3,
+                              min: 0,
+                              max: 20,
+                              labels: {
+                                formatter: function (value, index) {
+                                  if (value >= 0 && value <= 5) {
+                                    return "Potential";
+                                  } else if (value > 5 && value <= 10) {
+                                    return "Emerging";
+                                  } else if (value > 10 && value < 20) {
+                                    return "Current";
+                                  } else {
+                                    return "Crisis";
+                                  }
+                                },
+                              },
+                            },
+                          },
+                        }}
+                      />
+                    </Card> */}
+                  </Col>
+                </Row>
+              </div>
+              <p style={{marginBottom: '12px'}}></p>
+              <ModalDetailArticle />
+              <ModalChartList
+                chartList={chartList}
+                setChartList={setChartList}
+                spokepersonStatisticClick={spokepersonStatisticClick}
+                dataList={dataList}
+                paginationHandler={paginationHandler}
+                setDataList={setDataList}
+                handleClickChart={handleClickChart}
+              />
+              <ModalAnalytic />
+              
+              <Row>
                 <Col span={24} style={{ display: 'none' }}>
                   <Card
                     title="top issue"
-                    style={{ height: "100%" }}
-                    bodyStyle={{ height: "100%" }}
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
                     className={styles["dcc-card-list"]}
                     onLoading={issueTop.loading}
                   >
@@ -809,8 +948,8 @@ const CommandCenter = () => {
                 </Col>
                 <Col span={24}>
                   <Card
-                    style={{ height: "100%" }}
-                    bodyStyle={{ height: "100%" }}
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
                     onLoading={wordCloud.loading}
                     className={styles["dcc-card"]}
                   >
@@ -899,141 +1038,11 @@ const CommandCenter = () => {
             </Col>
           </Row>
         </div>
+        {/* <div className={styles.leftcol}>
+        </div> */}
+        {/* <div className={styles.midcol}>
+        </div> */}
       </div>
-      <div className={styles.botrow}>
-        <Row>
-          <Col xs={24} md={24} lg={12} xl={12}>
-            <Card onLoading={toneMedia.loading}>
-              <MediaTone
-                charts={{
-                  series: toneMedia.result.data
-                    ? getMediaSelection(toneMedia.result.data)
-                    : [],
-                  chartOptions: {
-                    stacked: true,
-                    events: {
-                      dataPointSelection(e, chart, config) {
-                        handleAnalyticDetail({
-                          type: "media",
-                          page: 0,
-                          maxSize: 10,
-                          order_by: "datee",
-                          order: "desc",
-                          data: {
-                            x: config.dataPointIndex,
-                            y: config.seriesIndex,
-                          },
-                        });
-                      },
-                    },
-                  },
-                  options: {
-                    title: {
-                      text: "Top 10 Media",
-                      floating: false,
-                      offsetY: 5,
-                      align: "left",
-                      style: BarHorizontal.title.style,
-                    },
-                    colors: [...BarHorizontal.colors, "#A020F0"],
-                    plotOptions: BarHorizontal.plotOptions,
-                    xaxis: {
-                      categories: toneMedia.result.data
-                        ? toneMedia.result.data.map((item) => item.media_name)
-                        : [],
-                    },
-                    legend: {
-                      position: "top",
-                      horizontalAlign: "right",
-                      markers: {
-                        height: 10,
-                        width: 10,
-                        offsetY: 0,
-                      },
-                    },
-                  },
-                }}
-              />
-            </Card>
-          </Col>
-          <Col xs={24} md={24} lg={12} xl={12}>
-            <Card onLoading={ews.loading}>
-              <EarlyWarning
-                charts={{
-                  series: ews.result.series || [],
-                  events: {
-                    markerClick(e, chart, config) {
-                      handleAnalyticDetail({
-                        type: "ews",
-                        page: 0,
-                        maxSize: 10,
-                        order_by: "datee",
-                        order: "desc",
-                        data: {
-                          x: config.dataPointIndex,
-                          y: config.seriesIndex,
-                        },
-                      });
-                    },
-                  },
-                  options: {
-                    title: {
-                      text: "Early Warning System",
-                      floating: false,
-                      offsetY: 5,
-                      align: "left",
-                      style: LineOptions.title.style,
-                    },
-                    tooltip: {
-                      shared: true,
-                      enabled: true,
-                    },
-                    markers: LineOptions.markers,
-                    stroke: LineOptions.stroke,
-                    colors: LineOptions.colors,
-                    xaxis: {
-                      categories: ews.result.date || [],
-                    },
-                    legend: {
-                      show: false,
-                    },
-                    yaxis: {
-                      show: true,
-                      tickAmount: 3,
-                      min: 0,
-                      max: 20,
-                      labels: {
-                        formatter: function (value, index) {
-                          if (value >= 0 && value <= 5) {
-                            return "Potential";
-                          } else if (value > 5 && value <= 10) {
-                            return "Emerging";
-                          } else if (value > 10 && value < 20) {
-                            return "Current";
-                          } else {
-                            return "Crisis";
-                          }
-                        },
-                      },
-                    },
-                  },
-                }}
-              />
-            </Card>
-          </Col>
-        </Row>
-      </div>
-      <ModalAnalytic />
-      <ModalDetailArticle />
-      <ModalChartList
-        chartList={chartList}
-        setChartList={setChartList}
-        spokepersonStatisticClick={spokepersonStatisticClick}
-        dataList={dataList}
-        paginationHandler={paginationHandler}
-        setDataList={setDataList}
-        handleClickChart={handleClickChart}
-      />
     </div>
   );
 };
