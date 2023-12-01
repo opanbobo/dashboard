@@ -123,13 +123,15 @@
 }
 
 // YUDI
-.feature-item{
-	display: inline-flex;
+.ant-menu-submenu-title{
+	display: flex;
 	align-items: center;
-	justify-content: center;
 	border-radius: 6px;
 	gap: 6px;
 	text-transform: capitalize;
+	width: 100%;
+	color: #333;
+
 	.feature-button {
 		background-color: transparent !important;
 		color: #00bdc2 !important;
@@ -146,6 +148,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
 	color: #fff !important;
 	padding-right: 8px !important;
+	color: #fff !important;
 
 	.feature-button {
 		color: #fff !important;

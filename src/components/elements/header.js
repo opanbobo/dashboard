@@ -1,5 +1,6 @@
 import { Image, Button, Icon, Dropdown } from "components";
 import { useMemo } from "react";
+import { MenuOutlined } from '@ant-design/icons';
 import styles from "styles/elements/header.module.scss";
 
 const MainHeader = ({
@@ -11,6 +12,7 @@ const MainHeader = ({
   search,
   logo,
   url,
+  onClick,
   showlogo = true,
   avatar,
   loginHeader = false,
@@ -27,6 +29,7 @@ const MainHeader = ({
 
   return (
     <div className={`${className} ${styles["head-wrap"]}`} {...props}>
+      <MenuOutlined className={styles["head-anticon-menu"]} onClick={onClick}/>
       <div className={styles["head-item-logo"]}>
         <Image
           src={logo}

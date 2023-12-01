@@ -362,6 +362,7 @@ const DefaultLayout = ({
 }) => {
   const dispatch = useDispatch();
   const [filterModal, setfilterModal] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const router = useRouter();
   const filters = useSelector((state) => state.filter);
   const { filter } = filters;
@@ -387,7 +388,7 @@ const DefaultLayout = ({
   }, []);
 
   return (
-    <div className={styles["layout-wrap"]}>
+    <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
       <div className={styles["layout-side"]}>
         <Menu
           logo={logoType}
@@ -414,6 +415,7 @@ const DefaultLayout = ({
             url="https://admin.antara-insight.id/asset/images/"
             logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
+            onClick={() => setToggleMenu(!toggleMenu) }
             search={{ onClick: handleSearch }}
             {...props}
           />
