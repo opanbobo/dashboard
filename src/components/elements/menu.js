@@ -31,7 +31,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 			<div className={styles['menu-head']}>
 				<div className={styles['head-item']}>
 					{/* <Image src={logotai} objectFit='cover' alt='headLogo bos' height={40} width={40} priority='true' /> */}
-					<Image src={logotai} alt='logo' style={{width: "40px"}} />
+					<Image src={logotai} alt='logo'  />
 				</div>
 			</div>
 			<div className={styles['menu-feature']}>
