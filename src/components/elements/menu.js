@@ -30,7 +30,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 		<div className={`${styles['menu-wrapper']} ${className}`} {...props}>
 			<div className={styles['menu-head']}>
 				<div className={styles['head-item']}>
-					<Image src={logo} objectFit='cover' alt='headLogo' height={60} width={60} priority='true' />
+					<Image src={logo} objectFit='cover' alt='headLogo' height={100} width={100} priority='true' />
 				</div>
 			</div>
 			<div className={styles['menu-feature']}>
