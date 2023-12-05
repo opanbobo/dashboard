@@ -29,6 +29,10 @@
 
 		.layout-side{
 			left: -146px;
+
+			@media screen and (max-width: 370px) {
+				left: -52%;
+			}
 		}
 
 		.layout-main {
@@ -64,6 +68,13 @@
 			padding: 0;
 			border-radius: 12px 12px 0 0;
 			filter: drop-shadow(0 9px 12px rgba($color: color(blue, base), $alpha: 0.5));
+		}
+
+		@media screen and (max-width: 370px) {
+			height: 100vh;
+			border-radius: 0;
+			border-radius: 0;
+			z-index: 99;
 		}
 	}
 
