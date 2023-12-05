@@ -70,10 +70,12 @@
 			filter: drop-shadow(0 9px 12px rgba($color: color(blue, base), $alpha: 0.5));
 		}
 
+		// YUDI
 		@media screen and (max-width: 370px) {
 			height: 100vh;
 			background-color: transparent;
 			box-shadow: unset;
+			filter: unset;
 			border-radius: 0;
 			border-radius: 0;
 			z-index: 99;
