@@ -31,7 +31,7 @@
 			left: -146px;
 
 			@media screen and (max-width: 370px) {
-				left: -52%;
+				left: -100%;
 			}
 		}
 
@@ -73,6 +73,7 @@
 		@media screen and (max-width: 370px) {
 			height: 100vh;
 			background-color: transparent;
+			box-shadow: unset;
 			border-radius: 0;
 			border-radius: 0;
 			z-index: 99;
