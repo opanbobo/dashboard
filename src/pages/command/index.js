@@ -712,88 +712,93 @@ const CommandCenter = () => {
                 </Col> */}
               {/* </Row> */}
               <p style={{marginBottom: '12px'}}></p>
-              <ImageList
-                bodyStyle={{ padding: 6}}
-                spokepersonStatistic={spokepersonStatistic}
-                getSpokepersonStatisticClick={getSpokepersonStatisticClick}
-                setDataList={setDataList}
-                setChartList={setChartList}
-                filter={filter}
-                dataList={dataList}
-              />
-              <p style={{marginBottom: '12px'}}></p>
-              
-              <Sparkline
-                onLoading={coverageTonality.loading}
-                bodyStyle={{ padding: 6 }}
-                title="media sentiment breakdown"
-                type="up"
-                total={
-                  coverageTonality.result.data
-                    ? coverageTonality.result.data.chart_bar.reduce((a, b) => {
-                        return { doc_count: a.doc_count + b.doc_count };
-                      }).doc_count
-                    : 0
-                }
-                percentage={8}
-                height={75}
-                charts={{
-                  type: "line",
-                  events: {
-                    markerClick(e, chart, config) {
-                      handleAnalyticDetail({
-                        type: "tone",
-                        page: 0,
-                        maxSize: 10,
-                        order_by: "datee",
-                        order: "desc",
-                        data: {
-                          x: config.w.config.series[config.seriesIndex].name,
-                          y: ews.result.date[config.dataPointIndex],
+              <Row>
+                <Col xs={24} md={24} lg={12} xl={13}>
+                  <ImageList
+                    bodyStyle={{ padding: 6}}
+                    spokepersonStatistic={spokepersonStatistic}
+                    getSpokepersonStatisticClick={getSpokepersonStatisticClick}
+                    setDataList={setDataList}
+                    setChartList={setChartList}
+                    filter={filter}
+                    dataList={dataList}
+                  />
+                </Col>
+                <Col xs={24} md={24} lg={12} xl={11}>
+                  <Sparkline
+                    onLoading={coverageTonality.loading}
+                    bodyStyle={{ padding: 6 }}
+                    style={{height: '100%'}}
+                    title="media sentiment breakdown"
+                    type="up"
+                    total={
+                      coverageTonality.result.data
+                        ? coverageTonality.result.data.chart_bar.reduce((a, b) => {
+                            return { doc_count: a.doc_count + b.doc_count };
+                          }).doc_count
+                        : 0
+                    }
+                    percentage={8}
+                    height={130}
+                    charts={{
+                      type: "line",
+                      events: {
+                        markerClick(e, chart, config) {
+                          handleAnalyticDetail({
+                            type: "tone",
+                            page: 0,
+                            maxSize: 10,
+                            order_by: "datee",
+                            order: "desc",
+                            data: {
+                              x: config.w.config.series[config.seriesIndex].name,
+                              y: ews.result.date[config.dataPointIndex],
+                            },
+                          });
                         },
-                      });
-                    },
-                  },
-                  series: coverageTonality.result.data
-                    ? coverageTonality.result.data.chart_bar.map((item) => {
-                        return {
-                          name:
-                            item.key == 1
-                              ? "Positive"
-                              : item.key == -1
-                              ? "Negative"
-                              : "Neutral",
-                          data: item.tone_per_day.buckets.map(
-                            (bucket) => bucket.doc_count
-                          ),
-                          color:
-                            item.key == 1
-                              ? "#06d6a0"
-                              : item.key == -1
-                              ? "#ff6b6b"
-                              : "#1990ff",
-                        };
-                      })
-                    : [],
-                  options: {
-                    stroke: {
-                      width: 2,
-                      lineCap: "butt",
-                    },
-                    // colors: ['#06d6a0', '#1990ff', '#ff6b6b'],
-                    grid: SparklineOptions.options.grid,
-                    yaxis: {
-                      show: false,
-                    },
-                    legend: SparklineOptions.options.legend,
-                    xaxis: {
-                      type: "date",
-                      categories: ews.result.date || [],
-                    },
-                  },
-                  chartOptions: SparklineOptions.chart,
-                }}
-              />
+                      },
+                      series: coverageTonality.result.data
+                        ? coverageTonality.result.data.chart_bar.map((item) => {
+                            return {
+                              name:
+                                item.key == 1
+                                  ? "Positive"
+                                  : item.key == -1
+                                  ? "Negative"
+                                  : "Neutral",
+                              data: item.tone_per_day.buckets.map(
+                                (bucket) => bucket.doc_count
+                              ),
+                              color:
+                                item.key == 1
+                                  ? "#06d6a0"
+                                  : item.key == -1
+                                  ? "#ff6b6b"
+                                  : "#1990ff",
+                            };
+                          })
+                        : [],
+                      options: {
+                        stroke: {
+                          width: 2,
+                          lineCap: "butt",
+                        },
+                        // colors: ['#06d6a0', '#1990ff', '#ff6b6b'],
+                        grid: SparklineOptions.options.grid,
+                        yaxis: {
+                          show: false,
+                        },
+                        legend: SparklineOptions.options.legend,
+                        xaxis: {
+                          type: "date",
+                          categories: ews.result.date || [],
+                        },
+                      },
+                      chartOptions: SparklineOptions.chart,
+                    }}
+                  />
+                </Col>
+               </Row>
             </Col>
             <Col xs={24} md={24} lg={10} xl={8}>
               
