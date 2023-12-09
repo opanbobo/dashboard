@@ -11,6 +11,10 @@
 	grid-template-areas: 'navs main';
 	gap: 0 12px;
 
+	a{
+		color: red;
+	}
+
 	@media screen and (max-width: 1024px) {
 		grid-template: auto 1fr / 1fr;
 		grid-template-areas:
