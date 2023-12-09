@@ -963,6 +963,8 @@ const Spokeperson = () => {
         setDataList={setDataList}
         handleClickChart={handleClickChart}
       />
+      {/* 
+      sesuai request hide
       <div
         style={{
           position: "absolute",
@@ -1002,7 +1004,7 @@ const Spokeperson = () => {
         >
           Download
         </Button>
-      </div>
+      </div> */}
     </Row>
   );
 };
