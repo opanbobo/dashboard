@@ -293,10 +293,10 @@ const CommandCenter = () => {
         name: "Positive",
         data: positive,
       },
-      {
-        name: "Media Favorability Index",
-        data: favorite,
-      },
+      // {
+      //   name: "Media Favorability Index",
+      //   data: favorite,
+      // },
     ];
   };
 
