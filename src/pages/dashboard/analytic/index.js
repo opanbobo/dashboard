@@ -1186,67 +1186,67 @@ const Analytic = () => {
         </div>
       ),
     },
-    {
-      key: "3",
-      title: "Early Warning",
-      content: (
-        <div id="ews-chart">
-          <Card onLoading={ews.loading} title="Early Warning System">
-            <EarlyWarning
-              height={350}
-              charts={{
-                series: ews.result.series,
-                events: {
-                  markerClick(e, chart, config) {
-                    handleClikable({
-                      type: "ews",
-                      page: 0,
-                      maxSize: 10,
-                      order_by: "datee",
-                      order: "desc",
-                      data: {
-                        x: ews.result.date[config.dataPointIndex],
-                        y: ews.result.series[config.seriesIndex].name,
-                      },
-                    });
-                  },
-                },
-                options: {
-                  tooltip: {
-                    shared: true,
-                  },
-                  markers: LineOptions.markers,
-                  stroke: LineOptions.stroke,
-                  colors: LineOptions.colors,
-                  xaxis: {
-                    categories: ews.result.date,
-                  },
-                  yaxis: {
-                    show: true,
-                    tickAmount: 3,
-                    min: 0,
-                    max: 20,
-                    labels: {
-                      formatter: function (value, index) {
-                        if (value >= 0 && value <= 5) {
-                          return "Potential";
-                        } else if (value > 5 && value <= 10) {
-                          return "Emerging";
-                        } else if (value > 10 && value < 20) {
-                          return "Current";
-                        } else {
-                          return "Crisis";
-                        }
-                      },
-                    },
-                  },
-                },
-              }}
-            />
-          </Card>
-        </div>
-      ),
-    },
+    // {
+    //   key: "3",
+    //   title: "Early Warning",
+    //   content: (
+    //     <div id="ews-chart">
+    //       <Card onLoading={ews.loading} title="Early Warning System">
+    //         <EarlyWarning
+    //           height={350}
+    //           charts={{
+    //             series: ews.result.series,
+    //             events: {
+    //               markerClick(e, chart, config) {
+    //                 handleClikable({
+    //                   type: "ews",
+    //                   page: 0,
+    //                   maxSize: 10,
+    //                   order_by: "datee",
+    //                   order: "desc",
+    //                   data: {
+    //                     x: ews.result.date[config.dataPointIndex],
+    //                     y: ews.result.series[config.seriesIndex].name,
+    //                   },
+    //                 });
+    //               },
+    //             },
+    //             options: {
+    //               tooltip: {
+    //                 shared: true,
+    //               },
+    //               markers: LineOptions.markers,
+    //               stroke: LineOptions.stroke,
+    //               colors: LineOptions.colors,
+    //               xaxis: {
+    //                 categories: ews.result.date,
+    //               },
+    //               yaxis: {
+    //                 show: true,
+    //                 tickAmount: 3,
+    //                 min: 0,
+    //                 max: 20,
+    //                 labels: {
+    //                   formatter: function (value, index) {
+    //                     if (value >= 0 && value <= 5) {
+    //                       return "Potential";
+    //                     } else if (value > 5 && value <= 10) {
+    //                       return "Emerging";
+    //                     } else if (value > 10 && value < 20) {
+    //                       return "Current";
+    //                     } else {
+    //                       return "Crisis";
+    //                     }
+    //                   },
+    //                 },
+    //               },
+    //             },
+    //           }}
+    //         />
+    //       </Card>
+    //     </div>
+    //   ),
+    // },
   ];
 
   return (
