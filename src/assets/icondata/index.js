@@ -1,7 +1,7 @@
 export { default as ArrowUpOutlined } from '@ant-design/icons/ArrowUpOutlined';
 export { default as UserOutlined } from '@ant-design/icons/UserOutlined';
 export { default as GlobalOutlined } from '@ant-design/icons/GlobalOutlined';
-export { default as AreaChartOutlined } from '@ant-design/icons/AreaChartOutlined';
+export { default as AreaChartOutlined } from '@ant-design/icons/FundOutlined';
 export { default as ArrowDownOutlined } from '@ant-design/icons/ArrowDownOutlined';
 
 export { default as DownOutlined } from '@ant-design/icons/DownOutlined';
@@ -32,7 +32,7 @@ export { default as SaveOutlined } from '@ant-design/icons/SaveOutlined';
 export { default as RollBackOutlined } from '@ant-design/icons/RollbackOutlined';
 export { default as CheckCircleOutlined } from '@ant-design/icons/CheckCircleOutlined';
 export { default as DesktopOutlined } from '@ant-design/icons/DesktopOutlined';
-export { default as ExperimentFilled } from '@ant-design/icons/ExperimentFilled';
+export { default as ExperimentFilled } from '@ant-design/icons/BarChartOutlined';
 
 export { default as BankOutlined } from '@ant-design/icons/BankOutlined';
 export { default as HomeOutlined } from '@ant-design/icons/HomeOutlined';
