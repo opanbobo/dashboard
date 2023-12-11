@@ -41,7 +41,7 @@
 		justify-content: center;
 
 		// YUDI
-		justify-content: start;
+		justify-content: flex-start;
 		width: 52%;
 		max-width: 190px;
 		background-color: #fff;
@@ -76,8 +76,8 @@
 			// YUDI
 			display: flex;
 			flex-direction: column;
-			justify-content: start;
-			align-items: start;
+			justify-content: flex-start;
+			align-items: flex-start;
 			width: 100%;
 
 
