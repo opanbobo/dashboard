@@ -14,11 +14,15 @@ const ToneTabs = ({
 }) => {
 	return (
 		<Row gutter={[gutter, gutter]}>
-			<Col xs={24} md={24} lg={12} xl={12}>
+			<Col xs={24} md={24} lg={8} xl={8}>
 				<Card title={coverage.title} onLoading={onLoading} {...cards}>
 				</Card>
 			</Col>
-			<Col xs={24} md={24} lg={12} xl={12}>
+			<Col xs={24} md={24} lg={8} xl={8}>
+				<Card title={coverage.title} onLoading={onLoading} {...cards}>
+				</Card>
+			</Col>
+			<Col xs={24} md={24} lg={8} xl={8}>
 				<Card title={coverage.title} onLoading={onLoading} {...cards}>
 				</Card>
 			</Col>
