@@ -47,18 +47,18 @@ export { default as FileWordFilled } from '@ant-design/icons/FileWordFilled';
 export { default as FileExcelFilled } from '@ant-design/icons/FileExcelFilled';
 export { default as FilePptFilled } from '@ant-design/icons/FilePptFilled';
 
-export { default as ContainerFilled } from '@ant-design/icons/ContainerFilled';
+export { default as ContainerFilled } from '@ant-design/icons/FileTextOutlined';
 export { default as CaretUpFilled } from '@ant-design/icons/CaretUpFilled';
 
 export { default as FolderAddFilled } from '@ant-design/icons/FolderAddFilled';
-export { default as StarFilled } from '@ant-design/icons/StarFilled';
-export { default as SettingFilled } from '@ant-design/icons/SettingFilled';
+export { default as StarFilled } from '@ant-design/icons/StarOutlined';
+export { default as SettingFilled } from '@ant-design/icons/SettingOutlined';
 export { default as ControlFilled } from '@ant-design/icons/ControlFilled';
 export { default as CloseCircleFilled } from '@ant-design/icons/CloseCircleFilled';
 
 export { default as SafetyFilled } from '@ant-design/icons/SafetyCertificateFilled';
 export { default as FilterFilled } from '@ant-design/icons/FilterFilled';
-export { default as NotificationFilled } from '@ant-design/icons/NotificationFilled';
+export { default as NotificationFilled } from '@ant-design/icons/ApiOutlined';
 
 export { default as FilterTwoTone } from '@ant-design/icons/FilterTwoTone';
 export { default as MinusCircleTwoTone } from '@ant-design/icons/MinusCircleTwoTone';
