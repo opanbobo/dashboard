@@ -1057,6 +1057,20 @@ const Analytic = () => {
                 legend: BarHorizontal.legend,
               },
             }}
+
+            // YUDI
+
+            positive={{
+              title: "Positive",
+            }}
+            neutral={{
+              title: "Neutral",
+            }}
+            negative={{
+              title: "Negative",
+            }}
+            // END YUDI
+
             pie={{
               title: "Coverage pie",
               series: coverageTonality.result.data

@@ -36,7 +36,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 			<div className={styles['menu-feature']}>
 				{feature.map((item, index) => {
 					return (
-						<div key={index} title={item.label} placement='right'>
+						<div key={index} title={item.text} placement='right'>
 							<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
 								<a className={`${styles['ant-menu-submenu-title']} ${router.pathname === item.link ? styles['menu-active'] : ''}`} href={item.link} passHref>
 									<>
@@ -58,7 +58,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 											type={router.pathname == item.link ? 'primary' : 'ghost'}
 											icons={item.icon}
 										/>
-										{item.label}
+										{item.text}
 									</>
 								</a>
 							</div>
@@ -69,7 +69,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 			<div className={styles['menu-feature']}>
 				{data.map((item, index) => {
 					return (
-						<div key={index} title={item.label} placement='right'>
+						<div key={index} title={item.text} placement='right'>
 							<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
 								<a className={`${styles['ant-menu-submenu-title']} ${router.pathname === item.link ? styles['menu-active'] : ''}`} href={item.link} passHref>
 									<>
@@ -91,7 +91,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 											type={router.pathname == item.link ? 'primary' : 'ghost'}
 											icons={item.icon}
 										/>
-										{item.label}
+										{item.text}
 									</>
 								</a>
 							</div>

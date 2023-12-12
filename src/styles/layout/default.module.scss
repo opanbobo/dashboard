@@ -142,7 +142,23 @@
 				padding: 10px 10px 110px;
 			}
 
+			// YUDI
 			
+			:global{
+				.ant-tabs-tab{
+					.ant-tabs-tab-btn{
+						color: #ffffff;
+					}
+				}
+
+				.ant-tabs-tab-active{
+					background-color: #3192a3;
+					.ant-tabs-tab-btn{
+						color: #ffffff;
+					}
+				}
+
+			}
 			
 		}
 	}

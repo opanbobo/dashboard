@@ -479,7 +479,7 @@ const Clipping = () => {
         data={[
           {
             key: 1,
-            title: "News Clipping",
+            title: "Clipping",
             content: (
               <ClippingList
                 cards={{ onLoading: newsClippingList.loading }}
@@ -803,7 +803,7 @@ const Clipping = () => {
           },
           {
             key: 2,
-            title: "News Editing",
+            title: "Editing",
             content: (
               <ClippingEdit
                 cards={{ onLoading: newsClippingList.loading }}

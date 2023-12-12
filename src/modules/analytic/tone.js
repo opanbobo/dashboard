@@ -10,20 +10,26 @@ const ToneTabs = ({
 	onLoadingCategory,
 	pie,
 	full,
+	positive,
+	neutral,
+	negative,
 	...cards
 }) => {
 	return (
 		<Row gutter={[gutter, gutter]}>
 			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={coverage.title} onLoading={onLoading} {...cards}>
+				<Card title={positive.title} onLoading={onLoading} {...cards}>
+					<div {...positive}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={coverage.title} onLoading={onLoading} {...cards}>
+				<Card title={neutral.title} onLoading={onLoading} {...cards}>
+					<div {...neutral}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={coverage.title} onLoading={onLoading} {...cards}>
+				<Card title={negative.title} onLoading={onLoading} {...cards}>
+					<div {...negative}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={full ? 12 : 24} xl={full ? 24 : 12}>
