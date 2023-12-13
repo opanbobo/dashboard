@@ -284,24 +284,25 @@ const Spokeperson = () => {
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
       textOverflow: "ellipsis",
-      textAlign: "center",
     };
     return (
       <>
         {!spokepersonStatistic.loading ? (
           <Row
-            align="middle"
-            justify={breakPoint == "tablet" ? "start" : "space-around"}
+            style={{
+              heigth: '100%',
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column"
+            }}
           >
             {data.map((item, idx) => {
               return (
-                <Col xs={6} sm={4} md={2} lg={2} xl={2} key={idx}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24} key={idx}>
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "column",
+                      gap: "12px"
                     }}
                   >
                     <Card
@@ -684,8 +685,8 @@ const Spokeperson = () => {
         </>
       )} */}
       <Col span={24}>
-        <Row align="middle" justify="center">
-          <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+        <Row>
+          <Col xs={24} sm={24} md={24} lg={6} xl={6}>
             <Card title="spokeperson">
               <HighlighPerson
                 data={
@@ -721,7 +722,7 @@ const Spokeperson = () => {
               />
             </Card>
           </Col>
-          <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+          <Col xs={24} sm={24} md={24} lg={18} xl={18}>
             <SpokeChart
               cards={{
                 title: "spokeperson breakdown",
@@ -807,151 +808,152 @@ const Spokeperson = () => {
                 },
               }}
             />
+            <p></p>
+            <Col style={{padding: '0px'}}>
+              <SpokeTable
+                cards={{
+                  onLoading: spokepersonList.loading,
+                  title: "spokeperson list",
+                  extra: `Total: ${spokepersonList.result.data?.length}`,
+                }}
+                tables={{
+                  data: spokepersonList.result.data
+                    ? spokepersonList.result.data
+                    : [],
+                  rowKey: (record) => {
+                    return record.quotes;
+                  },
+                  expandable: {
+                    expandedRowRender: (record) => (
+                      <p style={{ margin: 0 }}>{record.quotes}</p>
+                    ),
+                    rowExpandable: (record) =>
+                      record.influencer_name !== "Not Expandable",
+                  },
+                  pagination: {
+                    showSizeChanger: true,
+                    total: spokepersonList.result.recordsTotal,
+                    showTotal: (total) => `Total ${total} article`,
+                    current: dataTable.page + 1,
+                    pageSize: dataTable.max_size,
+                    onChange: (editingPage, editingPageSize) => {
+                      dispatch(
+                        getSpokepersonList({
+                          ...filter.result,
+                          page: editingPage - 1,
+                          max_size: editingPageSize,
+                        })
+                      );
+
+                      setDataTable({
+                        page: editingPage - 1,
+                        max_size: editingPageSize,
+                      });
+                    },
+                  },
+                  column: [
+                    {
+                      title: "Spokeperson List",
+                      render: (record) => (
+                        <Fragment>
+                          <ColumnList title="Date" content={record.datee} />
+                          <ColumnList title="Media" content={record.media} />
+                          <ColumnList
+                            title="Spokeperson"
+                            content={record.influencer_name}
+                          />
+                          <ColumnList title="tone" content={record.tone} />
+                          <ColumnList title="action" type="action">
+                            <Button size="small" icons="EditTwotone" />
+                          </ColumnList>
+                        </Fragment>
+                      ),
+                      responsive: ["xs"],
+                    },
+                    {
+                      title: "Date",
+                      dataIndex: "datee",
+                      key: "datee",
+                      width: 100,
+                      responsive: ["md"],
+                      sorter: (a, b) => a.datee - b.datee,
+                    },
+                    {
+                      title: "Name",
+                      dataIndex: "influencer_name",
+                      key: "influencer_name",
+                      ellipsis: true,
+                      responsive: ["md"],
+                      sorter: (a, b) =>
+                        a.influencer_name.length - b.influencer_name.length,
+                      // render: (text, record) => {
+                      //   return <ColumnList>{record.influencer_name}</ColumnList>;
+                      // },
+                    },
+                    {
+                      title: "Media",
+                      dataIndex: "media",
+                      key: "media_id",
+                      responsive: ["md"],
+                      sorter: (a, b) => a.media_id - b.media_id,
+                    },
+                    {
+                      title: "Tone",
+                      dataIndex: "tones",
+                      key: "tones",
+                      width: 100,
+                      responsive: ["md"],
+                      sorter: (a, b) => a.tones - b.tones,
+                      render: (text, record) => {
+                        return (
+                          <Tag
+                            color={
+                              record.tone == 0
+                                ? "processing"
+                                : record.tone == 1
+                                ? "success"
+                                : "error"
+                            }
+                          >
+                            {record.tone < 0
+                              ? "Negative"
+                              : record.tone > 0
+                              ? "Positive"
+                              : "Neutral"}
+                          </Tag>
+                        );
+                      },
+                    },
+                    {
+                      title: "Action",
+                      key: "action",
+                      width: 60,
+                      align: "center",
+                      responsive: ["md"],
+                      render: (text, record) => (
+                        <ColumnList type="action">
+                          <Button
+                            size="small"
+                            icons="EditOutlined"
+                            onClick={() => {
+                              setArticleDetail(record);
+                              setopenDetail(true);
+                              dispatch(
+                                getSpokepersonDetail({
+                                  article_id: record.article_id,
+                                })
+                              );
+                            }}
+                          />
+                        </ColumnList>
+                      ),
+                    },
+                  ],
+                }}
+              />
+            </Col>
           </Col>
         </Row>
-      </Col>
-      <Col span={24}>
-        <SpokeTable
-          cards={{
-            onLoading: spokepersonList.loading,
-            title: "spokeperson list",
-            extra: `Total: ${spokepersonList.result.data?.length}`,
-          }}
-          tables={{
-            data: spokepersonList.result.data
-              ? spokepersonList.result.data
-              : [],
-            rowKey: (record) => {
-              return record.quotes;
-            },
-            expandable: {
-              expandedRowRender: (record) => (
-                <p style={{ margin: 0 }}>{record.quotes}</p>
-              ),
-              rowExpandable: (record) =>
-                record.influencer_name !== "Not Expandable",
-            },
-            pagination: {
-              showSizeChanger: true,
-              total: spokepersonList.result.recordsTotal,
-              showTotal: (total) => `Total ${total} article`,
-              current: dataTable.page + 1,
-              pageSize: dataTable.max_size,
-              onChange: (editingPage, editingPageSize) => {
-                dispatch(
-                  getSpokepersonList({
-                    ...filter.result,
-                    page: editingPage - 1,
-                    max_size: editingPageSize,
-                  })
-                );
-
-                setDataTable({
-                  page: editingPage - 1,
-                  max_size: editingPageSize,
-                });
-              },
-            },
-            column: [
-              {
-                title: "Spokeperson List",
-                render: (record) => (
-                  <Fragment>
-                    <ColumnList title="Date" content={record.datee} />
-                    <ColumnList title="Media" content={record.media} />
-                    <ColumnList
-                      title="Spokeperson"
-                      content={record.influencer_name}
-                    />
-                    <ColumnList title="tone" content={record.tone} />
-                    <ColumnList title="action" type="action">
-                      <Button size="small" icons="EditTwotone" />
-                    </ColumnList>
-                  </Fragment>
-                ),
-                responsive: ["xs"],
-              },
-              {
-                title: "Date",
-                dataIndex: "datee",
-                key: "datee",
-                width: 100,
-                responsive: ["md"],
-                sorter: (a, b) => a.datee - b.datee,
-              },
-              {
-                title: "Name",
-                dataIndex: "influencer_name",
-                key: "influencer_name",
-                ellipsis: true,
-                responsive: ["md"],
-                sorter: (a, b) =>
-                  a.influencer_name.length - b.influencer_name.length,
-                // render: (text, record) => {
-                //   return <ColumnList>{record.influencer_name}</ColumnList>;
-                // },
-              },
-              {
-                title: "Media",
-                dataIndex: "media",
-                key: "media_id",
-                responsive: ["md"],
-                sorter: (a, b) => a.media_id - b.media_id,
-              },
-              {
-                title: "Tone",
-                dataIndex: "tones",
-                key: "tones",
-                width: 100,
-                responsive: ["md"],
-                sorter: (a, b) => a.tones - b.tones,
-                render: (text, record) => {
-                  return (
-                    <Tag
-                      color={
-                        record.tone == 0
-                          ? "processing"
-                          : record.tone == 1
-                          ? "success"
-                          : "error"
-                      }
-                    >
-                      {record.tone < 0
-                        ? "Negative"
-                        : record.tone > 0
-                        ? "Positive"
-                        : "Neutral"}
-                    </Tag>
-                  );
-                },
-              },
-              {
-                title: "Action",
-                key: "action",
-                width: 60,
-                align: "center",
-                responsive: ["md"],
-                render: (text, record) => (
-                  <ColumnList type="action">
-                    <Button
-                      size="small"
-                      icons="EditOutlined"
-                      onClick={() => {
-                        setArticleDetail(record);
-                        setopenDetail(true);
-                        dispatch(
-                          getSpokepersonDetail({
-                            article_id: record.article_id,
-                          })
-                        );
-                      }}
-                    />
-                  </ColumnList>
-                ),
-              },
-            ],
-          }}
-        />
       </Col>
       <ModalDetailArticle />
       <ModalChartList

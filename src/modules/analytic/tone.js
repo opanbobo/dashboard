@@ -19,17 +19,17 @@ const ToneTabs = ({
 		<Row gutter={[gutter, gutter]}>
 			<Col xs={24} md={24} lg={8} xl={8}>
 				<Card title={positive.title} onLoading={onLoading} {...cards}>
-					<div {...positive}/>
+					<div {...positive.content}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={8} xl={8}>
 				<Card title={neutral.title} onLoading={onLoading} {...cards}>
-					<div {...neutral}/>
+					<div {...neutral.content}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={8} xl={8}>
 				<Card title={negative.title} onLoading={onLoading} {...cards}>
-					<div {...negative}/>
+					<div {...negative.content}/>
 				</Card>
 			</Col>
 			<Col xs={24} md={24} lg={full ? 12 : 24} xl={full ? 24 : 12}>

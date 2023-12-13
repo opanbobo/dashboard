@@ -13,7 +13,7 @@
 	
 	// YUDI
 	// grid-template: 1fr / 60px 1fr;
-	grid-template: 1fr/146px 1fr;
+	grid-template: 1fr/156px 1fr;
 	// END YUDI
 
 	grid-template-areas: 'sidebar main';
@@ -28,7 +28,7 @@
 		display: block;
 
 		.layout-side{
-			left: -146px;
+			left: -156px;
 
 			@media screen and (max-width: 1023px) {
 				left: -100%;

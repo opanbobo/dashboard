@@ -1,6 +1,6 @@
 import { useState, useEffect, createRef, useRef, useMemo } from "react";
 import { useScreenshot, createFileName } from "use-react-screenshot";
-import { Divider } from "antd";
+import { Divider, Pagination } from "antd";
 
 import {
   Tabset,
@@ -15,6 +15,8 @@ import {
   Modal,
   ApexChart,
   Checkbox,
+  Loading,
+  Empty
 } from "components";
 import { WidgetSeries } from "constant/mock/data";
 import { BarHorizontal, LineOptions } from "constant/mock/options";
@@ -49,11 +51,14 @@ const breakPoints = {
   tablet: "(min-width: 300px) and (max-width: 780px)",
 };
 
-const Analytic = () => {
+const Analytic = (pagination) => {
   const dispatch = useDispatch();
   const analytic = useSelector((state) => state.analytic);
   const filters = useSelector((state) => state.filter);
   const excellconfig = useSelector((state) => state.excellconfig);
+	const [articleDetail, setArticleDetail] = useState({});
+	const [detailOpen, setDetailOpen] = useState(false);
+	const [saveArticlePop, setsaveArticlePop] = useState(false);
 
   const {
     mediaVisibility,
@@ -92,6 +97,20 @@ const Analytic = () => {
     columns: [],
   });
 
+	const Detail = () => {
+		return (
+			<DetailArticle
+				clippingDrawer={articleDetail}
+				setClippingDrawer={setArticleDetail}
+				clipListPop={detailOpen}
+				setclipListPop={setDetailOpen}
+				saveArticlePop={saveArticlePop}
+				setsaveArticlePop={setsaveArticlePop}
+				keyword={keyword}
+			/>
+		);
+	};
+
   useEffect(() => {
     breakPointOberver(breakPoints, setbreakPoint);
   }, [breakPoint]);
@@ -107,7 +126,244 @@ const Analytic = () => {
     );
   }, [category]);
 
-  useEffect(() => {
+  useEffect(
+    (
+      body = {
+        type: "ews",
+        page: 0,
+        maxSize: 10,
+        order_by: "datee",
+        order: "desc",
+        // data: {
+        //   y: coverageTonality.result.data.chart_bar.sort(
+        //     (a, b) => (a.key > b.key && 1) || -1
+        //   )[config.dataPointIndex].key,
+        // },
+      }
+    ) => {
+    const bodyDateStart = body.data?.x;
+    let bodyDateEnd = body.data?.x;
+    const tempD = new Date(body.data?.x);
+
+    const bodyDateStartY = body.data?.y;
+    let bodyDateEndY = body.data?.y;
+    const tempDY = new Date(body.data?.y);
+
+    const d1 = new Date(filter.result.start_date);
+    const d2 = new Date(filter.result.end_date);
+
+    if (Math.abs(d1 - d2) / 86400000 > 31) {
+      if (body.type !== "tonality") {
+        let month = body.data?.x.split("-");
+
+        const lastDayOfMonth = new Date(
+          tempD.getFullYear(),
+          tempD.getMonth() + 1,
+          0
+        ).getDate();
+        month[2] = lastDayOfMonth;
+        month = month.join("-");
+        bodyDateEnd = month;
+      } else {
+        let monthY = body.data?.y.split("-");
+
+        const lastDayOfMonthY = new Date(
+          tempDY.getFullYear(),
+          tempDY.getMonth() + 1,
+          0
+        ).getDate();
+
+        monthY[2] = lastDayOfMonthY;
+        monthY = monthY.join("-");
+        bodyDateEndY = monthY;
+      }
+    }
+
+    if (body.type == "visibility") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          category_id: body.data?.y,
+          start_date: bodyDateStart,
+          end_date: bodyDateEnd,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Category: body.data?.y,
+          "Start Date": bodyDateStart,
+          "End Date": bodyDateEnd,
+        },
+      });
+    } else if (body.type == "pie") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          category_id: body.data?.y,
+          start_date: filter.result.start_date,
+          end_date: filter.result.end_date,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Category: body.data?.y,
+        },
+      });
+    } else if (body.type == "pie-cov") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          tone: body.data?.y,
+          start_date: filter.result.start_date,
+          end_date: filter.result.end_date,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Tone:
+            body.data?.y == 1
+              ? "Positive"
+              : body.data?.y == -1
+              ? "Negative"
+              : "Neutral",
+        },
+      });
+    } else if (body.type == "coverage") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          tone: body.data?.y,
+          start_date: bodyDateStart,
+          end_date: bodyDateEnd,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Tone:
+            body.data?.y == 1
+              ? "Positive"
+              : body.data?.y == -1
+              ? "Negative"
+              : "Neutral",
+          "Start Date": bodyDateStart,
+          "End Date": bodyDateEnd,
+        },
+      });
+    } else if (body.type == "coverage-bar") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          tone: body.data?.x,
+          media_id: body.data?.y,
+          start_date: filter.result.start_date,
+          end_date: filter.result.end_date,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Tone:
+            body.data?.x == 1
+              ? "Positive"
+              : body.data?.x == -1
+              ? "Negative"
+              : "Neutral",
+          Date: body.data?.media_name,
+        },
+      });
+    } else if (body.type == "coverage-barhor") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          category_id: body.data?.y,
+          tone: body.data?.x,
+          start_date: filter.result.start_date,
+          end_date: filter.result.end_date,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Tone:
+            body.data?.x == 1
+              ? "Positive"
+              : body.data?.x == -1
+              ? "Negative"
+              : "Neutral",
+          Category: body.data?.y,
+        },
+      });
+    } else if (body.type == "ews") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          category_id: body.data?.y,
+          start_date: bodyDateStart,
+          end_date: bodyDateEnd,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Category: body.data?.y,
+          "Start Date": bodyDateStart,
+          "End Date": bodyDateEnd,
+        },
+      });
+    } else if (body.type == "tonality") {
+      dispatch(
+        getAnalyticArticle({
+          ...filter.result,
+          tone: body.data?.x,
+          start_date: bodyDateStartY,
+          end_date: bodyDateEndY,
+          page: body.page,
+          maxSize: body.maxSize,
+        })
+      );
+
+      setArticleData({
+        ...body,
+        desc: {
+          Tone:
+            body.data?.x == 1
+              ? "Positive"
+              : body.data?.x == -1
+              ? "Negative"
+              : "Neutral",
+          "Start Date": bodyDateStartY,
+          "End Date": bodyDateEndY,
+        },
+      });
+    }
+
+    console.log(articleData);
+
     dispatch(getMediaVisibility(filter.result));
 
     dispatch(getCoverageTonality(filter.result));
@@ -1062,6 +1318,78 @@ const Analytic = () => {
 
             positive={{
               title: "Positive",
+              content: 
+              <>
+                <div style={{ minHeight: 100, maxHeight: '50vh', overflowY: 'scroll' }}>
+
+                  {article.length > 0 ? (
+                    article.map((item, index) => {
+                      return (
+                        <ColumnList
+                          style={{
+                            background: index % 2 == 0 ? 'rgba(54, 65, 76, 0.1)' : null,
+                            paddingLeft: 6,
+                            paddingRight: 6,
+                            paddingTop: 8,
+                            paddingBottom: 8,
+                            marginBottom: 12,
+                          }}
+                          onClick={() => {
+                            if (!selfOnClick) {
+                              getKeywordArticle({
+                                article_id: item.id,
+                              }).then(data => data.json()).then(data => {
+                                setKeyword(data.data);
+                                setArticleDetail(item.detail);
+                                setDetailOpen(true);
+                              }).catch(err => console.log(err));
+                            }
+                          }}
+                          ellipsis
+                          title={<a style={{ color: '#1990ff', fontWeight: 600 }}>{item.title}</a>}
+                          key={item.id}
+                          content={
+                            <Row gutter={[0]}>
+                              <Col span={24}>
+                                <div
+                                  style={{
+                                    margin: '5px 0',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                  }}
+                                >
+                                  <div style={{ fontWeight: 600 }}>
+                                    {item.detail.media_name.length > 0 ? item.detail.media_name : 'undifined'}
+                                  </div>
+                                  <div>{item.detail.datee.length > 0 ? item.detail.datee.split('T').join(' ') : 'undifined'}</div>
+                                </div>
+                                <div style={textEllipis}>{item.content}</div>
+                              </Col>
+                            </Row>
+                          }
+                        />
+                      );
+                    })
+                  ) : (
+                    <div
+                      style={{
+                        minHeight: 300,
+                        height: '100%',
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <Empty />
+                    </div>
+                  )}
+                </div>
+
+                <Detail />
+                <Pagination size='small' {...pagination} />
+              </>
             }}
             neutral={{
               title: "Neutral",
