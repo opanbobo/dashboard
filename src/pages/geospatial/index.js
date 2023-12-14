@@ -119,7 +119,7 @@ const Geospatial = () => {
 
   return (
     <Card
-      title={`Geospatial by ${defaultFilter.type_location}`}
+      title={`Geodata by ${defaultFilter.type_location}`}
       onLoading={!doneCheck}
       extra={
         backtrackStatus ? (
