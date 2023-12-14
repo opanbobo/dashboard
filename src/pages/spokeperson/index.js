@@ -696,13 +696,19 @@ const Spokeperson = () => {
                           (a) => a.name == item.influencer_name
                         );
                         return {
-                          label: item.influencer_name,
+                          // label: item.influencer_name,
+                          label: (
+                            <div>
+                              <span>{item.influencer_name}</span>
+                              <p style={{ fontSize: '12px' }}>Statement {item.count.all}</p>
+                            </div>
+                          ),
                           image: (
-                            <Tooltip
-                              key={item.influencer_name}
-                              title={item.influencer_name}
-                              placement="bottom"
-                            >
+                            // <Tooltip
+                            //   key={item.influencer_name}
+                            //   title={item.influencer_name}
+                            //   placement="bottom"
+                            // >
                               <Image
                                 src={item.image ? item.image : avatar}
                                 url={
@@ -713,7 +719,7 @@ const Spokeperson = () => {
                                 alt="person"
                                 priority="true"
                               />
-                            </Tooltip>
+                            // </Tooltip>
                           ),
                         };
                       })
