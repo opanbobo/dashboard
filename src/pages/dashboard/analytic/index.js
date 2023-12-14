@@ -59,6 +59,7 @@ const Analytic = (pagination) => {
 	const [articleDetail, setArticleDetail] = useState({});
 	const [detailOpen, setDetailOpen] = useState(false);
 	const [saveArticlePop, setsaveArticlePop] = useState(false);
+  const [series, setSeries] = useState([])
 
   const {
     mediaVisibility,
@@ -73,6 +74,7 @@ const Analytic = (pagination) => {
   const { excelCol } = excellconfig;
 
   const [modal, setModal] = useState(false);
+  const [modalHidden, setModalHidden] = useState(false);
   const [modalLoading, setmodalLoading] = useState(true);
   const [articleData, setArticleData] = useState({});
   const [trendingDetail, setTrendingDetail] = useState({});
@@ -126,243 +128,7 @@ const Analytic = (pagination) => {
     );
   }, [category]);
 
-  useEffect(
-    (
-      body = {
-        type: "ews",
-        page: 0,
-        maxSize: 10,
-        order_by: "datee",
-        order: "desc",
-        // data: {
-        //   y: coverageTonality.result.data.chart_bar.sort(
-        //     (a, b) => (a.key > b.key && 1) || -1
-        //   )[config.dataPointIndex].key,
-        // },
-      }
-    ) => {
-    const bodyDateStart = body.data?.x;
-    let bodyDateEnd = body.data?.x;
-    const tempD = new Date(body.data?.x);
-
-    const bodyDateStartY = body.data?.y;
-    let bodyDateEndY = body.data?.y;
-    const tempDY = new Date(body.data?.y);
-
-    const d1 = new Date(filter.result.start_date);
-    const d2 = new Date(filter.result.end_date);
-
-    if (Math.abs(d1 - d2) / 86400000 > 31) {
-      if (body.type !== "tonality") {
-        let month = body.data?.x.split("-");
-
-        const lastDayOfMonth = new Date(
-          tempD.getFullYear(),
-          tempD.getMonth() + 1,
-          0
-        ).getDate();
-        month[2] = lastDayOfMonth;
-        month = month.join("-");
-        bodyDateEnd = month;
-      } else {
-        let monthY = body.data?.y.split("-");
-
-        const lastDayOfMonthY = new Date(
-          tempDY.getFullYear(),
-          tempDY.getMonth() + 1,
-          0
-        ).getDate();
-
-        monthY[2] = lastDayOfMonthY;
-        monthY = monthY.join("-");
-        bodyDateEndY = monthY;
-      }
-    }
-
-    if (body.type == "visibility") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data?.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data?.y,
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "pie") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data?.y,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data?.y,
-        },
-      });
-    } else if (body.type == "pie-cov") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data?.y,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data?.y == 1
-              ? "Positive"
-              : body.data?.y == -1
-              ? "Negative"
-              : "Neutral",
-        },
-      });
-    } else if (body.type == "coverage") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data?.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data?.y == 1
-              ? "Positive"
-              : body.data?.y == -1
-              ? "Negative"
-              : "Neutral",
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "coverage-bar") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data?.x,
-          media_id: body.data?.y,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data?.x == 1
-              ? "Positive"
-              : body.data?.x == -1
-              ? "Negative"
-              : "Neutral",
-          Date: body.data?.media_name,
-        },
-      });
-    } else if (body.type == "coverage-barhor") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data?.y,
-          tone: body.data?.x,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data?.x == 1
-              ? "Positive"
-              : body.data?.x == -1
-              ? "Negative"
-              : "Neutral",
-          Category: body.data?.y,
-        },
-      });
-    } else if (body.type == "ews") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data?.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data?.y,
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "tonality") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data?.x,
-          start_date: bodyDateStartY,
-          end_date: bodyDateEndY,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data?.x == 1
-              ? "Positive"
-              : body.data?.x == -1
-              ? "Negative"
-              : "Neutral",
-          "Start Date": bodyDateStartY,
-          "End Date": bodyDateEndY,
-        },
-      });
-    }
-
-    console.log(articleData);
+  useEffect(() => {
 
     dispatch(getMediaVisibility(filter.result));
 
@@ -375,7 +141,20 @@ const Analytic = (pagination) => {
     dispatch(getToneMedia(filter.result));
 
     dispatch(getEWS(filter.result));
-  }, [filter]);
+
+    // coverageTonality.result.data
+    // ? coverageTonality.result.data.chart_bar
+    //     .sort((a, b) => (a.key > b.key && 1) || -1)
+    //     .map((item) => {
+    //       return item.doc_count;
+    //     })
+    // : [],
+  
+  },[filter])
+
+  useEffect(() => {
+    dataPointSelection();
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -389,7 +168,34 @@ const Analytic = (pagination) => {
     }, 100000);
   }, [testLoading]);
 
+  const dataPointSelection = (e, chart, config) => {
+    return handleClikable({
+      type: "pie-cov",
+      page: 0,
+      maxSize: 10,
+      order_by: "datee",
+      order: "desc",
+      showModal: false,
+      data: {
+        y: series.sort(
+          (a, b) => (a.key > b.key && 1) || -1
+        )[config?.dataPointIndex]?.key,
+      },
+    });
+  }
+
   const handleClikable = (body) => {
+
+    setSeries(
+      coverageTonality.result.data
+      ? coverageTonality.result.data.chart_bar
+          .sort((a, b) => (a.key > b.key && 1) || -1)
+          .map((item) => {
+            return item.doc_count;
+          })
+      : []
+    );
+    
     const bodyDateStart = body.data.x;
     let bodyDateEnd = body.data.x;
     const tempD = new Date(body.data.x);
@@ -489,6 +295,8 @@ const Analytic = (pagination) => {
               : "Neutral",
         },
       });
+      
+
     } else if (body.type == "coverage") {
       dispatch(
         getAnalyticArticle({
@@ -611,10 +419,65 @@ const Analytic = (pagination) => {
       });
     }
 
-    setModal(true);
+    if(body.showModal){
+      setModal(true);
+    }else{
+      setModalHidden(true);
+    }
+  };
+
+  const ModalChartHidden = () => {
+    console.log(analytic);
+    return (
+      <Popchart
+        style={{'display': 'none'}}
+        onDetailClick={(e) => {
+          setArticleDetail(e);
+          setDetailOpen(true);
+        }}
+        onLoading={article.loading}
+        modal={{
+          title: `Article List ${
+            articleData.desc
+              ? "(" +
+                Object.keys(articleData.desc).map(
+                  (key) => key + ": " + articleData.desc[key]
+                ) +
+                ")"
+              : ""
+          }`,
+          visible: modalHidden && !article.loading,
+          close: () => setModalHidden(false),
+        }}
+        data={
+          article.result.data?.map((item) => {
+            return {
+              id: item.article_id,
+              title: item.title,
+              content: item.content,
+              detail: item,
+            };
+          }) || []
+        }
+        pagination={{
+          showSizeChanger: true,
+          total: article.result.recordsTotal || 0,
+          showTotal: (total) => `Total ${article.result.recordsTotal} data`,
+          defaultPageSize: articleData.maxSize || 0,
+          defaultCurrent: articleData.page + 1 || 0,
+          onChange: (page, pageSize) =>
+            handleClikable({
+              ...articleData,
+              page: page - 1,
+              maxSize: pageSize,
+            }),
+        }}
+      />
+    );
   };
 
   const ModalChart = () => {
+    console.log(analytic);
     return (
       <Popchart
         onDetailClick={(e) => {
@@ -1262,7 +1125,6 @@ const Analytic = (pagination) => {
               chartOptions: BarHorizontal.chartOptions,
               events: {
                 dataPointSelection(e, chart, config) {
-                  console.log(filters);
                   return handleClikable({
                     type: "coverage",
                     page: 0,
@@ -1319,83 +1181,116 @@ const Analytic = (pagination) => {
             positive={{
               title: "Positive",
               content: 
-              <>
-                <div style={{ minHeight: 100, maxHeight: '50vh', overflowY: 'scroll' }}>
-
-                  {article.length > 0 ? (
-                    article.map((item, index) => {
-                      return (
-                        <ColumnList
-                          style={{
-                            background: index % 2 == 0 ? 'rgba(54, 65, 76, 0.1)' : null,
-                            paddingLeft: 6,
-                            paddingRight: 6,
-                            paddingTop: 8,
-                            paddingBottom: 8,
-                            marginBottom: 12,
-                          }}
-                          onClick={() => {
-                            if (!selfOnClick) {
-                              getKeywordArticle({
-                                article_id: item.id,
-                              }).then(data => data.json()).then(data => {
-                                setKeyword(data.data);
-                                setArticleDetail(item.detail);
-                                setDetailOpen(true);
-                              }).catch(err => console.log(err));
-                            }
-                          }}
-                          ellipsis
-                          title={<a style={{ color: '#1990ff', fontWeight: 600 }}>{item.title}</a>}
-                          key={item.id}
-                          content={
-                            <Row gutter={[0]}>
-                              <Col span={24}>
-                                <div
-                                  style={{
-                                    margin: '5px 0',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                  }}
-                                >
-                                  <div style={{ fontWeight: 600 }}>
-                                    {item.detail.media_name.length > 0 ? item.detail.media_name : 'undifined'}
-                                  </div>
-                                  <div>{item.detail.datee.length > 0 ? item.detail.datee.split('T').join(' ') : 'undifined'}</div>
-                                </div>
-                                <div style={textEllipis}>{item.content}</div>
-                              </Col>
-                            </Row>
-                          }
-                        />
-                      );
-                    })
-                  ) : (
-                    <div
-                      style={{
-                        minHeight: 300,
-                        height: '100%',
-                        width: '100%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Empty />
-                    </div>
-                  )}
-                </div>
-
-                <Detail />
-                <Pagination size='small' {...pagination} />
-              </>
+                <Popchart
+                  modalInside={true}
+                  onDetailClick={(e) => {
+                    setArticleDetail(e);
+                    setDetailOpen(true);
+                  }}
+                  onLoading={article.loading}
+                  modal={{
+                    visible: true && !article.loading,
+                  }}
+                  data={
+                    article.result.data?.map((item) => {
+                      return {
+                        id: item.article_id,
+                        title: item.title,
+                        content: item.content,
+                        detail: item,
+                      };
+                    }) || []
+                  }
+                  pagination={{
+                    showSizeChanger: true,
+                    total: article.result.recordsTotal || 0,
+                    showTotal: (total) => `Total ${article.result.recordsTotal} data`,
+                    defaultPageSize: articleData.maxSize || 0,
+                    defaultCurrent: articleData.page + 1 || 0,
+                    onChange: (page, pageSize) =>
+                      handleClikable({
+                        ...articleData,
+                        page: page - 1,
+                        maxSize: pageSize,
+                      }),
+                  }}
+                />
             }}
             neutral={{
               title: "Neutral",
+              content: 
+                <Popchart
+                  modalInside={true}
+                  onDetailClick={(e) => {
+                    setArticleDetail(e);
+                    setDetailOpen(true);
+                  }}
+                  onLoading={article.loading}
+                  modal={{
+                    visible: true && !article.loading,
+                  }}
+                  data={
+                    article.result.data?.map((item) => {
+                      return {
+                        id: item.article_id,
+                        title: item.title,
+                        content: item.content,
+                        detail: item,
+                      };
+                    }) || []
+                  }
+                  pagination={{
+                    showSizeChanger: true,
+                    total: article.result.recordsTotal || 0,
+                    showTotal: (total) => `Total ${article.result.recordsTotal} data`,
+                    defaultPageSize: articleData.maxSize || 0,
+                    defaultCurrent: articleData.page + 1 || 0,
+                    onChange: (page, pageSize) =>
+                      handleClikable({
+                        ...articleData,
+                        page: page - 1,
+                        maxSize: pageSize,
+                      }),
+                  }}
+                />
             }}
             negative={{
               title: "Negative",
+              content: 
+                <Popchart
+                  modalInside={true}
+                  onDetailClick={(e) => {
+                    setArticleDetail(e);
+                    setDetailOpen(true);
+                  }}
+                  onLoading={article.loading}
+                  modal={{
+                    visible: true && !article.loading,
+                  }}
+                  data={
+                    article.result.data?.map((item) => {
+                      return {
+                        id: item.article_id,
+                        title: item.title,
+                        content: item.content,
+                        detail: item,
+                      };
+                    }) || []
+                  }
+                  pagination={{
+                    showSizeChanger: true,
+                    total: article.result.recordsTotal || 0,
+                    showTotal: (total) => `Total ${article.result.recordsTotal} data`,
+                    defaultPageSize: articleData.maxSize || 0,
+                    defaultCurrent: articleData.page + 1 || 0,
+                    onChange: (page, pageSize) =>
+                      handleClikable({
+                        ...articleData,
+                        page: page - 1,
+                        maxSize: pageSize,
+                      }),
+                  }}
+                />
             }}
             // END YUDI
 

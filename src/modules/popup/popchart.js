@@ -4,7 +4,7 @@ import DetailArticle from './detailArticle';
 import { useState } from 'react';
 import { getKeywordArticle } from 'store/actions/newsClippingActions';
 
-const Popchart = ({ data, modal, pagination, onLoading, onDetailClick, selfOnClick }) => {
+const Popchart = ({ data, modal, pagination, onLoading, onDetailClick, selfOnClick, modalInside }) => {
 	const [articleDetail, setArticleDetail] = useState({});
 	const [detailOpen, setDetailOpen] = useState(false);
 	const [saveArticlePop, setsaveArticlePop] = useState(false);
@@ -24,86 +24,167 @@ const Popchart = ({ data, modal, pagination, onLoading, onDetailClick, selfOnCli
 		);
 	};
 
-	return (
-		<Modal
-			bodyStyle={modalstyle}
-			closable
-			onCancel={modal.close}
-			footer={<Pagination size='small' {...pagination} />}
-			{...modal}
-		>
-			<div style={{ minHeight: 100, maxHeight: '50vh', overflowY: 'scroll' }}>
-				{onLoading == true && <Loading />}
-				{/* {} */}
-
-				{data.length > 0 ? (
-					data.map((item, index) => {
-						return (
-							<ColumnList
-								style={{
-									background: index % 2 == 0 ? 'rgba(54, 65, 76, 0.1)' : null,
-									paddingLeft: 6,
-									paddingRight: 6,
-									paddingTop: 8,
-									paddingBottom: 8,
-									marginBottom: 12,
-								}}
-								onClick={() => {
-									if (!selfOnClick) {
-										getKeywordArticle({
-											article_id: item.id,
-										}).then(data => data.json()).then(data => {
-											setKeyword(data.data);
-											setArticleDetail(item.detail);
-											setDetailOpen(true);
-										}).catch(err => console.log(err));
-									}
-								}}
-								ellipsis
-								title={<a style={{ color: '#1990ff', fontWeight: 600 }}>{item.title}</a>}
-								key={item.id}
-								content={
-									<Row gutter={[0]}>
-										<Col span={24}>
-											<div
-												style={{
-													margin: '5px 0',
-													display: 'flex',
-													alignItems: 'center',
-													justifyContent: 'space-between',
-												}}
-											>
-												<div style={{ fontWeight: 600 }}>
-													{item.detail.media_name.length > 0 ? item.detail.media_name : 'undifined'}
+	if(modalInside){
+		return (
+			<div
+				bodyStyle={modalstyle}
+				{...modal}
+			>
+				<div style={{ minHeight: 100, maxHeight: '50vh', overflowY: 'scroll' }}>
+					{onLoading == true && <Loading />}
+					{/* {} */}
+	
+					{data.length > 0 ? (
+						data.map((item, index) => {
+							return (
+								<ColumnList
+									style={{
+										background: index % 2 == 0 ? 'rgba(54, 65, 76, 0.1)' : null,
+										paddingLeft: 6,
+										paddingRight: 6,
+										paddingTop: 8,
+										paddingBottom: 8,
+										marginBottom: 12,
+									}}
+									onClick={() => {
+										if (!selfOnClick) {
+											getKeywordArticle({
+												article_id: item.id,
+											}).then(data => data.json()).then(data => {
+												setKeyword(data.data);
+												setArticleDetail(item.detail);
+												setDetailOpen(true);
+											}).catch(err => console.log(err));
+										}
+									}}
+									ellipsis
+									title={<a style={{ color: '#1990ff', fontWeight: 600 }}>{item.title}</a>}
+									key={item.id}
+									content={
+										<Row gutter={[0]}>
+											<Col span={24}>
+												<div
+													style={{
+														margin: '5px 0',
+														display: 'flex',
+														alignItems: 'center',
+														justifyContent: 'space-between',
+													}}
+												>
+													<div style={{ fontWeight: 600 }}>
+														{item.detail.media_name.length > 0 ? item.detail.media_name : 'undifined'}
+													</div>
+													<div>{item.detail.datee.length > 0 ? item.detail.datee.split('T').join(' ') : 'undifined'}</div>
 												</div>
-												<div>{item.detail.datee.length > 0 ? item.detail.datee.split('T').join(' ') : 'undifined'}</div>
-											</div>
-											<div style={textEllipis}>{item.content}</div>
-										</Col>
-									</Row>
-								}
-							/>
-						);
-					})
-				) : (
-					<div
-						style={{
-							minHeight: 300,
-							height: '100%',
-							width: '100%',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Empty />
-					</div>
-				)}
+												<div style={textEllipis}>{item.content}</div>
+											</Col>
+										</Row>
+									}
+								/>
+							);
+						})
+					) : (
+						<div
+							style={{
+								minHeight: 300,
+								height: '100%',
+								width: '100%',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Empty />
+						</div>
+					)}
+				</div>
+	
+				<Detail />
+				<Pagination size='small' {...pagination} />
 			</div>
+		);
+	}else{
+		return (
+			<Modal
+				bodyStyle={modalstyle}
+				closable
+				onCancel={modal.close}
+				footer={<Pagination size='small' {...pagination} />}
+				{...modal}
+			>
+				<div style={{ minHeight: 100, maxHeight: '50vh', overflowY: 'scroll' }}>
+					{onLoading == true && <Loading />}
+					{/* {} */}
 
-			<Detail />
-		</Modal>
-	);
+					{data.length > 0 ? (
+						data.map((item, index) => {
+							return (
+								<ColumnList
+									style={{
+										background: index % 2 == 0 ? 'rgba(54, 65, 76, 0.1)' : null,
+										paddingLeft: 6,
+										paddingRight: 6,
+										paddingTop: 8,
+										paddingBottom: 8,
+										marginBottom: 12,
+									}}
+									onClick={() => {
+										if (!selfOnClick) {
+											getKeywordArticle({
+												article_id: item.id,
+											}).then(data => data.json()).then(data => {
+												setKeyword(data.data);
+												setArticleDetail(item.detail);
+												setDetailOpen(true);
+											}).catch(err => console.log(err));
+										}
+									}}
+									ellipsis
+									title={<a style={{ color: '#1990ff', fontWeight: 600 }}>{item.title}</a>}
+									key={item.id}
+									content={
+										<Row gutter={[0]}>
+											<Col span={24}>
+												<div
+													style={{
+														margin: '5px 0',
+														display: 'flex',
+														alignItems: 'center',
+														justifyContent: 'space-between',
+													}}
+												>
+													<div style={{ fontWeight: 600 }}>
+														{item.detail.media_name.length > 0 ? item.detail.media_name : 'undifined'}
+													</div>
+													<div>{item.detail.datee.length > 0 ? item.detail.datee.split('T').join(' ') : 'undifined'}</div>
+												</div>
+												<div style={textEllipis}>{item.content}</div>
+											</Col>
+										</Row>
+									}
+								/>
+							);
+						})
+					) : (
+						<div
+							style={{
+								minHeight: 300,
+								height: '100%',
+								width: '100%',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							<Empty />
+						</div>
+					)}
+				</div>
+
+				<Detail />
+			</Modal>
+		);
+	}
 };
 
 const modalstyle = {
