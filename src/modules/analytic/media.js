@@ -18,7 +18,7 @@ const MediaTabs = ({ className, visibility, pie, headline, ...cards }) => {
 			{
 				headline && (
 					<Col xs={24} md={24} lg={12} xl={12}>
-						<Card title='Trending Highlight' {...cards}>
+						<Card title='Latest News' {...cards}>
 							{headline}
 						</Card>
 					</Col>
