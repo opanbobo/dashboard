@@ -1413,7 +1413,15 @@ const Analytic = (pagination) => {
                       <Col span={24} key={item.article_id}>
                         <ColumnList
                           ellipsis
-                          title={item.title}
+                          // title={item.title}
+                          title={
+                            <Row>
+                              <Col span={24}>
+                                <span>{item.title}</span>
+                                <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
+                              </Col>
+                            </Row>
+                          }
                           content={item.content}
                           onClick={() => {
                             getKeywordArticle({
