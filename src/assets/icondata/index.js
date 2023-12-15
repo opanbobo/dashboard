@@ -51,7 +51,7 @@ export { default as ContainerFilled } from '@ant-design/icons/FileTextOutlined';
 export { default as CaretUpFilled } from '@ant-design/icons/CaretUpFilled';
 
 export { default as FolderAddFilled } from '@ant-design/icons/FolderAddFilled';
-export { default as StarFilled } from '@ant-design/icons/StarOutlined';
+export { default as StarFilled } from '@ant-design/icons/TeamOutlined';
 export { default as SettingFilled } from '@ant-design/icons/SettingOutlined';
 export { default as ControlFilled } from '@ant-design/icons/ControlFilled';
 export { default as CloseCircleFilled } from '@ant-design/icons/CloseCircleFilled';
