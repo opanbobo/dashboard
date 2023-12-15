@@ -282,6 +282,120 @@ export const getAnalyticArticle = (body) => {
   };
 };
 
+export const getAnalyticArticlePositive = (body) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_POSITIVE,
+      });
+      const userToken = JSON.parse(localStorage.getItem("userToken"));
+
+      let data;
+
+      if (body.tone) {
+        data = await fetchPost(
+          "dashboard/article-by-tone",
+          userToken.token,
+          body
+        );
+      } else {
+        data = await fetchPost("user/editing/", userToken.token, {
+          ...body,
+          tone: body.tonee,
+        });
+      }
+
+      data = await data.json();
+
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_SUCCESS_POSITIVE,
+        result: data,
+      });
+    } catch (err) {
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_ERROR,
+        result: err,
+      });
+    }
+  };
+};
+
+export const getAnalyticArticleNeutral = (body) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_NEUTRAL,
+      });
+      const userToken = JSON.parse(localStorage.getItem("userToken"));
+
+      let data;
+
+      if (body.tone) {
+        data = await fetchPost(
+          "dashboard/article-by-tone",
+          userToken.token,
+          body
+        );
+      } else {
+        data = await fetchPost("user/editing/", userToken.token, {
+          ...body,
+          tone: body.tonee,
+        });
+      }
+
+      data = await data.json();
+
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_SUCCESS_NEUTRAL,
+        result: data,
+      });
+    } catch (err) {
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_ERROR,
+        result: err,
+      });
+    }
+  };
+};
+
+export const getAnalyticArticleNegative = (body) => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_NEGATIVE,
+      });
+      const userToken = JSON.parse(localStorage.getItem("userToken"));
+
+      let data;
+
+      if (body.tone) {
+        data = await fetchPost(
+          "dashboard/article-by-tone",
+          userToken.token,
+          body
+        );
+      } else {
+        data = await fetchPost("user/editing/", userToken.token, {
+          ...body,
+          tone: body.tonee,
+        });
+      }
+
+      data = await data.json();
+
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_SUCCESS_NEGATIVE,
+        result: data,
+      });
+    } catch (err) {
+      return dispatch({
+        type: types.LOAD_ANALYTIC_ARTICLE_ERROR,
+        result: err,
+      });
+    }
+  };
+};
+
 export const getMediaCount = (body) => {
   return async (dispatch, getState) => {
     try {

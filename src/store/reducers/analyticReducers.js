@@ -43,6 +43,24 @@ const initialState = {
 		loading: false,
 		loaded: false,
 	},
+	articlePositive: {
+		result: {},
+		error: null,
+		loading: false,
+		loaded: false,
+	},
+	articleNegative: {
+		result: {},
+		error: null,
+		loading: false,
+		loaded: false,
+	},
+	articleNeutral: {
+		result: {},
+		error: null,
+		loading: false,
+		loaded: false,
+	},
 	mediaListCount: {
 		result: {},
 		error: null,
@@ -279,6 +297,45 @@ const ACTION_HANDLERS = {
 			},
 		};
 	},
+	[types.LOAD_ANALYTIC_ARTICLE_POSITIVE]: (state) => {
+		return {
+			...state,
+			articlePositive: {
+				...state.articlePositive,
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+		};
+	},
+	[types.LOAD_ANALYTIC_ARTICLE_NEGATIVE]: (state) => {
+		return {
+			...state,
+			articleNegative: {
+				...state.articleNegative,
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+		};
+	},
+	[types.LOAD_ANALYTIC_ARTICLE_NEUTRAL]: (state) => {
+		return {
+			...state,
+			articlePositive: {
+				...state.articlePositive,
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+			articleNeutral: {
+				...state.articleNeutral,
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+		};
+	},
 	[types.LOAD_ANALYTIC_ARTICLE_SUCCESS]: (state, action) => {
 		return {
 			...state,
@@ -291,6 +348,42 @@ const ACTION_HANDLERS = {
 			},
 		};
 	},
+	[types.LOAD_ANALYTIC_ARTICLE_SUCCESS_POSITIVE]: (state, action) => {
+		return {
+			...state,
+			articlePositive: {
+				...state.articlePositive,
+				result: action.result ? action.result : {},
+				error: null,
+				loading: false,
+				loaded: false,
+			},
+		};
+	},
+	[types.LOAD_ANALYTIC_ARTICLE_SUCCESS_NEGATIVE]: (state, action) => {
+		return {
+			...state,
+			articleNegative: {
+				...state.articleNegative,
+				result: action.result ? action.result : {},
+				error: null,
+				loading: false,
+				loaded: false,
+			},
+		};
+	},
+	[types.LOAD_ANALYTIC_ARTICLE_SUCCESS_NEUTRAL]: (state, action) => {
+		return {
+			...state,
+			articleNeutral: {
+				...state.articleNeutral,
+				result: action.result ? action.result : {},
+				error: null,
+				loading: false,
+				loaded: false,
+			},
+		};
+	},
 	[types.LOAD_ANALYTIC_ARTICLE_ERROR]: (state, action) => {
 		return {
 			...state,
@@ -299,6 +392,30 @@ const ACTION_HANDLERS = {
 				result: {},
 				error: action.result ? action.result : {},
 				loading: false,
+				loaded: false,
+			},
+			articlePositive: {
+				...state.articlePositive,
+				result: {},
+				error: action.result ? action.result : {},
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+			articleNegative: {
+				...state.articleNegative,
+				result: {},
+				error: action.result ? action.result : {},
+				error: null,
+				loading: true,
+				loaded: false,
+			},
+			articleNeutral: {
+				...state.articleNeutral,
+				result: {},
+				error: action.result ? action.result : {},
+				error: null,
+				loading: true,
 				loaded: false,
 			},
 		};

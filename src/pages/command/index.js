@@ -154,7 +154,7 @@ const CommandCenter = () => {
   const { spokepersonStatistic, spokepersonStatisticClick, spokepersonDetail } =
     spokesperson;
   const { issueTop } = issues;
-  const { ews, coverageTonality, toneMedia, article, mediaListCount } =
+  const { ews, coverageTonality, toneMedia, article, articlePositive, articleNegative, articleNeutral, mediaListCount } =
     analytic;
 
   const [modalAnalytic, setModalAnalytic] = useState(false);

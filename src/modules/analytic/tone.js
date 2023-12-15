@@ -17,21 +17,6 @@ const ToneTabs = ({
 }) => {
 	return (
 		<Row gutter={[gutter, gutter]}>
-			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={positive.title} onLoading={onLoading} {...cards}>
-					<div>{positive.content}</div>
-				</Card>
-			</Col>
-			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={neutral.title} onLoading={onLoading} {...cards}>
-					<div>{neutral.content}</div>
-				</Card>
-			</Col>
-			<Col xs={24} md={24} lg={8} xl={8}>
-				<Card title={negative.title} onLoading={onLoading} {...cards}>
-					<div>{negative.content}</div>
-				</Card>
-			</Col>
 			<Col xs={24} md={24} lg={full ? 12 : 24} xl={full ? 24 : 12}>
 				<Card title={coverage.title} onLoading={onLoading} {...cards}>
 					<ApexChart className={className} id='coverage' type='bar' {...coverage} />
