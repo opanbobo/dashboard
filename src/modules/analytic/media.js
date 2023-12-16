@@ -10,12 +10,6 @@ const MediaTabs = ({ className, visibility, pie, headline, ...cards }) => {
 					</div>
 				</Card>
 			</Col>
-			{/* <Col xs={24} md={24} lg={headline ? 12 : 24} xl={headline ? 12 : 24}> */}
-			<Col xs={24} md={24} lg={16} xl={16}>
-				<Card title={pie.title} {...cards}>
-					<ApexChart className={className} id='pie' type='pie' {...pie} />
-				</Card>
-			</Col>
 			{
 				headline && (
 					// <Col xs={24} md={24} lg={12} xl={12}>
@@ -26,6 +20,13 @@ const MediaTabs = ({ className, visibility, pie, headline, ...cards }) => {
 					</Col>
 				)
 			}
+			{/* <Col xs={24} md={24} lg={headline ? 12 : 24} xl={headline ? 12 : 24}> */}
+			<Col xs={24} md={24} lg={16} xl={16}>
+				<Card title={pie.title} {...cards}>
+					<ApexChart className={className} id='pie' type='pie' {...pie} />
+				</Card>
+			</Col>
+			
 		</Row>
 	);
 };
