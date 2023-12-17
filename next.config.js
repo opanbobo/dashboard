@@ -11,6 +11,7 @@ module.exports = withPlugins([[pluginAntdLess], [new AntdDayjsWebpackPlugin()]],
 	trailingSlash: true,
 	strictMode: false,
 	images: {
+		unoptimized: true,
 		domains: ['images.unsplash.com', 'pixabay.com', 'admin.antara-insight.id', 'demo.digivla.id', 'api.digivla.id'],
 	},
 	webpack(config) {
