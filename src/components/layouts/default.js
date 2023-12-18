@@ -326,7 +326,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             <Button
               key="submit"
               type="primary"
-              style={{ marginLeft: "auto" }}
+              style={{ marginLeft: "auto", marginRight: "8px"}}
               onClick={() => {
                 dispatch(
                   setFilter({
@@ -339,7 +339,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               }}
             >
               Set Filter
-            </Button>,
+            </Button>
             <>
               {customPeriod ? (
                 <Button key="custom" onClick={() => setcustomPeriod(false)}>
