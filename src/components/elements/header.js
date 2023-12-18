@@ -68,7 +68,7 @@ const MainHeader = ({
             />
           </div>
 
-          <div className={styles["toolbar-item"]}>
+          {/* <div className={styles["toolbar-item"]}>
             <Button
               size="small"
               className={styles["toolbar-button"]}
@@ -77,7 +77,7 @@ const MainHeader = ({
               danger="true"
               onClick={logout}
             />
-          </div>
+          </div> */}
 
           {avatar != null && (
             <div className={styles["toolbar-item"]}>

@@ -162,5 +162,23 @@
 			
 		}
 	}
+	// YUDI
+	
+	:global{
+		.ant-card{
+			padding: 0;
+			color: #fff;
+			background-color: #3ebbc2;
+		}
+
+		.apexcharts-text tspan{
+			color: #fff;
+		}
+
+		text{
+			color: #fff;
+
+		}
+	}
 
 }

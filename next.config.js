@@ -10,6 +10,10 @@ const pluginAntdLess = withAntdLess({
 module.exports = withPlugins([[pluginAntdLess], [new AntdDayjsWebpackPlugin()]], {
 	trailingSlash: true,
 	strictMode: false,
+	reactStrictMode: true, 
+	eslint: { 
+		ignoreDuringBuilds: true, 
+	}, 
 	images: {
 		unoptimized: true,
 		domains: ['images.unsplash.com', 'pixabay.com', 'admin.antara-insight.id', 'demo.digivla.id', 'api.digivla.id'],

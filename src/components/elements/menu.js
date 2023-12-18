@@ -26,6 +26,14 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 		breakPointOberver(breakPoints, setbreakPoint);
 	}, [breakPoint]);
 
+  const handleLogout = async () => {
+    localStorage.clear();
+		notification.info({
+			message: 'Thank you for using Formal Media Dashboard',
+		});
+    router.push("/login");
+  };
+
 	return (
 		<div className={`${styles['menu-wrapper']} ${className}`} {...props}>
 			<div className={styles['menu-head']}>
@@ -99,9 +107,25 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 					);
 				})}
 			</div>
-			{/* <div className={styles['menu-foot']}>
-				<div className={styles['foot-item']}>foot</div>
-			</div> */}
+			
+			<div className={styles['menu-feature']}>
+				<div placement='right'>
+					<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
+						<a className={`${styles['ant-menu-submenu-title']}`} onClick={handleLogout}>
+							<>
+								<ButtonMenu
+									className={`${styles['feature-button']}`}
+									style={{
+										color: '#fff',
+									}}
+									icons="LogoutOutlined"
+								/>
+								Logout
+							</>
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

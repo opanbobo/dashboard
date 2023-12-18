@@ -12,6 +12,7 @@ import {
   Col,
   Select,
   DatePicker,
+  Card
 } from "components";
 import { routes, feature } from "constant/routes";
 // import 'moment/locale/id';
@@ -48,43 +49,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
   }, []);
 
   return (
-    <Modal
-      closable
-      visible={filterModal}
-      title="Dashboard Filter"
-      bodyStyle={modalstyle}
-      onCancel={() => setfilterModal(false)}
-      footer={[
-        <Button
-          key="submit"
-          type="primary"
-          style={{ marginLeft: "auto" }}
-          onClick={() => {
-            dispatch(
-              setFilter({
-                ...filter.result,
-                ...formData,
-              })
-            );
-
-            setfilterModal(false);
-          }}
-        >
-          Set Filter
-        </Button>,
-        <>
-          {customPeriod ? (
-            <Button key="custom" onClick={() => setcustomPeriod(false)}>
-              Close Custom
-            </Button>
-          ) : (
-            <Button key="custom" onClick={openCustom}>
-              Custom Periodic
-            </Button>
-          )}
-        </>,
-      ]}
-    >
+    <Card title="Dashboard Filter">
       <Form>
         <Row>
           <Col xs={24} md={12} lg={12} xl={12}>
@@ -170,6 +135,8 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 </Select.Option>
               </Select>
             </Form.Item>
+          </Col>
+          <Col xs={24} md={12} lg={12} xl={12}>
             <Form.Item>
               <label htmlFor="categories">Category</label>
               <Select
@@ -198,6 +165,9 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
+          </Col>
+          <Col xs={24} md={8} lg={8} xl={8}>
+            
             <Form.Item>
               <label htmlFor="subcategory">Sub Category</label>
               <Select
@@ -222,8 +192,33 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
+            {/* <Form.Item>
+              <label htmlFor="submedia">Sub Media</label>
+              <Select
+                id="submedia"
+                placeholder="select sub-media"
+                optionFilterProp="children"
+                onChange={(value) => {
+                  setFormData({
+                    ...formData,
+                    media_id: value,
+                  });
+                }}
+                defaultValue={formData.media_id}
+                optionLabelProp="label"
+                options={
+                  subMedia.result.results?.map((item) => {
+                    return {
+                      value: item.media_id,
+                      label: item.media_name,
+                    };
+                  }) || []
+                }
+              />
+            </Form.Item> */}
+
           </Col>
-          <Col xs={24} md={12} lg={12} xl={12}>
+          <Col xs={24} md={8} lg={8} xl={8}>
             <Form.Item>
               <label htmlFor="media">Media</label>
               <Select
@@ -251,30 +246,9 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
-            <Form.Item>
-              <label htmlFor="submedia">Sub Media</label>
-              <Select
-                id="submedia"
-                placeholder="select sub-media"
-                optionFilterProp="children"
-                onChange={(value) => {
-                  setFormData({
-                    ...formData,
-                    media_id: value,
-                  });
-                }}
-                defaultValue={formData.media_id}
-                optionLabelProp="label"
-                options={
-                  subMedia.result.results?.map((item) => {
-                    return {
-                      value: item.media_id,
-                      label: item.media_name,
-                    };
-                  }) || []
-                }
-              />
-            </Form.Item>
+
+          </Col>
+          <Col xs={24} md={8} lg={8} xl={8}>
             <Form.Item>
               <label htmlFor="tone">Tone</label>
               <Select
@@ -303,6 +277,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 })}
               />
             </Form.Item>
+
           </Col>
           {customPeriod ? (
             <Col span={24}>
@@ -346,8 +321,40 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             </Col>
           ) : null}
         </Row>
+        <Row>
+          <Col>
+            <Button
+              key="submit"
+              type="primary"
+              style={{ marginLeft: "auto" }}
+              onClick={() => {
+                dispatch(
+                  setFilter({
+                    ...filter.result,
+                    ...formData,
+                  })
+                );
+
+                setfilterModal(false);
+              }}
+            >
+              Set Filter
+            </Button>,
+            <>
+              {customPeriod ? (
+                <Button key="custom" onClick={() => setcustomPeriod(false)}>
+                  Close Custom
+                </Button>
+              ) : (
+                <Button key="custom" onClick={openCustom}>
+                  Custom Periodic
+                </Button>
+              )}
+            </>
+          </Col>
+        </Row>
       </Form>
-    </Modal>
+    </Card>
   );
 };
 
@@ -424,6 +431,8 @@ const DefaultLayout = ({
           className={styles["main-content"]}
           style={{ background: background }}
         >
+          <ModalFilter/>
+          <p></p>
           {children}
         </div>
       </div>
