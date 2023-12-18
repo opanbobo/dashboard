@@ -59,14 +59,14 @@ const MainHeader = ({
               {...search}
             />
           </div>
-          <div className={styles["toolbar-item"]}>
+          {/* <div className={styles["toolbar-item"]}>
             <Button
               size="small"
               className={styles["toolbar-button"]}
               icons="FilterOutlined"
               {...filters}
             />
-          </div>
+          </div> */}
 
           {/* <div className={styles["toolbar-item"]}>
             <Button

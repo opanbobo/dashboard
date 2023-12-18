@@ -95,7 +95,7 @@
 			'header'
 			'content';
 		row-gap: 2px;
-		border-top: 5px solid #00bdc2;
+		// border-top: 5px solid #00bdc2;
 		&.command-content {
 			width: 100%;
 			gap: 0;
@@ -113,11 +113,22 @@
 		}
 
 		.main-head {
+			padding: 0 10px;
 			grid-area: header;
 			position: sticky;
 			top: 0;
-			padding: 12px;
-			background: $white;
+			// padding: 12px;
+			// background: $white;
+			background-color: #00d4ff !important;
+			background: rgb(2,0,36);
+			background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
+	
+			.toggleMenuButton {
+				color: white !important;
+			}
 		}
 
 		.main-content {
@@ -153,6 +164,8 @@
 
 				.ant-tabs-tab-active{
 					background-color: #3192a3;
+					padding: 10px 20px;
+  				border-radius: 5px;
 					.ant-tabs-tab-btn{
 						color: #ffffff;
 					}
@@ -168,7 +181,7 @@
 		.ant-card{
 			padding: 0;
 			color: #fff;
-			background-color: #3ebbc2;
+			background-color: #65add0;
 		}
 
 		.apexcharts-text tspan{

@@ -427,6 +427,7 @@ const DefaultLayout = ({
             filters={{ onClick: () => setfilterModal(true) }}
             onClick={() => setToggleMenu(!toggleMenu) }
             search={{ onClick: handleSearch }}
+            style={{ color: 'white'}}
             {...props}
           />
         )}
