@@ -88,7 +88,7 @@ const Login = () => {
         </Button>
       </Form.Item>
       <Form.Item style={itemStyles}>
-        {!logoType && <small>copyright&copy;digivla indonesia </small>}
+        {!logoType && <small>copyright&copy;Conventional Media </small>}
       </Form.Item>
     </Form>
   );

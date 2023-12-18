@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { forwardRef, useState, useEffect } from 'react';
 import { Button, Tooltip } from 'components';
+import { notification } from 'antd';
 // import { Tooltip } from 'antd';
 import styles from 'styles/elements/menu.module.scss';
 import Image from 'next/image';
