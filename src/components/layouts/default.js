@@ -52,7 +52,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
     <Card title="Dashboard Filter">
       <Form>
         <Row>
-          <Col xs={24} md={12} lg={12} xl={12}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="periodic">Periodic</label>
 
@@ -136,7 +136,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               </Select>
             </Form.Item>
           </Col>
-          <Col xs={24} md={12} lg={12} xl={12}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="categories">Category</label>
               <Select
@@ -166,7 +166,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               />
             </Form.Item>
           </Col>
-          <Col xs={24} md={8} lg={8} xl={8}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             
             <Form.Item>
               <label htmlFor="subcategory">Sub Category</label>
@@ -218,7 +218,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             </Form.Item> */}
 
           </Col>
-          <Col xs={24} md={8} lg={8} xl={8}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="media">Media</label>
               <Select
@@ -248,7 +248,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             </Form.Item>
 
           </Col>
-          <Col xs={24} md={8} lg={8} xl={8}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">Tone</label>
               <Select
@@ -283,7 +283,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             <Col span={24}>
               <label htmlFor="custom">Custom Periodic</label>
               <Row gutter={12}>
-                <Col xs={24} md={12} lg={12} xl={12}>
+                <Col xs={12} md={4} lg={4} xl={4}>
                   <Form.Item>
                     <DatePicker
                       defaultValue={moment(formData.start_date)}
@@ -300,7 +300,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                     />
                   </Form.Item>
                 </Col>
-                <Col xs={24} md={12} lg={12} xl={12}>
+                <Col xs={12} md={4} lg={4} xl={4}>
                   <Form.Item>
                     <DatePicker
                       defaultValue={moment(formData.end_date)}
@@ -320,37 +320,40 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               </Row>
             </Col>
           ) : null}
-        </Row>
-        <Row>
-          <Col>
-            <Button
-              key="submit"
-              type="primary"
-              style={{ marginLeft: "auto", marginRight: "8px"}}
-              onClick={() => {
-                dispatch(
-                  setFilter({
-                    ...filter.result,
-                    ...formData,
-                  })
-                );
+          <Col xs={12} md={4} lg={4} xl={4}>
+            <Form.Item>
+              <label htmlFor="tone">&nbsp;</label>
+              <div style={{width: '100%'}}>
+                <Button
+                  key="submit"
+                  type="primary"
+                  style={{ marginLeft: "auto", marginRight: "8px"}}
+                  onClick={() => {
+                    dispatch(
+                      setFilter({
+                        ...filter.result,
+                        ...formData,
+                      })
+                    );
 
-                setfilterModal(false);
-              }}
-            >
-              Set Filter
-            </Button>
-            <>
-              {customPeriod ? (
-                <Button key="custom" onClick={() => setcustomPeriod(false)}>
-                  Close Custom
+                    setfilterModal(false);
+                  }}
+                >
+                  Set Filter
                 </Button>
-              ) : (
-                <Button key="custom" onClick={openCustom}>
-                  Custom Periodic
-                </Button>
-              )}
-            </>
+                <>
+                  {customPeriod ? (
+                    <Button key="custom" onClick={() => setcustomPeriod(false)}>
+                      Close Custom
+                    </Button>
+                  ) : (
+                    <Button key="custom" onClick={openCustom}>
+                      Custom
+                    </Button>
+                  )}
+                </>
+              </div>
+            </Form.Item>
           </Col>
         </Row>
       </Form>
