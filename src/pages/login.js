@@ -42,7 +42,7 @@ const Login = () => {
         );
         notification.success({
           message: `Hello, ${res.usr_comp_name}`,
-          description: "Welcome to Formal Media Dashboard",
+          description: "Welcome to Conventional Media Dashboard",
         });
       } else {
         // Error handling

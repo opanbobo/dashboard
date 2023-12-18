@@ -29,7 +29,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
   const handleLogout = async () => {
     localStorage.clear();
 		notification.info({
-			message: 'Thank you for using Formal Media Dashboard',
+			message: 'Thank you for using Conventional Media Dashboard',
 		});
     router.push("/login");
   };

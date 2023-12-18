@@ -27,7 +27,7 @@ const LoginLayout = ({ children, logo }) => {
 					<div className={styles['box-form']}>
 						<div className={styles['form-title']}>
 							<div className={styles['subtitle-text']}>Welcome to,</div>
-							<div className={styles['title-text']}>Formal Media Dashboard</div>
+							<div className={styles['title-text']}>Conventional Media Dashboard</div>
 							<div className={styles['subtitle-text']}>News - Information - Insight</div>
 						</div>
 						{children}
