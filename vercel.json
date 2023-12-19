@@ -1,6 +1,6 @@
 {
   "routes": [
-    // ... (aturan rute lainnya jika ada)
+    
   ],
   "alias": {
     "modules/analytic/summaryTone": "./src/modules/analytic/summaryTone"
