@@ -38,7 +38,7 @@ const MainHeader = ({
       }
       <div className={styles["head-item-logo"]}>
         <Image
-          src={logo}
+          src={'https://admin.antara-insight.id/asset/images/company/agraria.png'}
           url={url ? url : null}
           layout="fill"
           objectFit="contain"

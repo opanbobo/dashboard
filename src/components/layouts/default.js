@@ -323,11 +323,10 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
           <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">&nbsp;</label>
-              <div style={{width: '100%'}}>
+              <div style={{width: '100%', display: 'flex', gap: '8px'}}>
                 <Button
                   key="submit"
                   type="primary"
-                  style={{ marginLeft: "auto", marginRight: "8px"}}
                   onClick={() => {
                     dispatch(
                       setFilter({
@@ -336,7 +335,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                       })
                     );
 
-                    setfilterModal(false);
+                    // setfilterModal(false);
                   }}
                 >
                   Set Filter

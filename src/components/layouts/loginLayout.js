@@ -20,7 +20,7 @@ const LoginLayout = ({ children, logo }) => {
 	return (
 		<div className={styles['layout-auth']}>
 			<div className={styles['auth-head']}>
-				<MainHeader logo={logoType == LogoArta ? logoType : logo} loginHeader showToggleMenu={false}/>
+				<MainHeader logo={logoType == LogoArta ? logoType : 'https://admin.antara-insight.id/asset/images/company/agraria.png'} loginHeader showToggleMenu={false}/>
 			</div>
 			<div className={styles.content}>
 				<div className={styles.left}>
