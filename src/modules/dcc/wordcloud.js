@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 
 const WordCloud = ({ className, options, ...props }) => {
 	const chartOptions = {
-		background: '#65add0',
+		background: '#ffffff59',
 		title: {
 			text: undefined,
 		},

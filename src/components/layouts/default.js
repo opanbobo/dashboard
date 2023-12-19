@@ -427,13 +427,13 @@ const DefaultLayout = ({
             filters={{ onClick: () => setfilterModal(true) }}
             onClick={() => setToggleMenu(!toggleMenu) }
             search={{ onClick: handleSearch }}
-            style={{ color: 'white'}}
+            style={{ color: 'white', padding: '0 20px'}}
             {...props}
           />
         )}
         <div
           className={styles["main-content"]}
-          style={{ background: background }}
+          style={{ background: background, padding: '20px' }}
         >
           <ModalFilter/>
           <p></p>

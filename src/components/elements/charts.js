@@ -17,7 +17,7 @@ export default function ApexChart({
 }) {
 	const baseOptions = {
 		chart: {
-			background: '#65add0',
+			background: '#ffffff59',
 			title: {
 				style: {
 					fontSize: '14px',

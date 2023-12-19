@@ -75,7 +75,7 @@ export const BarHorizontal = {
 
 export const SparklineOptions = {
 	chart: {
-		background: '#65add0',
+		background: '#ffffff59',
 		sparkline: {
 			enabled: true,
 		},
