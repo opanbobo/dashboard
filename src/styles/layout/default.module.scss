@@ -142,13 +142,12 @@
 			overflow: auto;
 			// background: $white;
 			
-			background-color: #00d4ff !important;
 			background: rgb(2,0,36);
-			background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
-
+			background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+		
 			@include res.media(tablet) {
 				padding: 10px 10px 60px;
 			}
