@@ -1,5 +1,8 @@
 {
   "routes": [
-    { "src": "/modules/analytic/summaryTone", "dest": "/vercel/path0/src/pages/dashboard/analytic/modules/analytic/summaryTone.js" }
-  ]
+    // ... (aturan rute lainnya jika ada)
+  ],
+  "alias": {
+    "modules/analytic/summaryTone": "./src/modules/analytic/summaryTone"
+  }
 }
