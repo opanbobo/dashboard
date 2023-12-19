@@ -1190,6 +1190,13 @@ const Analytic = (pagination) => {
                             )
                           : [],
                       },
+                      yaxis: {
+                        labels: {
+                          style: {
+                            colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                          },
+                        },
+                      },
                       legend: BarHorizontal.legend,
                     },
                   }}
@@ -1368,6 +1375,18 @@ const Analytic = (pagination) => {
                           }
                         )
                       : [],
+                      labels: {
+                        style: {
+                          colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                        },
+                      },
+                },
+                yaxis: {
+                  labels: {
+                    style: {
+                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                    },
+                  },
                 },
                 legend: LineOptions.legend,
               },
@@ -1524,6 +1543,13 @@ const Analytic = (pagination) => {
                       )
                     : [],
                 },
+                yaxis: {
+                  labels: {
+                    style: {
+                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                    },
+                  },
+                },
                 legend: BarHorizontal.legend,
               },
             }}
@@ -1604,6 +1630,13 @@ const Analytic = (pagination) => {
                     ? toneMedia.result.data.map((item) => item.media_name)
                     : [],
                 },
+                yaxis: {
+                  labels: {
+                    style: {
+                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                    },
+                  },
+                },
                 legend: BarHorizontal.legend,
               },
             }}
@@ -1649,6 +1682,18 @@ const Analytic = (pagination) => {
                         })
                         .map((selected) => selected.category_id)
                     : [],
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                      },
+                    },
+                },
+                yaxis: {
+                  labels: {
+                    style: {
+                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                    },
+                  },
                 },
                 legend: BarHorizontal.legend,
               },
@@ -1852,6 +1897,13 @@ const Analytic = (pagination) => {
                     },
                     stroke: LineOptions.stroke,
                     colors: ["#ff6b6b", "#1990ff", "#06d6a0"],
+                    yaxis: {
+                      labels: {
+                        style: {
+                          colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                        },
+                      },
+                    },
                     legend: {
                       position: "top",
                       horizontalAlign: "right",

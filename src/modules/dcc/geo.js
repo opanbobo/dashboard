@@ -7,7 +7,7 @@ import indo from 'constant/map.json';
 const Geo = ({ style, className, options, series, clickEvent, ...props }) => {
 	const chartOptions = {
 		chart:{
-			backgroundColor: '#ffffff59',
+			backgroundColor: '#2b2d3e',
 		},
 		title: {
 			text: '',

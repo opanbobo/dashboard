@@ -54,7 +54,7 @@
 		position: fixed;
 		height: 100%;
 		width: auto;
-		background: #112143;
+		background: #343e59;
 		left: 0;
 		padding: 0 12px;
 		box-shadow: 0 4px 12px 0 rgba(131, 146, 165, 0.15);
@@ -101,12 +101,12 @@
 			gap: 0;
 
 			.main-content {
-				// background: $background;
-				background: rgb(2,0,36);
-				background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+				background: #343e59;
+				// background: rgb(2,0,36);
+				// background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
 			}
 		}
 
@@ -116,7 +116,7 @@
 			position: sticky;
 			top: 0;
 			// padding: 12px;
-			// // background: $white;
+			background: #343e59;
 			// background-color: #00d4ff !important;
 			// background: rgb(2,0,36);
 			// background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
@@ -124,11 +124,11 @@
 			// background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
 			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
 	
-			background: rgb(2,0,36);
-			background: -moz-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: -webkit-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+			// background: rgb(2,0,36);
+			// background: -moz-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: -webkit-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
 
 			.toggleMenuButton {
 				color: white !important;
@@ -140,13 +140,13 @@
 			height: 100%;
 			padding: 12px;
 			overflow: auto;
-			// background: $white;
+			background: #343e59;
 			
-			background: rgb(2,0,36);
-			background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+			// background: rgb(2,0,36);
+			// background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
 		
 			@include res.media(tablet) {
 				padding: 10px 10px 60px;
@@ -184,7 +184,7 @@
 		.ant-card{
 			padding: 0;
 			color: #fff;
-			background-color: #ffffff59;
+			background-color: #2b2d3e;
 		}
 
 		.ant-form-item-control-input-content{
@@ -199,6 +199,38 @@
 		}
 
 		.apexcharts-text tspan{
+			color: #fff;
+		}
+
+		.ant-pagination-total-text{
+			color: #fff;
+		}
+
+		.ant-pagination {
+			color: #fff;
+		}
+		.ant-pagination-item a{
+			color: #fff;
+		}
+
+		.total-msb h5{
+			color: #fff;
+		}
+
+		.ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
+			background: none;
+			color: #fff;
+		}
+
+		.apexcharts-legend-text{
+			color: #fff !important;
+		}
+
+		.ant-pagination-item-active{
+			background: none;
+		}
+
+		.ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link, .ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link{
 			color: #fff;
 		}
 

@@ -726,9 +726,10 @@ const CommandCenter = () => {
                 </Col>
                 <Col xs={24} md={24} lg={12} xl={11}>
                   <Sparkline
+                    className="total-msb"
                     onLoading={coverageTonality.loading}
                     bodyStyle={{ padding: 6 }}
-                    style={{height: '100%'}}
+                    style={{height: '100%', color: 'white'}}
                     title="media sentiment breakdown"
                     type="up"
                     total={
@@ -835,7 +836,10 @@ const CommandCenter = () => {
                               floating: false,
                               offsetY: 5,
                               align: "left",
-                              style: BarHorizontal.title.style,
+                              // style: BarHorizontal.title.style,
+                              style: {
+                                color: '#FFFFFF', // Mengubah warna teks judul menjadi putih
+                              },
                             },
                             colors: [...BarHorizontal.colors, "#A020F0"],
                             plotOptions: BarHorizontal.plotOptions,
@@ -843,6 +847,18 @@ const CommandCenter = () => {
                               categories: toneMedia.result.data
                                 ? toneMedia.result.data.map((item) => item.media_name)
                                 : [],
+                                labels: {
+                                  style: {
+                                    colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                                  },
+                                },
+                            },
+                            yaxis: {
+                              labels: {
+                                style: {
+                                  colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                                },
+                              },
                             },
                             legend: {
                               position: "top",

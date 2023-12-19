@@ -54,7 +54,7 @@ const InsideBox = ({ data, modal, pagination, onLoading, onDetailClick, selfOnCl
                   }
                 }}
                 ellipsis
-                title={<a style={{ color: 'rgba(54, 65, 76, 0.85)', fontWeight: 600 }}>{item.title}</a>}
+                title={<a style={{ color: 'rgb(0, 143, 251)', fontWeight: 600 }}>{item.title}</a>}
                 key={item.id}
                 content={
                   <Row gutter={[0]}>
