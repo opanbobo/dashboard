@@ -90,11 +90,11 @@ const MediaList = ({ className, data, ...props }) => {
 								setModal(true);
 							}}
 						>
-							<div className={styles['item-image']}>
+							{/* <div className={styles['item-image']}>
 								<Image src={icon.url} objectFit='contain' alt='icon' height={30} width={30} priority='true' />
-							</div>
-							<div className={styles['item-label']}>{icon.label}</div>
+							</div> */}
 							<div className={styles['item-total']}>{icon.total}</div>
+							<div className={styles['item-label']}>{icon.label}</div>
 						</div>
 					);
 				})}

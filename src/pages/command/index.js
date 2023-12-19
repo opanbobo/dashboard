@@ -713,7 +713,7 @@ const CommandCenter = () => {
               {/* </Row> */}
               <p style={{marginBottom: '12px'}}></p>
               <Row>
-                <Col xs={24} md={24} lg={12} xl={13}>
+                {/* <Col xs={24} md={24} lg={12} xl={13}>
                   <ImageList
                     bodyStyle={{ padding: 6}}
                     spokepersonStatistic={spokepersonStatistic}
@@ -723,8 +723,9 @@ const CommandCenter = () => {
                     filter={filter}
                     dataList={dataList}
                   />
-                </Col>
-                <Col xs={24} md={24} lg={12} xl={11}>
+                </Col> spokeperson di takeout
+                */}
+                <Col xs={24} md={24} lg={12} xl={24}>
                   <Sparkline
                     className="total-msb"
                     onLoading={coverageTonality.loading}
@@ -998,10 +999,14 @@ const CommandCenter = () => {
                               style: {
                                 fontFamily: `Noto Sans, sans-serif`,
                                 textTransform: "capitalize",
+                                color: 'white',
                               },
                               minFontSize: 10,
                             },
                           ],
+                          chart: {
+                            backgroundColor: '#2b2d3e',
+                          },
                         }}
                       />
                     ) : (

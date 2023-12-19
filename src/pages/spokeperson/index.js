@@ -828,6 +828,18 @@ const Spokeperson = () => {
                           return item.influencer_name;
                         })
                       : [],
+                      labels: {
+                        style: {
+                          colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                        },
+                      },
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
                   },
                   legend: BarHorizontal.legend,
                 },

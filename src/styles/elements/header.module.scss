@@ -27,6 +27,8 @@
 				.toolbar-button {
 					border: none;
 					border-radius: 6px;
+					background: none;
+				  color: #fff;
 
 					&-search {
 						background: rgba($color: color(blue, base), $alpha: 0.2);
