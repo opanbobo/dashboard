@@ -1,0 +1,5 @@
+{
+  "routes": [
+    { "src": "/modules/analytic/summaryTone", "dest": "/vercel/path0/src/pages/dashboard/analytic/modules/analytic/summaryTone.js" }
+  ]
+}
