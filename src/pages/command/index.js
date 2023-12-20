@@ -4,6 +4,7 @@ import breakPointOberver from "constant/mediaQuery";
 import dynamic from "next/dynamic";
 import CommandLayout from "components/layouts/commandLayout";
 import styles from "styles/layout/command.module.scss";
+import styles2 from 'styles/elements/commandMediaList.module.scss';
 
 import airlangga from "assets/images/person/airlangga.jpeg";
 import edwin from "assets/images/person/edwin.jpeg";
@@ -34,6 +35,7 @@ import EarlyWarning from "modules/ews";
 import Sparkline from "components/elements/sparkline";
 import MediaList from "modules/dcc/mediaList";
 import MediaTone from "modules/dcc/mediaTone";
+import Geospatial from "pages/geospatial";
 import MentionList from "modules/dcc/mentionList";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -89,52 +91,52 @@ const ImageList = ({
 }) => {
   const dispatch = useDispatch();
 
-  return (
-    <MentionList
-      onLoading={spokepersonStatistic.loading}
-      data={
-        spokepersonStatistic.result.data
-          ? spokepersonStatistic.result.data.map((item) => {
-              // const foto = mockperson.findIndex((a) => a.name == item.influencer_name);
-              return {
-                label: item.influencer_name,
-                image: (
-                  <Image
-                    key={item.influencer_name}
-                    url={item.image ? "https://demo.digivla.id" : null}
-                    src={item.image ? item.image : avatar}
-                    // layout='fill'
-                    objectFit="cover"
-                    alt="person"
-                    height={40}
-                    width={40}
-                    priority="true"
-                    onClick={() => {
-                      dispatch(
-                        getSpokepersonStatisticClick({
-                          ...filter.result,
-                          page: 0,
-                          max_size: 10,
-                          tone: "all",
-                          influencer: item.influencer_name,
-                          order: "desc",
-                        })
-                      );
+  // return (
+  //   <MentionList
+  //     onLoading={spokepersonStatistic.loading}
+  //     data={
+  //       spokepersonStatistic.result.data
+  //         ? spokepersonStatistic.result.data.map((item) => {
+  //             // const foto = mockperson.findIndex((a) => a.name == item.influencer_name);
+  //             return {
+  //               label: item.influencer_name,
+  //               image: (
+  //                 <Image
+  //                   key={item.influencer_name}
+  //                   url={item.image ? "https://demo.digivla.id" : null}
+  //                   src={item.image ? item.image : avatar}
+  //                   // layout='fill'
+  //                   objectFit="cover"
+  //                   alt="person"
+  //                   height={40}
+  //                   width={40}
+  //                   priority="true"
+  //                   onClick={() => {
+  //                     dispatch(
+  //                       getSpokepersonStatisticClick({
+  //                         ...filter.result,
+  //                         page: 0,
+  //                         max_size: 10,
+  //                         tone: "all",
+  //                         influencer: item.influencer_name,
+  //                         order: "desc",
+  //                       })
+  //                     );
 
-                      setChartList(true);
-                      setDataList({
-                        ...dataList,
-                        ...item,
-                      });
-                    }}
-                  />
-                ),
-              };
-            })
-          : []
-      }
-    />
-  );
+  //                     setChartList(true);
+  //                     setDataList({
+  //                       ...dataList,
+  //                       ...item,
+  //                     });
+  //                   }}
+  //                 />
+  //               ),
+  //             };
+  //           })
+  //         : []
+  //     }
+  //   />
+  // );
 };
 
 const CommandCenter = () => {
@@ -633,79 +635,26 @@ const CommandCenter = () => {
                           })
                         : []
                     }
+
+                    children={
+                      <div
+                        className={styles2['list-item']}
+                        >
+                        <div className={styles2['item-total']}>{
+                          coverageTonality?.result?.data
+                            ? coverageTonality.result.data.chart_bar.reduce((a, b) => {
+                                return { doc_count: a.doc_count + b.doc_count };
+                              }).doc_count
+                            : 0
+                          }
+                        </div>
+                        <div className={styles2['item-label']}>Media Sentiment Breakdown</div>
+                      </div>
+                    }
                   />
                   <p style={{marginBottom: '12px'}}></p>
-                  <Card
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    className={styles["dcc-card"]}
-                    onLoading={!doneCheck}
-                  >
-                    {!backtrackStatus ? (
-                      <Row align="middle">
-                        <Col>Please select date for backtrack:</Col>
-                        <Col>
-                          <DatePicker
-                            onChange={(e) => setBtDate(e.format("YYYY-MM-DD"))}
-                          />
-                          <Button
-                            onClick={() => {
-                              postBacktrack({
-                                backtrack_date: btDate,
-                              })
-                                .then((data) => data.json())
-                                .then((data) => {
-                                  if (
-                                    data.message ==
-                                    "client_id is successfully registered"
-                                  ) {
-                                    notification.success({
-                                      message: "Success backtrack",
-                                    });
-
-                                    dispatch(
-                                      getGeo({
-                                        ...defaultFilter,
-                                        ...filter.result,
-                                      })
-                                    );
-
-                                    setBacktrackStatus(true);
-                                  } else {
-                                    notification.error({
-                                      message:
-                                        "Error happen when add backtrack date!",
-                                    });
-                                  }
-                                });
-                              // .catch((err) =>
-                              // 	notification.error({
-                              // 		message: 'Error happen when add backtrack date!',
-                              // 	}),
-                              // );
-                            }}
-                          >
-                            Submit
-                          </Button>
-                        </Col>
-                      </Row>
-                    ) : (
-                      <Geo
-                        className={styles["chart-geo"]}
-                        options={geo.result.data ? geo.result.data : []}
-                        clickEvent={(e) => {
-                          handleAnalyticDetail({
-                            type: "geo",
-                            page: 0,
-                            maxSize: 10,
-                            order_by: "datee",
-                            order: "desc",
-                            type_location: "article",
-                            geo_loc: e,
-                          });
-                        }}
-                      />
-                    )}
+                  <Card>
+                    <Geospatial />
                   </Card>
                 {/* </Col> */}
                 {/* <Col xs={24} md={24} lg={11} xl={8}>

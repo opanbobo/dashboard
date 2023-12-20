@@ -13,13 +13,13 @@ export const feature = [
 		link: '/dashboard/analytic',
 		icon: 'ExperimentFilled',
 	},
-	{
-		id: 3,
-		text: 'Geodata',
-		label: 'geospatial',
-		link: '/geospatial',
-		icon: 'GlobalOutlined',
-	},
+	// {
+	// 	id: 3,
+	// 	text: 'Geodata',
+	// 	label: 'geospatial',
+	// 	link: '/geospatial',
+	// 	icon: 'GlobalOutlined',
+	// },
 	{
 		id: 4,
 		text: 'Spokesperson',

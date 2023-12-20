@@ -3,7 +3,7 @@ import { ApexChart, Card, gutter, Row, Col } from 'components';
 const MediaTabs = ({ className, visibility, pie, headline, ...cards }) => {
 	return (
 		<Row>
-			<Col span={24}>
+			{/* <Col span={24}>
 				<Card title={visibility.title} {...cards}>
 					<div ref={visibility.ref}>
 						<ApexChart className={className} type='line' {...visibility} />
@@ -19,9 +19,9 @@ const MediaTabs = ({ className, visibility, pie, headline, ...cards }) => {
 						</Card>
 					</Col>
 				)
-			}
+			} */}
 			{/* <Col xs={24} md={24} lg={headline ? 12 : 24} xl={headline ? 12 : 24}> */}
-			<Col xs={24} md={24} lg={16} xl={16}>
+			<Col xs={24} md={24} lg={24} xl={24}>
 				<Card title={pie.title} {...cards}>
 					<ApexChart className={className} id='pie' type='pie' {...pie} />
 				</Card>

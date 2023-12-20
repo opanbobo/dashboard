@@ -264,45 +264,7 @@ const Analytic = (pagination) => {
       }
     }
 
-    if (body.type == "visibility") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data.y,
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "pie") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data.y,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data.y,
-        },
-      });
-    }  else if (body.type == "article-positive") {
+    if (body.type == "article-positive") {
       dispatch(
         getAnalyticArticlePositive({
           ...filter.result,
@@ -356,126 +318,6 @@ const Analytic = (pagination) => {
         ...body,
         desc: {
           Tone: "Neutral"
-        },
-      });
-    } else if (body.type == "coverage") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data.y == 1
-              ? "Positive"
-              : body.data.y == -1
-              ? "Negative"
-              : "Neutral",
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "coverage-bar") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data.x,
-          media_id: body.data.y,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data.x == 1
-              ? "Positive"
-              : body.data.x == -1
-              ? "Negative"
-              : "Neutral",
-          Date: body.data.media_name,
-        },
-      });
-    } else if (body.type == "coverage-barhor") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data.y,
-          tone: body.data.x,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data.x == 1
-              ? "Positive"
-              : body.data.x == -1
-              ? "Negative"
-              : "Neutral",
-          Category: body.data.y,
-        },
-      });
-    } else if (body.type == "ews") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          category_id: body.data.y,
-          start_date: bodyDateStart,
-          end_date: bodyDateEnd,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Category: body.data.y,
-          "Start Date": bodyDateStart,
-          "End Date": bodyDateEnd,
-        },
-      });
-    } else if (body.type == "tonality") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          tone: body.data.x,
-          start_date: bodyDateStartY,
-          end_date: bodyDateEndY,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleData({
-        ...body,
-        desc: {
-          Tone:
-            body.data.x == 1
-              ? "Positive"
-              : body.data.x == -1
-              ? "Negative"
-              : "Neutral",
-          "Start Date": bodyDateStartY,
-          "End Date": bodyDateEndY,
         },
       });
     }
@@ -738,8 +580,9 @@ const Analytic = (pagination) => {
           defaultPageSize: articleDataPositive.maxSize || 0,
           defaultCurrent: articleDataPositive.page + 1 || 0,
           onChange: (page, pageSize) =>
-            handleClikable({
+            loadedFetch({
               ...articleDataPositive,
+              type: "article-positive",
               page: page - 1,
               maxSize: pageSize,
             }),
@@ -774,8 +617,9 @@ const Analytic = (pagination) => {
           defaultPageSize: articleDataNeutral.maxSize || 0,
           defaultCurrent: articleDataNeutral.page + 1 || 0,
           onChange: (page, pageSize) =>
-            handleClikable({
+            loadedFetch({
               ...articleDataNeutral,
+              type: "article-neutral",
               page: page - 1,
               maxSize: pageSize,
             }),
@@ -812,6 +656,7 @@ const Analytic = (pagination) => {
           onChange: (page, pageSize) =>
             handleClikable({
               ...articleDataNegative,
+              type: "article-negative",
               page: page - 1,
               maxSize: pageSize,
             }),
@@ -821,7 +666,7 @@ const Analytic = (pagination) => {
   };
 
   const ModalChart = () => {
-    console.log(analytic);
+    console.log(articleData);
     return (
       <Popchart
         onDetailClick={(e) => {
@@ -1422,45 +1267,45 @@ const Analytic = (pagination) => {
                 },
               },
             }}
-            headline={
-              <div
-                style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
-              >
-                <Row>
-                  {trendingHighLights.result.data?.map((item) => {
-                    return (
-                      <Col span={24} key={item.article_id}>
-                        <ColumnList
-                          ellipsis
-                          // title={item.title}
-                          title={
-                            <Row>
-                              <Col span={24}>
-                                <span>{item.title}</span>
-                                <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
-                              </Col>
-                            </Row>
-                          }
-                          content={item.content}
-                          onClick={() => {
-                            getKeywordArticle({
-                              article_id: item.article_id,
-                            })
-                              .then((data) => data.json())
-                              .then((data) => {
-                                setTrendingDetail(item);
-                                setModalTrending(true);
-                                setKeyword(data.data);
-                              })
-                              .catch((err) => console.log(err));
-                          }}
-                        />
-                      </Col>
-                    );
-                  })}
-                </Row>
-              </div>
-            }
+            // headline={
+            //   <div
+            //     style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
+            //   >
+            //     <Row>
+            //       {trendingHighLights.result.data?.map((item) => {
+            //         return (
+            //           <Col span={24} key={item.article_id}>
+            //             <ColumnList
+            //               ellipsis
+            //               // title={item.title}
+            //               title={
+            //                 <Row>
+            //                   <Col span={24}>
+            //                     <span>{item.title}</span>
+            //                     <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
+            //                   </Col>
+            //                 </Row>
+            //               }
+            //               content={item.content}
+            //               onClick={() => {
+            //                 getKeywordArticle({
+            //                   article_id: item.article_id,
+            //                 })
+            //                   .then((data) => data.json())
+            //                   .then((data) => {
+            //                     setTrendingDetail(item);
+            //                     setModalTrending(true);
+            //                     setKeyword(data.data);
+            //                   })
+            //                   .catch((err) => console.log(err));
+            //               }}
+            //             />
+            //           </Col>
+            //         );
+            //       })}
+            //     </Row>
+            //   </div>
+            // }
           />
         </div>
       ),
@@ -1797,7 +1642,46 @@ const Analytic = (pagination) => {
       </div>
       <Row>
         <Col md={24} lg={6}>
-          <Row>
+          <Card title={'Latest news'}>
+            <div
+              style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
+            >
+              <Row>
+                {trendingHighLights.result.data?.map((item) => {
+                  return (
+                    <Col span={24} key={item.article_id}>
+                      <ColumnList
+                        ellipsis
+                        // title={item.title}
+                        title={
+                          <Row>
+                            <Col span={24}>
+                              <span>{item.title}</span>
+                              <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
+                            </Col>
+                          </Row>
+                        }
+                        content={item.content}
+                        onClick={() => {
+                          getKeywordArticle({
+                            article_id: item.article_id,
+                          })
+                            .then((data) => data.json())
+                            .then((data) => {
+                              setTrendingDetail(item);
+                              setModalTrending(true);
+                              setKeyword(data.data);
+                            })
+                            .catch((err) => console.log(err));
+                        }}
+                      />
+                    </Col>
+                  );
+                })}
+              </Row>
+            </div>
+          </Card>
+          {/* <Row>
             {!coverageTonality.result.data
               ? WidgetSeries.map((item) => {
                   return (
@@ -1846,7 +1730,7 @@ const Analytic = (pagination) => {
                     </Col>
                   );
                 })}
-          </Row>
+          </Row> */}
         </Col>
 
         <Col xs={24} md={24} lg={18}>

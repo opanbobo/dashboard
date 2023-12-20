@@ -67,37 +67,40 @@ const MediaList = ({ className, data, ...props }) => {
 		<Card className={className} {...props}>
 			<div className={styles['media-list-wrapper']}>
 				{data.map((icon, index) => {
-					return (
-						<div
-							key={index}
-							className={styles['list-item']}
-							onClick={() => {
-								setArticleData({
-									name: icon.label,
-									page: 0,
-									size: 10,
-									article_ids: icon.article_ids,
-								});
-
-								dispatch(
-									getMediaCountArticle({
-										size: 10,
+					if(icon.label !== 'Radio'){
+						return (
+							<div
+								key={index}
+								className={styles['list-item']}
+								onClick={() => {
+									setArticleData({
+										name: icon.label,
 										page: 0,
+										size: 10,
 										article_ids: icon.article_ids,
-									}),
-								);
+									});
 
-								setModal(true);
-							}}
-						>
-							{/* <div className={styles['item-image']}>
-								<Image src={icon.url} objectFit='contain' alt='icon' height={30} width={30} priority='true' />
-							</div> */}
-							<div className={styles['item-total']}>{icon.total}</div>
-							<div className={styles['item-label']}>{icon.label}</div>
-						</div>
-					);
+									dispatch(
+										getMediaCountArticle({
+											size: 10,
+											page: 0,
+											article_ids: icon.article_ids,
+										}),
+									);
+
+									setModal(true);
+								}}
+							>
+								{/* <div className={styles['item-image']}>
+									<Image src={icon.url} objectFit='contain' alt='icon' height={30} width={30} priority='true' />
+								</div> */}
+								<div className={styles['item-total']}>{icon.total}</div>
+								<div className={styles['item-label']}>{icon.label}</div>
+							</div>
+						);
+					}
 				})}
+				{props.children}
 			</div>
 			<ModalMedia />
 		</Card>
