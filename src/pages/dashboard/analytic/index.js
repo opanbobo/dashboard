@@ -1664,7 +1664,7 @@ const Analytic = (pagination) => {
         <Col md={24} lg={6}>
           <Card title={'Latest news'}>
             <div
-              style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
+              style={{ overflowY: "auto", overflowX: "hidden", height: 270 }}
             >
               <Row>
                 {trendingHighLights.result.data?.map((item) => {

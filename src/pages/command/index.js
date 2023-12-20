@@ -622,7 +622,7 @@ const CommandCenter = () => {
       <div className={styles.toprow}>
         <div className={styles.topcol}>
           <Row>
-            <Col xs={24} md={24} lg={14} xl={16}>
+            <Col xs={24} md={24} lg={24} xl={24}>
               {/* <Row style={{ height: "100%" }}> */}
                 {/* <Col xs={24} md={24} lg={13} xl={16}> */}
                   <MediaList
@@ -648,7 +648,7 @@ const CommandCenter = () => {
                             : 0
                           }
                         </div>
-                        <div className={styles2['item-label']}>Media Sentiment Breakdown</div>
+                        <div className={styles2['item-label']}>Total Article</div>
                       </div>
                     }
                   />
@@ -661,7 +661,7 @@ const CommandCenter = () => {
                 </Col> */}
               {/* </Row> */}
               <p style={{marginBottom: '12px'}}></p>
-              <Row>
+              {/* <Row> */}
                 {/* <Col xs={24} md={24} lg={12} xl={13}>
                   <ImageList
                     bodyStyle={{ padding: 6}}
@@ -674,7 +674,7 @@ const CommandCenter = () => {
                   />
                 </Col> spokeperson di takeout
                 */}
-                <Col xs={24} md={24} lg={12} xl={24}>
+                {/* <Col xs={24} md={24} lg={12} xl={24}>
                   <Sparkline
                     className="total-msb"
                     onLoading={coverageTonality.loading}
@@ -748,12 +748,118 @@ const CommandCenter = () => {
                       chartOptions: SparklineOptions.chart,
                     }}
                   />
-                </Col>
-               </Row>
+                </Col> */}
+               {/* </Row> */}
             </Col>
-            <Col xs={24} md={24} lg={10} xl={8}>
-              
-              <div className={styles.botrow}>
+            <Col xs={24} md={24} lg={8} xl={8}>
+              <Row>
+                {/* <Col span={24} style={{ display: 'none' }}>
+                  <Card
+                    title="top issue"
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    className={styles["dcc-card-list"]}
+                    onLoading={issueTop.loading}
+                  >
+                    <IssueList />
+                  </Card>
+                </Col> */}
+                <Col span={24}>
+                  <Card
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    onLoading={wordCloud.loading}
+                    className={styles["dcc-card"]}
+                  >
+                    {wordCloud.result.total_word ? (
+                      <WordCloud
+                        className={styles["chart-word"]}
+                        options={{
+                          series: [
+                            {
+                              type: "wordcloud",
+                              // data: wordCloud.result.data ? wordCloud.result.data : [],
+                              data: wordCloud.result.data
+                                ? wordCloud.result.data.map((word) => ({
+                                    name: word.name,
+                                    weight: word.weight,
+                                    color: `rgba(25, 144, 255,${
+                                      word.weight > 20
+                                        ? 1
+                                        : 0.3 && word.weight <= 15
+                                        ? 0.3
+                                        : 1
+                                    })`,
+                                  }))
+                                : [],
+                              style: {
+                                fontFamily: `Noto Sans, sans-serif`,
+                                textTransform: "capitalize",
+                                color: 'white',
+                              },
+                              minFontSize: 10,
+                            },
+                          ],
+                          chart: {
+                            backgroundColor: '#2b2d3e',
+                          },
+                        }}
+                      />
+                    ) : (
+                      <Row>
+                        <Col>Please select date for backtrack:</Col>
+                        <Col>
+                          <DatePicker
+                            onChange={(e) =>
+                              setBtWcDate(e.format("YYYY-MM-DD"))
+                            }
+                          />
+                          <Button
+                            onClick={() => {
+                              postBacktrackWordcloud({
+                                backtrack_date: btWcDate,
+                              })
+                                .then((data) => data.json())
+                                .then((data) => {
+                                  if (
+                                    data.message ==
+                                    "vdadi successfully registered..."
+                                  ) {
+                                    notification.success({
+                                      message: "Success backtrack",
+                                    });
+
+                                    dispatch(
+                                      getWordcloud({
+                                        start_date: filter.result.start_date,
+                                        end_date: filter.result.end_date,
+                                        total_word: 40,
+                                      })
+                                    );
+                                  } else {
+                                    notification.error({
+                                      message: "Error when add backtrack date",
+                                    });
+                                  }
+                                })
+                                .catch((err) =>
+                                  notification.error({
+                                    message: "Error when add backtrack date",
+                                  })
+                                );
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    )}
+                  </Card>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={24} md={24} lg={16} xl={16}>
+            <div className={styles.botrow}>
                 <Row>
                   <Col xs={24} md={24} lg={24} xl={24}>
                     <Card onLoading={toneMedia.loading}>
@@ -909,111 +1015,6 @@ const CommandCenter = () => {
               />
               <ModalAnalytic />
               
-              <Row>
-                <Col span={24} style={{ display: 'none' }}>
-                  <Card
-                    title="top issue"
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    className={styles["dcc-card-list"]}
-                    onLoading={issueTop.loading}
-                  >
-                    <IssueList />
-                  </Card>
-                </Col>
-                <Col span={24}>
-                  <Card
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    onLoading={wordCloud.loading}
-                    className={styles["dcc-card"]}
-                  >
-                    {wordCloud.result.total_word ? (
-                      <WordCloud
-                        className={styles["chart-word"]}
-                        options={{
-                          series: [
-                            {
-                              type: "wordcloud",
-                              // data: wordCloud.result.data ? wordCloud.result.data : [],
-                              data: wordCloud.result.data
-                                ? wordCloud.result.data.map((word) => ({
-                                    name: word.name,
-                                    weight: word.weight,
-                                    color: `rgba(25, 144, 255,${
-                                      word.weight > 20
-                                        ? 1
-                                        : 0.3 && word.weight <= 15
-                                        ? 0.3
-                                        : 1
-                                    })`,
-                                  }))
-                                : [],
-                              style: {
-                                fontFamily: `Noto Sans, sans-serif`,
-                                textTransform: "capitalize",
-                                color: 'white',
-                              },
-                              minFontSize: 10,
-                            },
-                          ],
-                          chart: {
-                            backgroundColor: '#2b2d3e',
-                          },
-                        }}
-                      />
-                    ) : (
-                      <Row>
-                        <Col>Please select date for backtrack:</Col>
-                        <Col>
-                          <DatePicker
-                            onChange={(e) =>
-                              setBtWcDate(e.format("YYYY-MM-DD"))
-                            }
-                          />
-                          <Button
-                            onClick={() => {
-                              postBacktrackWordcloud({
-                                backtrack_date: btWcDate,
-                              })
-                                .then((data) => data.json())
-                                .then((data) => {
-                                  if (
-                                    data.message ==
-                                    "vdadi successfully registered..."
-                                  ) {
-                                    notification.success({
-                                      message: "Success backtrack",
-                                    });
-
-                                    dispatch(
-                                      getWordcloud({
-                                        start_date: filter.result.start_date,
-                                        end_date: filter.result.end_date,
-                                        total_word: 40,
-                                      })
-                                    );
-                                  } else {
-                                    notification.error({
-                                      message: "Error when add backtrack date",
-                                    });
-                                  }
-                                })
-                                .catch((err) =>
-                                  notification.error({
-                                    message: "Error when add backtrack date",
-                                  })
-                                );
-                            }}
-                          >
-                            Submit
-                          </Button>
-                        </Col>
-                      </Row>
-                    )}
-                  </Card>
-                </Col>
-              </Row>
             </Col>
           </Row>
         </div>

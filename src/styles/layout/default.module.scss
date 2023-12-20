@@ -209,6 +209,19 @@
 			padding: 0
 		}
 
+		.ant-table.ant-table-small{
+			background: none;
+			color: #fff;
+		}
+
+		.ant-table-tbody > tr.ant-table-row:hover > td, .ant-table-tbody > tr > td.ant-table-cell-row-hover{
+			background-color: #343e59;
+		}
+
+		.ant-table-thead th.ant-table-column-has-sorters{
+			background: #fff !important;
+		}
+
 		.dashboard-menux{
 			margin-bottom: 10px;
 		}
