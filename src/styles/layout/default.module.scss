@@ -57,7 +57,7 @@
 		width: auto;
 		background: #343e59;
 		left: 0;
-		padding: 0 15px;
+		padding: 0 10px;
 		box-shadow: 0 4px 12px 0 rgba(131, 146, 165, 0.15);
   	border-right: 1px solid rgb(74, 73, 73);
 		z-index: 1;
@@ -186,6 +186,42 @@
 			padding: 0;
 			color: #fff;
 			background-color: #2b2d3e;
+		}
+
+		/* CSS atau SCSS Anda */
+		.ant-collapse-content {
+			background-color: transparent; /* Atur latar belakang transparan */
+		}
+
+		.ant-collapse-header-text{
+			color: #fff;
+		}
+
+		.ant-collapse-content-box{
+			margin-top: 20px;
+		}
+
+		.dashboard-menux .ant-collapse-expand-icon{
+			display: none;
+		}
+
+		.ant-collapse-content > .ant-collapse-content-box{
+			padding: 0
+		}
+
+		.dashboard-menux{
+			margin-bottom: 10px;
+		}
+
+		.dashboard-menux .ant-collapse > .ant-collapse-item{
+			border-left: none;
+			border-top: none;
+			border-right: none;
+		}
+
+		.ant-collapse{
+			border: none;
+			background: none;
 		}
 
 		.ant-form-item-control-input-content{

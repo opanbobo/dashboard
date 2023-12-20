@@ -961,6 +961,10 @@ const Analytic = (pagination) => {
                             : [],
                       },
                       legend: LineOptions.legend,
+                      tooltip: {
+                        theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                        fillSeriesColor: false, // Untuk mengisi warna tooltip
+                      },
                     },
                   }}
                 />
@@ -1234,6 +1238,10 @@ const Analytic = (pagination) => {
                   },
                 },
                 legend: LineOptions.legend,
+                tooltip: {
+                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                  fillSeriesColor: false, // Untuk mengisi warna tooltip
+                },
               },
             }}
             pie={{
@@ -1396,6 +1404,10 @@ const Analytic = (pagination) => {
                   },
                 },
                 legend: BarHorizontal.legend,
+                tooltip: {
+                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                  fillSeriesColor: false, // Untuk mengisi warna tooltip
+                },
               },
             }}
 
@@ -1483,6 +1495,10 @@ const Analytic = (pagination) => {
                   },
                 },
                 legend: BarHorizontal.legend,
+                tooltip: {
+                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                  fillSeriesColor: false, // Untuk mengisi warna tooltip
+                },
               },
             }}
             media={{
@@ -1541,6 +1557,10 @@ const Analytic = (pagination) => {
                   },
                 },
                 legend: BarHorizontal.legend,
+                tooltip: {
+                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                  fillSeriesColor: false, // Untuk mengisi warna tooltip
+                },
               },
             }}
           />
@@ -1763,7 +1783,7 @@ const Analytic = (pagination) => {
                       style: {
                         fontSize: "14px",
                         fontWeight: 500,
-                        color: "#263238",
+                        color: "#fff",
                       },
                     },
                     tooltip: {
@@ -1792,6 +1812,10 @@ const Analytic = (pagination) => {
                       position: "top",
                       horizontalAlign: "right",
                       markers: LineOptions.legend.markers,
+                    },
+                    tooltip: {
+                      theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                      fillSeriesColor: false, // Untuk mengisi warna tooltip
                     },
                   },
                   series: coverageTonality.result.data
