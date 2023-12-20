@@ -870,6 +870,10 @@ const CommandCenter = () => {
                                 offsetY: 0,
                               },
                             },
+                            tooltip: {
+                              theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                              fillSeriesColor: false, // Untuk mengisi warna tooltip
+                            },
                           },
                         }}
                       />
