@@ -396,6 +396,11 @@ const DefaultLayout = ({
     dispatch(getFilterSubMedia(filter.result.user_media_type_id));
   }, []);
 
+  const userToken = localStorage.getItem("userToken");
+  console.log("Nilai userToken:", userToken);
+  const parsedToken = JSON.parse(userToken);
+  console.log("Nilai logo:", parsedToken.comp_icon);
+
   return (
     <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
       <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(true)}}>
@@ -422,7 +427,8 @@ const DefaultLayout = ({
           <MainHeader
             className={styles["main-head"]}
             url="https://admin.antara-insight.id/asset/images/"
-            logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
+            // logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
+            logo={parsedToken.comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
             onClick={() => setToggleMenu(!toggleMenu) }
             search={{ onClick: handleSearch }}
