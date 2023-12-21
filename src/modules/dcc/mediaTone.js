@@ -35,7 +35,7 @@ const MediaTone = ({ className, charts, ...props }) => {
           labels: ['Positive', 'Negative', 'Neutral'],
           width: 100,
           tooltip: {
-            theme: 'light',
+            theme: 'dark',
             fillSeriesColor: true,
           },
           legend: {
@@ -54,6 +54,7 @@ const MediaTone = ({ className, charts, ...props }) => {
               },
             },
           },
+          colors: ['#1b81e2', '#df6264', '#0bbd91'],
           dataLabels: {
             dropShadow: {
               blur: 3,
@@ -66,6 +67,9 @@ const MediaTone = ({ className, charts, ...props }) => {
             formatter: function (val, opts) {
               return `${val.toFixed(1)}%`; // Display percentage on the data label
             },
+          },
+          stroke: {
+            show: false, // Menyembunyikan border (garis tepi) pada grafik
           },
           annotations: {
             points: percentages.map((percentage, i) => ({
