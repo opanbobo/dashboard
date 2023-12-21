@@ -122,7 +122,8 @@ const EditDrawer = ({
   return (
     <Drawer
       title={editingDrawerTemp.title}
-      placement="right"
+      placement="top"
+      height={550}
       onClose={() => {
         setclipEditingPop(false);
         setEditingDrawerTemp({});

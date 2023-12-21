@@ -1398,7 +1398,8 @@ const Clipping = () => {
       {/* action clipping list */}
       <Drawer
         title={clippingDrawer.title}
-        placement="right"
+        placement="top"
+        height={550}
         visible={clipListPop}
         onClose={() => {
           setclipListPop(false);

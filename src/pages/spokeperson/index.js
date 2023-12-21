@@ -189,7 +189,8 @@ const Spokeperson = () => {
     return (
       <Drawer
         title={articleDetail.influencer_name}
-        placement="right"
+        placement="top"
+        height={550}
         visible={openDetail && !spokepersonDetail.loading}
         onClose={() => {
           setopenDetail(false);
@@ -842,6 +843,10 @@ const Spokeperson = () => {
                     },
                   },
                   legend: BarHorizontal.legend,
+                  tooltip: {
+                    theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                    fillSeriesColor: false, // Untuk mengisi warna tooltip
+                  },
                 },
               }}
             />
