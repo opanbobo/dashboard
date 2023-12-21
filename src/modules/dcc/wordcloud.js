@@ -4,6 +4,7 @@ import Highcharts from 'highcharts';
 
 const WordCloud = ({ className, options, ...props }) => {
 	const chartOptions = {
+		background: '#2b2d3e',
 		title: {
 			text: undefined,
 		},
@@ -15,7 +16,7 @@ const WordCloud = ({ className, options, ...props }) => {
 	};
 	return (
 		<div id='chart' className={className}>
-			<Chart highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '100%' } }} {...props} />
+			<Chart highcharts={Highcharts} options={chartOptions} containerProps={{ style: { height: '100%'} }} {...props} />
 		</div>
 	);
 };

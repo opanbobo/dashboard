@@ -17,11 +17,12 @@ export default function ApexChart({
 }) {
 	const baseOptions = {
 		chart: {
+			background: '#2b2d3e',
 			title: {
 				style: {
 					fontSize: '14px',
 					fontWeight: 400,
-					color: '#263238',
+					color: '#fff',
 				},
 				...title,
 			},

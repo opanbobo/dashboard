@@ -42,7 +42,7 @@ const Login = () => {
         );
         notification.success({
           message: `Hello, ${res.usr_comp_name}`,
-          description: "Welcome to Formal Media Dashboard",
+          description: "Welcome to Conventional Media Dashboard",
         });
       } else {
         // Error handling
@@ -88,7 +88,7 @@ const Login = () => {
         </Button>
       </Form.Item>
       <Form.Item style={itemStyles}>
-        {!logoType && <small>copyright&copy;digivla indonesia </small>}
+        {!logoType && <small>copyright &copy; conventional media </small>}
       </Form.Item>
     </Form>
   );

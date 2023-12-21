@@ -29,7 +29,7 @@ const Headers = () => {
 
   return (
     <Head>
-      <title>Formal Media Dashboard</title>
+      <title>Conventional Media Dashboard</title>
       <meta charset="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <link rel='shortcut icon' href="" type='image/x-icon' />
@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }) {
   const handleLogout = async () => {
     localStorage.clear();
 		notification.info({
-			message: 'Thank you for using Formal Media Dashboard',
+			message: 'Thank you for using Conventional Media Dashboard',
 		});
     router.push("/login");
   };

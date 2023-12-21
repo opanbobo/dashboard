@@ -75,10 +75,15 @@ export const BarHorizontal = {
 
 export const SparklineOptions = {
 	chart: {
+		background: '#2b2d3e',
 		sparkline: {
 			enabled: true,
 		},
 	},
+	tooltip: {
+    theme: 'dark'
+  },
+	curve: 'smooth',
 	options: {
 		grid: {
 			show: false,
@@ -88,6 +93,9 @@ export const SparklineOptions = {
 		},
 		legend: {
 			show: false,
+		},
+		stroke: {
+			lineCap: 'round'
 		},
 	},
 };

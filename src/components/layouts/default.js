@@ -12,6 +12,7 @@ import {
   Col,
   Select,
   DatePicker,
+  Card
 } from "components";
 import { routes, feature } from "constant/routes";
 // import 'moment/locale/id';
@@ -48,46 +49,10 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
   }, []);
 
   return (
-    <Modal
-      closable
-      visible={filterModal}
-      title="Dashboard Filter"
-      bodyStyle={modalstyle}
-      onCancel={() => setfilterModal(false)}
-      footer={[
-        <Button
-          key="submit"
-          type="primary"
-          style={{ marginLeft: "auto" }}
-          onClick={() => {
-            dispatch(
-              setFilter({
-                ...filter.result,
-                ...formData,
-              })
-            );
-
-            setfilterModal(false);
-          }}
-        >
-          Set Filter
-        </Button>,
-        <>
-          {customPeriod ? (
-            <Button key="custom" onClick={() => setcustomPeriod(false)}>
-              Close Custom
-            </Button>
-          ) : (
-            <Button key="custom" onClick={openCustom}>
-              Custom Periodic
-            </Button>
-          )}
-        </>,
-      ]}
-    >
+    <Card title="Dashboard Filter">
       <Form>
         <Row>
-          <Col xs={24} md={12} lg={12} xl={12}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="periodic">Periodic</label>
 
@@ -170,6 +135,8 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 </Select.Option>
               </Select>
             </Form.Item>
+          </Col>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="categories">Category</label>
               <Select
@@ -198,6 +165,9 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
+          </Col>
+          <Col xs={12} md={4} lg={4} xl={4}>
+            
             <Form.Item>
               <label htmlFor="subcategory">Sub Category</label>
               <Select
@@ -222,8 +192,33 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
+            {/* <Form.Item>
+              <label htmlFor="submedia">Sub Media</label>
+              <Select
+                id="submedia"
+                placeholder="select sub-media"
+                optionFilterProp="children"
+                onChange={(value) => {
+                  setFormData({
+                    ...formData,
+                    media_id: value,
+                  });
+                }}
+                defaultValue={formData.media_id}
+                optionLabelProp="label"
+                options={
+                  subMedia.result.results?.map((item) => {
+                    return {
+                      value: item.media_id,
+                      label: item.media_name,
+                    };
+                  }) || []
+                }
+              />
+            </Form.Item> */}
+
           </Col>
-          <Col xs={24} md={12} lg={12} xl={12}>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="media">Media</label>
               <Select
@@ -251,30 +246,9 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 }
               />
             </Form.Item>
-            <Form.Item>
-              <label htmlFor="submedia">Sub Media</label>
-              <Select
-                id="submedia"
-                placeholder="select sub-media"
-                optionFilterProp="children"
-                onChange={(value) => {
-                  setFormData({
-                    ...formData,
-                    media_id: value,
-                  });
-                }}
-                defaultValue={formData.media_id}
-                optionLabelProp="label"
-                options={
-                  subMedia.result.results?.map((item) => {
-                    return {
-                      value: item.media_id,
-                      label: item.media_name,
-                    };
-                  }) || []
-                }
-              />
-            </Form.Item>
+
+          </Col>
+          <Col xs={12} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">Tone</label>
               <Select
@@ -303,12 +277,13 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                 })}
               />
             </Form.Item>
+
           </Col>
           {customPeriod ? (
             <Col span={24}>
               <label htmlFor="custom">Custom Periodic</label>
               <Row gutter={12}>
-                <Col xs={24} md={12} lg={12} xl={12}>
+                <Col xs={12} md={4} lg={4} xl={4}>
                   <Form.Item>
                     <DatePicker
                       defaultValue={moment(formData.start_date)}
@@ -325,7 +300,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
                     />
                   </Form.Item>
                 </Col>
-                <Col xs={24} md={12} lg={12} xl={12}>
+                <Col xs={12} md={4} lg={4} xl={4}>
                   <Form.Item>
                     <DatePicker
                       defaultValue={moment(formData.end_date)}
@@ -345,9 +320,43 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               </Row>
             </Col>
           ) : null}
+          <Col xs={12} md={4} lg={4} xl={4}>
+            <Form.Item>
+              <label htmlFor="tone">&nbsp;</label>
+              <div style={{width: '100%', display: 'flex', gap: '8px'}}>
+                <Button
+                  key="submit"
+                  type="primary"
+                  onClick={() => {
+                    dispatch(
+                      setFilter({
+                        ...filter.result,
+                        ...formData,
+                      })
+                    );
+
+                    // setfilterModal(false);
+                  }}
+                >
+                  Set Filter
+                </Button>
+                <>
+                  {customPeriod ? (
+                    <Button key="custom" onClick={() => setcustomPeriod(false)}>
+                      Close Custom
+                    </Button>
+                  ) : (
+                    <Button key="custom" onClick={openCustom}>
+                      Custom
+                    </Button>
+                  )}
+                </>
+              </div>
+            </Form.Item>
+          </Col>
         </Row>
       </Form>
-    </Modal>
+    </Card>
   );
 };
 
@@ -387,6 +396,11 @@ const DefaultLayout = ({
     dispatch(getFilterSubMedia(filter.result.user_media_type_id));
   }, []);
 
+  const userToken = localStorage.getItem("userToken");
+  console.log("Nilai userToken:", userToken);
+  const parsedToken = JSON.parse(userToken);
+  console.log("Nilai logo:", parsedToken.comp_icon);
+
   return (
     <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
       <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(true)}}>
@@ -413,17 +427,21 @@ const DefaultLayout = ({
           <MainHeader
             className={styles["main-head"]}
             url="https://admin.antara-insight.id/asset/images/"
-            logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
+            // logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
+            logo={parsedToken.comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
             onClick={() => setToggleMenu(!toggleMenu) }
             search={{ onClick: handleSearch }}
+            style={{ color: 'white', padding: '0 20px'}}
             {...props}
           />
         )}
         <div
           className={styles["main-content"]}
-          style={{ background: background }}
+          style={{ background: background, padding: '20px' }}
         >
+          <ModalFilter/>
+          <p></p>
           {children}
         </div>
       </div>

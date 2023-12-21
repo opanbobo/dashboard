@@ -15,6 +15,12 @@
 	background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
 	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);		
+	padding-bottom: 50px;
+	padding-top: 10px;
+	.head-item-toolbar{
+		text-align: center;
+		padding: 20px 0;
+	}
 
 	.auth-head {
 		position: relative;
@@ -22,6 +28,10 @@
 		background: transparent;
 		padding: 18px;
 		color: #fff;
+		text-align: center;
+			span{
+				display: inline-block;
+			}
 
 
 		@include res.media(phone) {

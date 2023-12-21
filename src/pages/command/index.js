@@ -4,6 +4,7 @@ import breakPointOberver from "constant/mediaQuery";
 import dynamic from "next/dynamic";
 import CommandLayout from "components/layouts/commandLayout";
 import styles from "styles/layout/command.module.scss";
+import styles2 from 'styles/elements/commandMediaList.module.scss';
 
 import airlangga from "assets/images/person/airlangga.jpeg";
 import edwin from "assets/images/person/edwin.jpeg";
@@ -34,6 +35,7 @@ import EarlyWarning from "modules/ews";
 import Sparkline from "components/elements/sparkline";
 import MediaList from "modules/dcc/mediaList";
 import MediaTone from "modules/dcc/mediaTone";
+import Geospatial from "pages/geospatial";
 import MentionList from "modules/dcc/mentionList";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -89,52 +91,52 @@ const ImageList = ({
 }) => {
   const dispatch = useDispatch();
 
-  return (
-    <MentionList
-      onLoading={spokepersonStatistic.loading}
-      data={
-        spokepersonStatistic.result.data
-          ? spokepersonStatistic.result.data.map((item) => {
-              // const foto = mockperson.findIndex((a) => a.name == item.influencer_name);
-              return {
-                label: item.influencer_name,
-                image: (
-                  <Image
-                    key={item.influencer_name}
-                    url={item.image ? "https://demo.digivla.id" : null}
-                    src={item.image ? item.image : avatar}
-                    // layout='fill'
-                    objectFit="cover"
-                    alt="person"
-                    height={40}
-                    width={40}
-                    priority="true"
-                    onClick={() => {
-                      dispatch(
-                        getSpokepersonStatisticClick({
-                          ...filter.result,
-                          page: 0,
-                          max_size: 10,
-                          tone: "all",
-                          influencer: item.influencer_name,
-                          order: "desc",
-                        })
-                      );
+  // return (
+  //   <MentionList
+  //     onLoading={spokepersonStatistic.loading}
+  //     data={
+  //       spokepersonStatistic.result.data
+  //         ? spokepersonStatistic.result.data.map((item) => {
+  //             // const foto = mockperson.findIndex((a) => a.name == item.influencer_name);
+  //             return {
+  //               label: item.influencer_name,
+  //               image: (
+  //                 <Image
+  //                   key={item.influencer_name}
+  //                   url={item.image ? "https://demo.digivla.id" : null}
+  //                   src={item.image ? item.image : avatar}
+  //                   // layout='fill'
+  //                   objectFit="cover"
+  //                   alt="person"
+  //                   height={40}
+  //                   width={40}
+  //                   priority="true"
+  //                   onClick={() => {
+  //                     dispatch(
+  //                       getSpokepersonStatisticClick({
+  //                         ...filter.result,
+  //                         page: 0,
+  //                         max_size: 10,
+  //                         tone: "all",
+  //                         influencer: item.influencer_name,
+  //                         order: "desc",
+  //                       })
+  //                     );
 
-                      setChartList(true);
-                      setDataList({
-                        ...dataList,
-                        ...item,
-                      });
-                    }}
-                  />
-                ),
-              };
-            })
-          : []
-      }
-    />
-  );
+  //                     setChartList(true);
+  //                     setDataList({
+  //                       ...dataList,
+  //                       ...item,
+  //                     });
+  //                   }}
+  //                 />
+  //               ),
+  //             };
+  //           })
+  //         : []
+  //     }
+  //   />
+  // );
 };
 
 const CommandCenter = () => {
@@ -302,28 +304,31 @@ const CommandCenter = () => {
 
   const handleAnalyticDetail = (body) => {
     if (body.type == "media") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          maxSize: body.maxSize,
-          page: body.page,
-          media_id: toneMedia.result.data[body.data.x].media_id,
-          tone: `${body.data.y - 1}`,
-        })
-      );
 
-      setArticleData({
-        ...body,
-        desc: {
-          Media: toneMedia.result.data[body.data.x].media_name,
-          Tone:
-            body.data.y - 1 == 1
-              ? "Positive"
-              : body.data.y - 1 == -1
-              ? "Negative"
-              : "Neutral",
-        },
-      });
+      console.log(body.data.x)
+      // dispatch(
+      //   getAnalyticArticle({
+      //     ...filter.result,
+      //     maxSize: body.maxSize,
+      //     page: body.page,
+      //     media_id: toneMedia.result.data[body.data.x].media_id,
+      //     tone: `${body.data.y - 1}`,
+      //   })
+      // );
+
+      // setArticleData({
+      //   ...body,
+      //   desc: {
+      //     Media: toneMedia.result.data[body.data.x].media_name,
+      //     Tone:
+      //       body.data.y - 1 == 1
+      //         ? "Positive"
+      //         : body.data.y - 1 == -1
+      //         ? "Negative"
+      //         : "Neutral",
+      //   },
+      // });
+
     } else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
@@ -620,7 +625,7 @@ const CommandCenter = () => {
       <div className={styles.toprow}>
         <div className={styles.topcol}>
           <Row>
-            <Col xs={24} md={24} lg={14} xl={16}>
+            <Col xs={24} md={24} lg={24} xl={24}>
               {/* <Row style={{ height: "100%" }}> */}
                 {/* <Col xs={24} md={24} lg={13} xl={16}> */}
                   <MediaList
@@ -633,87 +638,34 @@ const CommandCenter = () => {
                           })
                         : []
                     }
+
+                    children={
+                      <div
+                        className={styles2['list-item']}
+                        >
+                        <div className={styles2['item-total']}>{
+                          coverageTonality?.result?.data
+                            ? coverageTonality.result.data.chart_bar.reduce((a, b) => {
+                                return { doc_count: a.doc_count + b.doc_count };
+                              }).doc_count
+                            : 0
+                          }
+                        </div>
+                        <div className={styles2['item-label']}>Total Article</div>
+                      </div>
+                    }
                   />
                   <p style={{marginBottom: '12px'}}></p>
-                  <Card
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    className={styles["dcc-card"]}
-                    onLoading={!doneCheck}
-                  >
-                    {!backtrackStatus ? (
-                      <Row align="middle">
-                        <Col>Please select date for backtrack:</Col>
-                        <Col>
-                          <DatePicker
-                            onChange={(e) => setBtDate(e.format("YYYY-MM-DD"))}
-                          />
-                          <Button
-                            onClick={() => {
-                              postBacktrack({
-                                backtrack_date: btDate,
-                              })
-                                .then((data) => data.json())
-                                .then((data) => {
-                                  if (
-                                    data.message ==
-                                    "client_id is successfully registered"
-                                  ) {
-                                    notification.success({
-                                      message: "Success backtrack",
-                                    });
-
-                                    dispatch(
-                                      getGeo({
-                                        ...defaultFilter,
-                                        ...filter.result,
-                                      })
-                                    );
-
-                                    setBacktrackStatus(true);
-                                  } else {
-                                    notification.error({
-                                      message:
-                                        "Error happen when add backtrack date!",
-                                    });
-                                  }
-                                });
-                              // .catch((err) =>
-                              // 	notification.error({
-                              // 		message: 'Error happen when add backtrack date!',
-                              // 	}),
-                              // );
-                            }}
-                          >
-                            Submit
-                          </Button>
-                        </Col>
-                      </Row>
-                    ) : (
-                      <Geo
-                        className={styles["chart-geo"]}
-                        options={geo.result.data ? geo.result.data : []}
-                        clickEvent={(e) => {
-                          handleAnalyticDetail({
-                            type: "geo",
-                            page: 0,
-                            maxSize: 10,
-                            order_by: "datee",
-                            order: "desc",
-                            type_location: "article",
-                            geo_loc: e,
-                          });
-                        }}
-                      />
-                    )}
+                  <Card>
+                    <Geospatial />
                   </Card>
                 {/* </Col> */}
                 {/* <Col xs={24} md={24} lg={11} xl={8}>
                 </Col> */}
               {/* </Row> */}
               <p style={{marginBottom: '12px'}}></p>
-              <Row>
-                <Col xs={24} md={24} lg={12} xl={13}>
+              {/* <Row> */}
+                {/* <Col xs={24} md={24} lg={12} xl={13}>
                   <ImageList
                     bodyStyle={{ padding: 6}}
                     spokepersonStatistic={spokepersonStatistic}
@@ -723,12 +675,14 @@ const CommandCenter = () => {
                     filter={filter}
                     dataList={dataList}
                   />
-                </Col>
-                <Col xs={24} md={24} lg={12} xl={11}>
+                </Col> spokeperson di takeout
+                */}
+                {/* <Col xs={24} md={24} lg={12} xl={24}>
                   <Sparkline
+                    className="total-msb"
                     onLoading={coverageTonality.loading}
                     bodyStyle={{ padding: 6 }}
-                    style={{height: '100%'}}
+                    style={{height: '100%', color: 'white'}}
                     title="media sentiment breakdown"
                     type="up"
                     total={
@@ -797,66 +751,174 @@ const CommandCenter = () => {
                       chartOptions: SparklineOptions.chart,
                     }}
                   />
-                </Col>
-               </Row>
+                </Col> */}
+               {/* </Row> */}
             </Col>
-            <Col xs={24} md={24} lg={10} xl={8}>
-              
-              <div className={styles.botrow}>
-                <Row>
-                  <Col xs={24} md={24} lg={24} xl={24}>
-                    <Card onLoading={toneMedia.loading}>
-                      <MediaTone
-                        charts={{
-                          series: toneMedia.result.data
-                            ? getMediaSelection(toneMedia.result.data)
-                            : [],
-                          chartOptions: {
-                            stacked: true,
-                            events: {
-                              dataPointSelection(e, chart, config) {
-                                handleAnalyticDetail({
-                                  type: "media",
-                                  page: 0,
-                                  maxSize: 10,
-                                  order_by: "datee",
-                                  order: "desc",
-                                  data: {
-                                    x: config.dataPointIndex,
-                                    y: config.seriesIndex,
-                                  },
-                                });
-                              },
-                            },
-                          },
-                          options: {
-                            title: {
-                              text: "Top 10 Media",
-                              floating: false,
-                              offsetY: 5,
-                              align: "left",
-                              style: BarHorizontal.title.style,
-                            },
-                            colors: [...BarHorizontal.colors, "#A020F0"],
-                            plotOptions: BarHorizontal.plotOptions,
-                            xaxis: {
-                              categories: toneMedia.result.data
-                                ? toneMedia.result.data.map((item) => item.media_name)
+            <Col xs={24} md={24} lg={8} xl={8}>
+              <Row>
+                {/* <Col span={24} style={{ display: 'none' }}>
+                  <Card
+                    title="top issue"
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    className={styles["dcc-card-list"]}
+                    onLoading={issueTop.loading}
+                  >
+                    <IssueList />
+                  </Card>
+                </Col> */}
+                <Col span={24}>
+                  <Card
+                    // style={{ height: "100%" }}
+                    // bodyStyle={{ height: "100%" }}
+                    onLoading={wordCloud.loading}
+                    className={styles["dcc-card"]}
+                  >
+                    {wordCloud.result.total_word ? (
+                      <WordCloud
+                        className={styles["chart-word"]}
+                        options={{
+                          series: [
+                            {
+                              type: "wordcloud",
+                              // data: wordCloud.result.data ? wordCloud.result.data : [],
+                              data: wordCloud.result.data
+                                ? wordCloud.result.data.map((word) => ({
+                                    name: word.name,
+                                    weight: word.weight,
+                                    color: `rgba(25, 144, 255,${
+                                      word.weight > 20
+                                        ? 1
+                                        : 0.3 && word.weight <= 15
+                                        ? 0.3
+                                        : 1
+                                    })`,
+                                  }))
                                 : [],
-                            },
-                            legend: {
-                              position: "top",
-                              horizontalAlign: "right",
-                              markers: {
-                                height: 10,
-                                width: 10,
-                                offsetY: 0,
+                              style: {
+                                fontFamily: `Noto Sans, sans-serif`,
+                                textTransform: "capitalize",
+                                color: 'white',
                               },
+                              minFontSize: 10,
                             },
+                          ],
+                          chart: {
+                            backgroundColor: '#2b2d3e',
                           },
                         }}
                       />
-                    </Card>
+                    ) : (
+                      <Row>
+                        <Col>Please select date for backtrack:</Col>
+                        <Col>
+                          <DatePicker
+                            onChange={(e) =>
+                              setBtWcDate(e.format("YYYY-MM-DD"))
+                            }
+                          />
+                          <Button
+                            onClick={() => {
+                              postBacktrackWordcloud({
+                                backtrack_date: btWcDate,
+                              })
+                                .then((data) => data.json())
+                                .then((data) => {
+                                  if (
+                                    data.message ==
+                                    "vdadi successfully registered..."
+                                  ) {
+                                    notification.success({
+                                      message: "Success backtrack",
+                                    });
+
+                                    dispatch(
+                                      getWordcloud({
+                                        start_date: filter.result.start_date,
+                                        end_date: filter.result.end_date,
+                                        total_word: 40,
+                                      })
+                                    );
+                                  } else {
+                                    notification.error({
+                                      message: "Error when add backtrack date",
+                                    });
+                                  }
+                                })
+                                .catch((err) =>
+                                  notification.error({
+                                    message: "Error when add backtrack date",
+                                  })
+                                );
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    )}
+                  </Card>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={24} md={24} lg={16} xl={16}>
+            <div className={styles.botrow}>
+                <Row>
+                  <Col xs={24} md={24} lg={24} xl={24}>
+                    <Card onLoading={toneMedia.loading} title={'Top 10 Media'}>
+                      <div
+                        style={{
+                          overflowY: 'scroll',
+                          overflowX: 'hidden',
+                          maxHeight: 362,
+                          border: '1px dashed rgba(54, 65, 76, 0.3)',
+                          padding: 6,
+                          borderRadius: 3,
+                        }}>
+                        <MediaTone
+                          charts={{
+                            data: toneMedia.result.data || [],
+                            onDonutClick: function (selectedDataX, selectedDataY) {
+                              handleAnalyticDetail({
+                                type: "media",
+                                page: 0,
+                                maxSize: 10,
+                                order_by: "datee",
+                                order: "desc",
+                                data: {
+                                  x: selectedDataX,
+                                  y: selectedDataY,
+                                },
+                              });
+                            },
+                            chartOptions: {
+                              labels: ['Positive', 'Negative', 'Neutral'],
+                              width: 100,
+                              tooltip: {
+                                theme: 'light',
+                                fillSeriesColor: true,
+                              },
+                              legend: {
+                                position: "top",
+                              },
+                              plotOptions: {
+                                pie: {
+                                  donut: {
+                                    labels: {
+                                      show: false,
+                                      total: {
+                                        showAlways: false,
+                                        show: false,
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                            },
+                          }}
+                        />
+                      </div>
+                  </Card>
                   {/* </Col>
                   <Col xs={24} md={24} lg={12} xl={12}> */}
                   {/* <p style={{marginBottom: '12px'}}></p> */}
@@ -939,107 +1001,6 @@ const CommandCenter = () => {
               />
               <ModalAnalytic />
               
-              <Row>
-                <Col span={24} style={{ display: 'none' }}>
-                  <Card
-                    title="top issue"
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    className={styles["dcc-card-list"]}
-                    onLoading={issueTop.loading}
-                  >
-                    <IssueList />
-                  </Card>
-                </Col>
-                <Col span={24}>
-                  <Card
-                    // style={{ height: "100%" }}
-                    // bodyStyle={{ height: "100%" }}
-                    onLoading={wordCloud.loading}
-                    className={styles["dcc-card"]}
-                  >
-                    {wordCloud.result.total_word ? (
-                      <WordCloud
-                        className={styles["chart-word"]}
-                        options={{
-                          series: [
-                            {
-                              type: "wordcloud",
-                              // data: wordCloud.result.data ? wordCloud.result.data : [],
-                              data: wordCloud.result.data
-                                ? wordCloud.result.data.map((word) => ({
-                                    name: word.name,
-                                    weight: word.weight,
-                                    color: `rgba(25, 144, 255,${
-                                      word.weight > 20
-                                        ? 1
-                                        : 0.3 && word.weight <= 15
-                                        ? 0.3
-                                        : 1
-                                    })`,
-                                  }))
-                                : [],
-                              style: {
-                                fontFamily: `Noto Sans, sans-serif`,
-                                textTransform: "capitalize",
-                              },
-                              minFontSize: 10,
-                            },
-                          ],
-                        }}
-                      />
-                    ) : (
-                      <Row>
-                        <Col>Please select date for backtrack:</Col>
-                        <Col>
-                          <DatePicker
-                            onChange={(e) =>
-                              setBtWcDate(e.format("YYYY-MM-DD"))
-                            }
-                          />
-                          <Button
-                            onClick={() => {
-                              postBacktrackWordcloud({
-                                backtrack_date: btWcDate,
-                              })
-                                .then((data) => data.json())
-                                .then((data) => {
-                                  if (
-                                    data.message ==
-                                    "vdadi successfully registered..."
-                                  ) {
-                                    notification.success({
-                                      message: "Success backtrack",
-                                    });
-
-                                    dispatch(
-                                      getWordcloud({
-                                        start_date: filter.result.start_date,
-                                        end_date: filter.result.end_date,
-                                        total_word: 40,
-                                      })
-                                    );
-                                  } else {
-                                    notification.error({
-                                      message: "Error when add backtrack date",
-                                    });
-                                  }
-                                })
-                                .catch((err) =>
-                                  notification.error({
-                                    message: "Error when add backtrack date",
-                                  })
-                                );
-                            }}
-                          >
-                            Submit
-                          </Button>
-                        </Col>
-                      </Row>
-                    )}
-                  </Card>
-                </Col>
-              </Row>
             </Col>
           </Row>
         </div>

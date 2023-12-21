@@ -206,11 +206,11 @@ export const MediaListSeries = [
 		label: 'TV',
 		total: 30,
 	},
-	{
-		url: '/static/radio.png',
-		label: 'Radio',
-		total: 120,
-	},
+	// {
+	// 	url: '/static/radio.png',
+	// 	label: 'Radio',
+	// 	total: 120,
+	// },
 ];
 
 export const treeData = [
