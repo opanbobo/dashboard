@@ -18,7 +18,7 @@ import {
   DatePicker,
 } from "components";
 
-import { notification } from "antd";
+import { notification, Pagination } from "antd";
 
 import { BarHorizontal } from "constant/mock/options";
 import breakPointOberver from "constant/mediaQuery";
@@ -276,9 +276,9 @@ const Spokeperson = () => {
     );
   };
 
+
   const HighlighPerson = ({ data, props }) => {
     const textEllipis = {
-      display: "-webkit-box",
       maxWidth: "80%",
       WebkitLineClamp: 1,
       WebkitBoxOrient: "vertical",
@@ -328,13 +328,36 @@ const Spokeperson = () => {
                           ...item,
                         });
                         setChartList(true);
+                        console.log({
+                          ...dataList,
+                          ...item,
+                        })
                       }}
                     />
-                    <div style={textEllipis}>{item.label}</div>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <div style={textEllipis}>{item.label}</div>
+                      <p style={{ fontSize: '12px' }}>Statement {item.statement}</p>
+                    </div>
                   </div>
                 </Col>
               );
             })}
+            <Col>
+            <Pagination size='small' 
+              pagination={{
+                showSizeChanger: true,
+                total: data.recordsTotal || 0,
+                showTotal: (total) => `Total ${data.recordsTotal} data`,
+                defaultPageSize: data.maxSize || 0,
+                defaultCurrent: data.page + 1 || 0,
+                onChange: (page, pageSize) =>
+                  handleClikable({
+                    ...data,
+                    page: page - 1,
+                    maxSize: pageSize,
+                  }),
+              }} />
+            </Col>
           </Row>
         ) : (
           <Loading />
@@ -342,6 +365,7 @@ const Spokeperson = () => {
       </>
     );
   };
+
 
   return (
     <Row>
@@ -684,51 +708,46 @@ const Spokeperson = () => {
           />
         </>
       )} */}
-      <Col span={24}>
-        <Row>
-          <Col xs={24} sm={24} md={24} lg={6} xl={6}>
-            <Card title="spokeperson">
-              <HighlighPerson
-                data={
-                  spokepersonStatistic.result.data
-                    ? spokepersonStatistic.result.data.map((item) => {
-                        const foto = mockperson.findIndex(
-                          (a) => a.name == item.influencer_name
-                        );
-                        return {
-                          // label: item.influencer_name,
-                          label: (
-                            <div>
-                              <span>{item.influencer_name}</span>
-                              <p style={{ fontSize: '12px' }}>Statement {item.count.all}</p>
-                            </div>
-                          ),
-                          image: (
-                            // <Tooltip
-                            //   key={item.influencer_name}
-                            //   title={item.influencer_name}
-                            //   placement="bottom"
-                            // >
-                              <Image
-                                src={item.image ? item.image : avatar}
-                                url={
-                                  item.image ? "https://demo.digivla.id" : null
-                                }
-                                layout="fill"
-                                objectFit="cover"
-                                alt="person"
-                                priority="true"
-                              />
-                            // </Tooltip>
-                          ),
-                        };
-                      })
-                    : []
-                }
-              />
-            </Card>
-          </Col>
-          <Col xs={24} sm={24} md={24} lg={18} xl={18}>
+      <Row align="start" justify="start">
+        <Col xl={6} md={12} sm={24}>
+          <Card title="spokeperson">
+            <HighlighPerson
+              data={
+                spokepersonStatistic.result.data
+                  ? spokepersonStatistic.result.data.map((item) => {
+                      const foto = mockperson.findIndex(
+                        (a) => a.name == item.influencer_name
+                      );
+                      return {
+                        label: item.influencer_name,
+                        statement: item.count.all,
+                        image: (
+                          <Tooltip
+                            key={item.influencer_name}
+                            title={item.influencer_name}
+                            placement="bottom"
+                          >
+                            <Image
+                              src={item.image ? item.image : avatar}
+                              url={
+                                item.image ? "https://demo.digivla.id" : null
+                              }
+                              layout="fill"
+                              objectFit="cover"
+                              alt="person"
+                              priority="true"
+                            />
+                          </Tooltip>
+                        ),
+                      };
+                    })
+                  : []
+              }
+            />
+          </Card>
+        </Col>
+        <Col xl={18} md={24} sm={24}>
+          <Col>
             <SpokeChart
               cards={{
                 title: "spokeperson breakdown",
@@ -809,158 +828,170 @@ const Spokeperson = () => {
                           return item.influencer_name;
                         })
                       : [],
+                      labels: {
+                        style: {
+                          colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                        },
+                      },
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
                   },
                   legend: BarHorizontal.legend,
                 },
               }}
             />
-            <p></p>
-            <Col style={{padding: '0px'}}>
-              <SpokeTable
-                cards={{
-                  onLoading: spokepersonList.loading,
-                  title: "spokeperson list",
-                  extra: `Total: ${spokepersonList.result.data?.length}`,
-                }}
-                tables={{
-                  data: spokepersonList.result.data
-                    ? spokepersonList.result.data
-                    : [],
-                  rowKey: (record) => {
-                    return record.quotes;
-                  },
-                  expandable: {
-                    expandedRowRender: (record) => (
-                      <p style={{ margin: 0 }}>{record.quotes}</p>
-                    ),
-                    rowExpandable: (record) =>
-                      record.influencer_name !== "Not Expandable",
-                  },
-                  pagination: {
-                    showSizeChanger: true,
-                    total: spokepersonList.result.recordsTotal,
-                    showTotal: (total) => `Total ${total} article`,
-                    current: dataTable.page + 1,
-                    pageSize: dataTable.max_size,
-                    onChange: (editingPage, editingPageSize) => {
-                      dispatch(
-                        getSpokepersonList({
-                          ...filter.result,
-                          page: editingPage - 1,
-                          max_size: editingPageSize,
-                        })
-                      );
-
-                      setDataTable({
+          </Col>
+          <p></p>
+          <Col>
+            <SpokeTable
+              cards={{
+                onLoading: spokepersonList.loading,
+                title: "spokeperson list",
+                extra: `Total: ${spokepersonList.result.data?.length}`,
+              }}
+              tables={{
+                data: spokepersonList.result.data
+                  ? spokepersonList.result.data
+                  : [],
+                rowKey: (record) => {
+                  return record.quotes;
+                },
+                expandable: {
+                  expandedRowRender: (record) => (
+                    <p style={{ margin: 0 }}>{record.quotes}</p>
+                  ),
+                  rowExpandable: (record) =>
+                    record.influencer_name !== "Not Expandable",
+                },
+                pagination: {
+                  showSizeChanger: true,
+                  total: spokepersonList.result.recordsTotal,
+                  showTotal: (total) => `Total ${total} article`,
+                  current: dataTable.page + 1,
+                  pageSize: dataTable.max_size,
+                  onChange: (editingPage, editingPageSize) => {
+                    dispatch(
+                      getSpokepersonList({
+                        ...filter.result,
                         page: editingPage - 1,
                         max_size: editingPageSize,
-                      });
+                      })
+                    );
+
+                    setDataTable({
+                      page: editingPage - 1,
+                      max_size: editingPageSize,
+                    });
+                  },
+                },
+                column: [
+                  {
+                    title: "Spokeperson List",
+                    render: (record) => (
+                      <Fragment>
+                        <ColumnList title="Date" content={record.datee} />
+                        <ColumnList title="Media" content={record.media} />
+                        <ColumnList
+                          title="Spokeperson"
+                          content={record.influencer_name}
+                        />
+                        <ColumnList title="tone" content={record.tone} />
+                        <ColumnList title="action" type="action">
+                          <Button size="small" icons="EditTwotone" />
+                        </ColumnList>
+                      </Fragment>
+                    ),
+                    responsive: ["xs"],
+                  },
+                  {
+                    title: "Date",
+                    dataIndex: "datee",
+                    key: "datee",
+                    width: 100,
+                    responsive: ["md"],
+                    sorter: (a, b) => a.datee - b.datee,
+                  },
+                  {
+                    title: "Name",
+                    dataIndex: "influencer_name",
+                    key: "influencer_name",
+                    ellipsis: true,
+                    responsive: ["md"],
+                    sorter: (a, b) =>
+                      a.influencer_name.length - b.influencer_name.length,
+                    // render: (text, record) => {
+                    //   return <ColumnList>{record.influencer_name}</ColumnList>;
+                    // },
+                  },
+                  {
+                    title: "Media",
+                    dataIndex: "media",
+                    key: "media_id",
+                    responsive: ["md"],
+                    sorter: (a, b) => a.media_id - b.media_id,
+                  },
+                  {
+                    title: "Tone",
+                    dataIndex: "tones",
+                    key: "tones",
+                    width: 100,
+                    responsive: ["md"],
+                    sorter: (a, b) => a.tones - b.tones,
+                    render: (text, record) => {
+                      return (
+                        <Tag
+                          color={
+                            record.tone == 0
+                              ? "processing"
+                              : record.tone == 1
+                              ? "success"
+                              : "error"
+                          }
+                        >
+                          {record.tone < 0
+                            ? "Negative"
+                            : record.tone > 0
+                            ? "Positive"
+                            : "Neutral"}
+                        </Tag>
+                      );
                     },
                   },
-                  column: [
-                    {
-                      title: "Spokeperson List",
-                      render: (record) => (
-                        <Fragment>
-                          <ColumnList title="Date" content={record.datee} />
-                          <ColumnList title="Media" content={record.media} />
-                          <ColumnList
-                            title="Spokeperson"
-                            content={record.influencer_name}
-                          />
-                          <ColumnList title="tone" content={record.tone} />
-                          <ColumnList title="action" type="action">
-                            <Button size="small" icons="EditTwotone" />
-                          </ColumnList>
-                        </Fragment>
-                      ),
-                      responsive: ["xs"],
-                    },
-                    {
-                      title: "Date",
-                      dataIndex: "datee",
-                      key: "datee",
-                      width: 100,
-                      responsive: ["md"],
-                      sorter: (a, b) => a.datee - b.datee,
-                    },
-                    {
-                      title: "Name",
-                      dataIndex: "influencer_name",
-                      key: "influencer_name",
-                      ellipsis: true,
-                      responsive: ["md"],
-                      sorter: (a, b) =>
-                        a.influencer_name.length - b.influencer_name.length,
-                      // render: (text, record) => {
-                      //   return <ColumnList>{record.influencer_name}</ColumnList>;
-                      // },
-                    },
-                    {
-                      title: "Media",
-                      dataIndex: "media",
-                      key: "media_id",
-                      responsive: ["md"],
-                      sorter: (a, b) => a.media_id - b.media_id,
-                    },
-                    {
-                      title: "Tone",
-                      dataIndex: "tones",
-                      key: "tones",
-                      width: 100,
-                      responsive: ["md"],
-                      sorter: (a, b) => a.tones - b.tones,
-                      render: (text, record) => {
-                        return (
-                          <Tag
-                            color={
-                              record.tone == 0
-                                ? "processing"
-                                : record.tone == 1
-                                ? "success"
-                                : "error"
-                            }
-                          >
-                            {record.tone < 0
-                              ? "Negative"
-                              : record.tone > 0
-                              ? "Positive"
-                              : "Neutral"}
-                          </Tag>
-                        );
-                      },
-                    },
-                    {
-                      title: "Action",
-                      key: "action",
-                      width: 60,
-                      align: "center",
-                      responsive: ["md"],
-                      render: (text, record) => (
-                        <ColumnList type="action">
-                          <Button
-                            size="small"
-                            icons="EditOutlined"
-                            onClick={() => {
-                              setArticleDetail(record);
-                              setopenDetail(true);
-                              dispatch(
-                                getSpokepersonDetail({
-                                  article_id: record.article_id,
-                                })
-                              );
-                            }}
-                          />
-                        </ColumnList>
-                      ),
-                    },
-                  ],
-                }}
-              />
-            </Col>
+                  {
+                    title: "Action",
+                    key: "action",
+                    width: 60,
+                    align: "center",
+                    responsive: ["md"],
+                    render: (text, record) => (
+                      <ColumnList type="action">
+                        <Button
+                          size="small"
+                          icons="EditOutlined"
+                          onClick={() => {
+                            setArticleDetail(record);
+                            setopenDetail(true);
+                            dispatch(
+                              getSpokepersonDetail({
+                                article_id: record.article_id,
+                              })
+                            );
+                          }}
+                        />
+                      </ColumnList>
+                    ),
+                  },
+                ],
+              }}
+            />
           </Col>
-        </Row>
-      </Col>
+        </Col>
+      </Row>
       <ModalDetailArticle />
       <ModalChartList
         chartList={chartList}
@@ -971,8 +1002,6 @@ const Spokeperson = () => {
         setDataList={setDataList}
         handleClickChart={handleClickChart}
       />
-      {/* 
-      sesuai request hide
       <div
         style={{
           position: "absolute",
@@ -1012,7 +1041,7 @@ const Spokeperson = () => {
         >
           Download
         </Button>
-      </div> */}
+      </div>
     </Row>
   );
 };

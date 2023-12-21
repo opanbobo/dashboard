@@ -38,7 +38,7 @@ const MainHeader = ({
       }
       <div className={styles["head-item-logo"]}>
         <Image
-          src={logo}
+          src={url + logo}
           url={url ? url : null}
           layout="fill"
           objectFit="contain"
@@ -59,16 +59,16 @@ const MainHeader = ({
               {...search}
             />
           </div>
-          <div className={styles["toolbar-item"]}>
+          {/* <div className={styles["toolbar-item"]}>
             <Button
               size="small"
               className={styles["toolbar-button"]}
               icons="FilterOutlined"
               {...filters}
             />
-          </div>
+          </div> */}
 
-          <div className={styles["toolbar-item"]}>
+          {/* <div className={styles["toolbar-item"]}>
             <Button
               size="small"
               className={styles["toolbar-button"]}
@@ -77,7 +77,7 @@ const MainHeader = ({
               danger="true"
               onClick={logout}
             />
-          </div>
+          </div> */}
 
           {avatar != null && (
             <div className={styles["toolbar-item"]}>

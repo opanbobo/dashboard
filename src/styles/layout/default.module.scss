@@ -1,5 +1,6 @@
 @use '../color' as *;
 @use '../media' as res;
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:wght@400;700&family=Figtree:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;600;700&family=Lato:wght@300;400;700&display=swap');
 
 .layout-wrap {
 	height: 100vh;
@@ -17,7 +18,7 @@
 	// END YUDI
 
 	grid-template-areas: 'sidebar main';
-	background: $background;
+	background: #343e59;
 	overflow: auto;
 	scrollbar-width: none;
 	column-gap: 1px;
@@ -54,11 +55,11 @@
 		position: fixed;
 		height: 100%;
 		width: auto;
-		background: #112143;
+		background: #343e59;
 		left: 0;
-		padding: 0 12px;
+		padding: 0 10px;
 		box-shadow: 0 4px 12px 0 rgba(131, 146, 165, 0.15);
-  	border-right: 1px solid rgba(224, 225, 235, 0.85);
+  	border-right: 1px solid rgb(74, 73, 73);
 		z-index: 1;
 		transition: left 0.5s;
 
@@ -95,29 +96,44 @@
 			'header'
 			'content';
 		row-gap: 2px;
-		border-top: 5px solid #00bdc2;
+		// border-top: 5px solid #00bdc2;
 		&.command-content {
 			width: 100%;
 			gap: 0;
 
 			.main-content {
-				// background: $background;
-				background-color: #00d4ff !important;
-				background: rgb(2,0,36);
-				background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);	
-
+				background: #343e59;
+				// background: rgb(2,0,36);
+				// background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+				// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
 			}
 		}
 
 		.main-head {
+			padding: 0 10px;
 			grid-area: header;
 			position: sticky;
 			top: 0;
-			padding: 12px;
-			background: $white;
+			// padding: 12px;
+			background: #343e59;
+			// background-color: #00d4ff !important;
+			// background: rgb(2,0,36);
+			// background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
+	
+			// background: rgb(2,0,36);
+			// background: -moz-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: -webkit-linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+
+			.toggleMenuButton {
+				color: white !important;
+			}
 		}
 
 		.main-content {
@@ -125,15 +141,14 @@
 			height: 100%;
 			padding: 12px;
 			overflow: auto;
-			// background: $white;
+			background: #343e59;
 			
-			background-color: #00d4ff !important;
-			background: rgb(2,0,36);
-			background: -moz-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: -webkit-linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
-			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1);
-
+			// background: rgb(2,0,36);
+			// background: -moz-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: -webkit-linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,59,121,1) 30%, rgba(0,189,194,1) 100%);
+			// filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00bdc2",GradientType=1); 
+		
 			@include res.media(tablet) {
 				padding: 10px 10px 60px;
 			}
@@ -153,6 +168,8 @@
 
 				.ant-tabs-tab-active{
 					background-color: #3192a3;
+					padding: 10px 20px;
+  				border-radius: 5px;
 					.ant-tabs-tab-btn{
 						color: #ffffff;
 					}
@@ -160,6 +177,120 @@
 
 			}
 			
+		}
+	}
+	// YUDI
+	
+	:global{
+		.ant-card{
+			padding: 0;
+			color: #fff;
+			background-color: #2b2d3e;
+		}
+
+		/* CSS atau SCSS Anda */
+		.ant-collapse-content {
+			background-color: transparent; /* Atur latar belakang transparan */
+		}
+
+		.ant-collapse-header-text{
+			color: #fff;
+		}
+
+		.ant-collapse-content-box{
+			margin-top: 20px;
+		}
+
+		.dashboard-menux .ant-collapse-expand-icon{
+			display: none;
+		}
+
+		.ant-collapse-content > .ant-collapse-content-box{
+			padding: 0
+		}
+
+		.ant-table.ant-table-small{
+			background: none;
+			color: #fff;
+		}
+
+		.ant-table-tbody > tr.ant-table-row:hover > td, .ant-table-tbody > tr > td.ant-table-cell-row-hover{
+			background-color: #343e59;
+		}
+
+		.ant-table-thead th.ant-table-column-has-sorters{
+			background: #fff !important;
+		}
+
+		.dashboard-menux{
+			margin-bottom: 10px;
+		}
+
+		.dashboard-menux .ant-collapse > .ant-collapse-item{
+			border-left: none;
+			border-top: none;
+			border-right: none;
+		}
+
+		.ant-collapse{
+			border: none;
+			background: none;
+		}
+
+		.ant-form-item-control-input-content{
+			color: #fff;
+		}
+
+		.ant-card-extra{
+			color: #a9a9a9;
+		}
+
+		.ant-checkbox + span, .ant-col-24{
+			color: #fff;
+		}
+		.ant-card-small > .ant-card-head > .ant-card-head-wrapper > .ant-card-head-title{
+			color: #fff;
+		}
+
+		.apexcharts-text tspan{
+			color: #fff;
+		}
+
+		.ant-pagination-total-text{
+			color: #fff;
+		}
+
+		.ant-pagination {
+			color: #fff;
+		}
+		.ant-pagination-item a{
+			color: #fff;
+		}
+
+		.total-msb h5{
+			color: #fff !important;
+		}
+
+		.ant-select-single.ant-select-sm:not(.ant-select-customize-input) .ant-select-selector{
+			background: none;
+			color: #fff;
+		}
+
+		.apexcharts-legend-text{
+			color: #fff !important;
+		}
+
+		.ant-pagination-item-active{
+			background: none;
+		}
+
+		.ant-pagination.ant-pagination-mini .ant-pagination-prev .ant-pagination-item-link, .ant-pagination.ant-pagination-mini .ant-pagination-next .ant-pagination-item-link{
+			color: #fff;
+		}
+
+		text{
+			color: #fff;
+
 		}
 	}
 
