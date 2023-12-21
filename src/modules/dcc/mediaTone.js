@@ -1,3 +1,5 @@
+// MediaTone.js
+
 import React from 'react';
 import { ApexChart, Row, Col } from 'components';
 
@@ -13,12 +15,12 @@ const MediaTone = ({ className, charts, ...props }) => {
         const chartOptions = {
           chart: {
             type: 'donut',
-						events: {
-							click: function () {
-								onDonutClick(item.dataPointIndex, item.seriesIndex);
-								console.log(item);
-							}
-						},
+            events: {
+              click: function (event, chartContext, config) {
+                onDonutClick(config.dataPointIndex, config.seriesIndex);
+                console.log(config);
+              },
+            },
           },
           title: {
             text: item.media_name,
@@ -33,7 +35,7 @@ const MediaTone = ({ className, charts, ...props }) => {
           labels: ['Positive', 'Negative', 'Neutral'],
           width: 100,
           tooltip: {
-            theme: 'dark',
+            theme: 'light',
             fillSeriesColor: true,
           },
           legend: {
@@ -52,7 +54,6 @@ const MediaTone = ({ className, charts, ...props }) => {
               },
             },
           },
-          colors: ['#1b81e2', '#df6264', '#0bbd91'],
           dataLabels: {
             dropShadow: {
               blur: 3,
@@ -66,9 +67,6 @@ const MediaTone = ({ className, charts, ...props }) => {
               return `${val.toFixed(1)}%`; // Display percentage on the data label
             },
           },
-          stroke: {
-            show: false, // Menyembunyikan border (garis tepi) pada grafik
-          },
           annotations: {
             points: percentages.map((percentage, i) => ({
               x: i + 1,
@@ -77,25 +75,24 @@ const MediaTone = ({ className, charts, ...props }) => {
                 size: 0,
               },
               onClick: function () {
-								onDonutClick(item.dataPointIndex, item.seriesIndex);
-								console.log(item);
-							}
+                onDonutClick(config.dataPointIndex, config.seriesIndex);
+                console.log(config);
+              },
             })),
           },
         };
 
         return (
-					<Col xl={12} md={12}>
-						<ApexChart
-							key={index}
-							id={`mediaTone_${index}`}
-							type='donut'
-							className={className}
-							options={chartOptions}
-							series={percentages.slice(0, chartOptions.labels.length)}
-							{...props}
-						/>
-					</Col>
+          <Col xl={12} md={12} key={index}>
+            <ApexChart
+              id={`mediaTone_${index}`}
+              type='donut'
+              className={className}
+              options={chartOptions}
+              series={percentages.slice(0, chartOptions.labels.length)}
+              {...props}
+            />
+          </Col>
         );
       })}
     </Row>
