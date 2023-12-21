@@ -919,9 +919,6 @@ const CommandCenter = () => {
           },
         }}
       />
-    </div>
-  );
-};
                       </div>
                   </Card>
                   {/* </Col>
