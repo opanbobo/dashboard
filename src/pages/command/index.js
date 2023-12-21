@@ -875,48 +875,53 @@ const CommandCenter = () => {
                           padding: 6,
                           borderRadius: 3,
                         }}>
-                        <MediaTone
-                          charts={{
-                            data: toneMedia.result.data || [],
-                            onDonutClick: function (selectedDataX, selectedDataY) {
-                              handleAnalyticDetail({
-                                type: "media",
-                                page: 0,
-                                maxSize: 10,
-                                order_by: "datee",
-                                order: "desc",
-                                data: {
-                                  x: selectedDataX,
-                                  y: selectedDataY,
-                                },
-                              });
-                            },
-                            chartOptions: {
-                              labels: ['Positive', 'Negative', 'Neutral'],
-                              width: 100,
-                              tooltip: {
-                                theme: 'light',
-                                fillSeriesColor: true,
-                              },
-                              legend: {
-                                position: "top",
-                              },
-                              plotOptions: {
-                                pie: {
-                                  donut: {
-                                    labels: {
-                                      show: false,
-                                      total: {
-                                        showAlways: false,
-                                        show: false,
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                            },
-                          }}
-                        />
+      <MediaTone
+        charts={{
+          data: toneMedia.result.data || [],
+          onDonutClick: function (dataPointIndex, seriesIndex) {
+            handleAnalyticDetail({
+              type: "media",
+              page: 0,
+              maxSize: 10,
+              order_by: "datee",
+              order: "desc",
+              data: {
+                x: dataPointIndex,
+                y: seriesIndex,
+              },
+              dataPointIndex, // Optional: Pass the indices directly
+              seriesIndex,
+            });
+          },
+          chartOptions: {
+            labels: ['Positive', 'Negative', 'Neutral'],
+            width: 100,
+            tooltip: {
+              theme: 'light',
+              fillSeriesColor: true,
+            },
+            legend: {
+              position: "top",
+            },
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: {
+                    show: false,
+                    total: {
+                      showAlways: false,
+                      show: false,
+                    }
+                  }
+                }
+              }
+            },
+          },
+        }}
+      />
+    </div>
+  );
+};
                       </div>
                   </Card>
                   {/* </Col>
