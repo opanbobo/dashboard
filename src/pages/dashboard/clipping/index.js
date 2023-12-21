@@ -726,7 +726,7 @@ const Clipping = () => {
                       sorter: (a, b) => a.datee - b.datee,
                     },
                     {
-                      title: "Media",
+                      title: "Media Name",
                       dataIndex: "media_name",
                       width: 200,
                       responsive: ["md"],
@@ -757,7 +757,7 @@ const Clipping = () => {
                       },
                     },
                     {
-                      title: "Headline",
+                      title: "News Title",
                       dataIndex: "title",
                       ellipsis: breakPoint == "ellipsis" ? true : false,
                       responsive: ["md"],
@@ -770,7 +770,7 @@ const Clipping = () => {
                       sorter: (a, b) => a.issue - b.issue,
                     },
                     {
-                      title: "Action",
+                      title: "Preview",
                       key: "action",
                       width: 90,
                       align: "center",
@@ -1163,7 +1163,7 @@ const Clipping = () => {
                       sorter: (a, b) => a.datee - b.datee,
                     },
                     {
-                      title: "Media",
+                      title: "Media Name",
                       dataIndex: "media_name",
                       width: "25%",
                       sorter: (a, b) =>
@@ -1236,7 +1236,7 @@ const Clipping = () => {
                     },
 
                     {
-                      title: "Headline",
+                      title: "News Title",
                       dataIndex: "title",
                       width: "50%",
                       responsive: ["md"],
@@ -1274,7 +1274,7 @@ const Clipping = () => {
                       },
                     },
                     {
-                      title: "Action",
+                      title: "Preview",
                       key: "action",
                       width: 90,
                       align: "center",
