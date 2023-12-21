@@ -304,28 +304,31 @@ const CommandCenter = () => {
 
   const handleAnalyticDetail = (body) => {
     if (body.type == "media") {
-      dispatch(
-        getAnalyticArticle({
-          ...filter.result,
-          maxSize: body.maxSize,
-          page: body.page,
-          media_id: toneMedia.result.data[body.data.x].media_id,
-          tone: `${body.data.y - 1}`,
-        })
-      );
 
-      setArticleData({
-        ...body,
-        desc: {
-          Media: toneMedia.result.data[body.data.x].media_name,
-          Tone:
-            body.data.y - 1 == 1
-              ? "Positive"
-              : body.data.y - 1 == -1
-              ? "Negative"
-              : "Neutral",
-        },
-      });
+      console.log(body.data.x)
+      // dispatch(
+      //   getAnalyticArticle({
+      //     ...filter.result,
+      //     maxSize: body.maxSize,
+      //     page: body.page,
+      //     media_id: toneMedia.result.data[body.data.x].media_id,
+      //     tone: `${body.data.y - 1}`,
+      //   })
+      // );
+
+      // setArticleData({
+      //   ...body,
+      //   desc: {
+      //     Media: toneMedia.result.data[body.data.x].media_name,
+      //     Tone:
+      //       body.data.y - 1 == 1
+      //         ? "Positive"
+      //         : body.data.y - 1 == -1
+      //         ? "Negative"
+      //         : "Neutral",
+      //   },
+      // });
+
     } else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
@@ -862,77 +865,60 @@ const CommandCenter = () => {
             <div className={styles.botrow}>
                 <Row>
                   <Col xs={24} md={24} lg={24} xl={24}>
-                    <Card onLoading={toneMedia.loading}>
-                      <MediaTone
-                        charts={{
-                          series: toneMedia.result.data
-                            ? getMediaSelection(toneMedia.result.data)
-                            : [],
-                          chartOptions: {
-                            stacked: true,
-                            events: {
-                              dataPointSelection(e, chart, config) {
-                                handleAnalyticDetail({
-                                  type: "media",
-                                  page: 0,
-                                  maxSize: 10,
-                                  order_by: "datee",
-                                  order: "desc",
-                                  data: {
-                                    x: config.dataPointIndex,
-                                    y: config.seriesIndex,
-                                  },
-                                });
-                              },
-                            },
-                          },
-                          options: {
-                            title: {
-                              text: "Top 10 Media",
-                              floating: false,
-                              offsetY: 5,
-                              align: "left",
-                              // style: BarHorizontal.title.style,
-                              style: {
-                                color: '#FFFFFF', // Mengubah warna teks judul menjadi putih
-                              },
-                            },
-                            colors: [...BarHorizontal.colors, "#A020F0"],
-                            plotOptions: BarHorizontal.plotOptions,
-                            xaxis: {
-                              categories: toneMedia.result.data
-                                ? toneMedia.result.data.map((item) => item.media_name)
-                                : [],
-                                labels: {
-                                  style: {
-                                    colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
-                                  },
+                    <Card onLoading={toneMedia.loading} title={'Top 10 Media'}>
+                      <div
+                        style={{
+                          overflowY: 'scroll',
+                          overflowX: 'hidden',
+                          maxHeight: 362,
+                          border: '1px dashed rgba(54, 65, 76, 0.3)',
+                          padding: 6,
+                          borderRadius: 3,
+                        }}>
+                        <MediaTone
+                          charts={{
+                            data: toneMedia.result.data || [],
+                            onDonutClick: function (selectedDataX, selectedDataY) {
+                              handleAnalyticDetail({
+                                type: "media",
+                                page: 0,
+                                maxSize: 10,
+                                order_by: "datee",
+                                order: "desc",
+                                data: {
+                                  x: selectedDataX,
+                                  y: selectedDataY,
                                 },
+                              });
                             },
-                            yaxis: {
-                              labels: {
-                                style: {
-                                  colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
-                                },
+                            chartOptions: {
+                              labels: ['Positive', 'Negative', 'Neutral'],
+                              width: 100,
+                              tooltip: {
+                                theme: 'light',
+                                fillSeriesColor: true,
+                              },
+                              legend: {
+                                position: "top",
+                              },
+                              plotOptions: {
+                                pie: {
+                                  donut: {
+                                    labels: {
+                                      show: false,
+                                      total: {
+                                        showAlways: false,
+                                        show: false,
+                                      }
+                                    }
+                                  }
+                                }
                               },
                             },
-                            legend: {
-                              position: "top",
-                              horizontalAlign: "right",
-                              markers: {
-                                height: 10,
-                                width: 10,
-                                offsetY: 0,
-                              },
-                            },
-                            tooltip: {
-                              theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                              fillSeriesColor: false, // Untuk mengisi warna tooltip
-                            },
-                          },
-                        }}
-                      />
-                    </Card>
+                          }}
+                        />
+                      </div>
+                  </Card>
                   {/* </Col>
                   <Col xs={24} md={24} lg={12} xl={12}> */}
                   {/* <p style={{marginBottom: '12px'}}></p> */}
