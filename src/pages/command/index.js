@@ -306,28 +306,28 @@ const CommandCenter = () => {
     if (body.type == "media") {
 
       console.log(body.data.x)
-      // dispatch(
-      //   getAnalyticArticle({
-      //     ...filter.result,
-      //     maxSize: body.maxSize,
-      //     page: body.page,
-      //     media_id: toneMedia.result.data[body.data.x].media_id,
-      //     tone: `${body.data.y - 1}`,
-      //   })
-      // );
+       dispatch(
+         getAnalyticArticle({
+           ...filter.result,
+           maxSize: body.maxSize,
+           page: body.page,
+           media_id: toneMedia.result.data[body.data.x].media_id,
+           tone: `${body.data.y - 1}`,
+         })
+       );
 
-      // setArticleData({
-      //   ...body,
-      //   desc: {
-      //     Media: toneMedia.result.data[body.data.x].media_name,
-      //     Tone:
-      //       body.data.y - 1 == 1
-      //         ? "Positive"
-      //         : body.data.y - 1 == -1
-      //         ? "Negative"
-      //         : "Neutral",
-      //   },
-      // });
+       setArticleData({
+         ...body,
+         desc: {
+           Media: toneMedia.result.data[body.data.x].media_name,
+           Tone:
+             body.data.y - 1 == 1
+               ? "Positive"
+               : body.data.y - 1 == -1
+               ? "Negative"
+               : "Neutral",
+         },
+       });
 
     } else if (body.type == "ews") {
       dispatch(
