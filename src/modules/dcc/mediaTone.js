@@ -17,7 +17,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             type: 'donut',
             events: {
               click: function (event, chartContext, config) {
-                onDonutClick(config.dataPointIndex, config.seriesIndex);
+                onDonutClick(config.dataPointIndex, config.seriesIndex, config); // Pass config to onDonutClick
                 console.log(config);
               },
             },
@@ -35,7 +35,7 @@ const MediaTone = ({ className, charts, ...props }) => {
           labels: ['Positive', 'Negative', 'Neutral'],
           width: 100,
           tooltip: {
-            theme: 'dark',
+            theme: 'light',
             fillSeriesColor: true,
           },
           legend: {
@@ -54,7 +54,6 @@ const MediaTone = ({ className, charts, ...props }) => {
               },
             },
           },
-          colors: ['#1b81e2', '#df6264', '#0bbd91'],
           dataLabels: {
             dropShadow: {
               blur: 3,
@@ -65,11 +64,8 @@ const MediaTone = ({ className, charts, ...props }) => {
               colors: ['#fff'],
             },
             formatter: function (val, opts) {
-              return `${val.toFixed(1)}%`; // Display percentage on the data label
+              return `${val.toFixed(1)}%`;
             },
-          },
-          stroke: {
-            show: false, // Menyembunyikan border (garis tepi) pada grafik
           },
           annotations: {
             points: percentages.map((percentage, i) => ({
@@ -79,7 +75,7 @@ const MediaTone = ({ className, charts, ...props }) => {
                 size: 0,
               },
               onClick: function () {
-                onDonutClick(config.dataPointIndex, config.seriesIndex);
+                onDonutClick(config.dataPointIndex, config.seriesIndex, config); // Pass config to onDonutClick
                 console.log(config);
               },
             })),
