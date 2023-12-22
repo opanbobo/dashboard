@@ -330,10 +330,10 @@ const handleAnalyticDetail = (body) => {
             : "Neutral",
       },
     });
-  } else {
-    // Handle the case when toneMedia.result.data[body.data.x] is undefined
-    console.error("Selected media not found or undefined.");
-  }
+  // } else {
+  //   // Handle the case when toneMedia.result.data[body.data.x] is undefined
+  //   console.error("Selected media not found or undefined.");
+  // }
 } else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
