@@ -33,6 +33,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             },
           },
           labels: ['Positive', 'Negative', 'Neutral'],
+          colors: ['#1b81e2', '#df6264', '#0bbd91'],
           width: 100,
           tooltip: {
             theme: 'light',
@@ -40,6 +41,9 @@ const MediaTone = ({ className, charts, ...props }) => {
           },
           legend: {
             position: 'top',
+          },
+          stroke: {
+            show: false, // Menyembunyikan border (garis tepi) pada grafik
           },
           plotOptions: {
             pie: {
