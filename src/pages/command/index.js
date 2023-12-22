@@ -878,7 +878,7 @@ const CommandCenter = () => {
       <MediaTone
         charts={{
           data: toneMedia.result.data || [],
-          onDonutClick: function (dataPointIndex, seriesIndex) {
+          onDonutClick: function (dataPointIndex, seriesIndex, body) {
             handleAnalyticDetail({
               type: "media",
               page: 0,
