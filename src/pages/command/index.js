@@ -302,34 +302,39 @@ const CommandCenter = () => {
     ];
   };
 
-  const handleAnalyticDetail = (body) => {
-    if (body.type == "media") {
+const handleAnalyticDetail = (body) => {
+  if (body.type === "media" && toneMedia.result.data && toneMedia.result.data[body.data.x]) {
+    const selectedMedia = toneMedia.result.data[body.data.x];
 
-      console.log(body.data.x)
-       dispatch(
-         getAnalyticArticle({
-           ...filter.result,
-           maxSize: body.maxSize,
-           page: body.page,
-           media_id: toneMedia.result.data[body.data.x].media_id,
-           tone: `${body.data.y - 1}`,
-         })
-       );
+    console.log(body.data.x);
 
-       setArticleData({
-         ...body,
-         desc: {
-           Media: toneMedia.result.data[body.data.x].media_name,
-           Tone:
-             body.data.y - 1 == 1
-               ? "Positive"
-               : body.data.y - 1 == -1
-               ? "Negative"
-               : "Neutral",
-         },
-       });
+    dispatch(
+      getAnalyticArticle({
+        ...filter.result,
+        maxSize: body.maxSize,
+        page: body.page,
+        media_id: selectedMedia.media_id,
+        tone: `${body.data.y - 1}`,
+      })
+    );
 
-    } else if (body.type == "ews") {
+    setArticleData({
+      ...body,
+      desc: {
+        Media: selectedMedia.media_name,
+        Tone:
+          body.data.y - 1 === 1
+            ? "Positive"
+            : body.data.y - 1 === -1
+            ? "Negative"
+            : "Neutral",
+      },
+    });
+  } else {
+    // Handle the case when toneMedia.result.data[body.data.x] is undefined
+    console.error("Selected media not found or undefined.");
+  }
+} else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
           ...filter.result,
