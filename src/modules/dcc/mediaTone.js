@@ -17,7 +17,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             type: 'donut',
             events: {
               click: function (event, chartContext, config) {
-                onDonutClick(config.dataPointIndex, config.seriesIndex, config); // Pass config to onDonutClick
+                // onDonutClick(config.dataPointIndex, config.seriesIndex, config); // disable dlu ye
                 console.log(config);
               },
             },
