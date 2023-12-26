@@ -1,5 +1,3 @@
-// MediaTone.js
-
 import React from 'react';
 import { ApexChart, Row, Col } from 'components';
 
@@ -16,14 +14,14 @@ const MediaTone = ({ className, charts, ...props }) => {
           chart: {
             type: 'donut',
             events: {
-              click: function (event, chartContext, config) {
-                // onDonutClick(config.dataPointIndex, config.seriesIndex, config); // disable dlu ye
-                console.log(config);
+              click: function (config) {
+                onDonutClick(index, config);
+                
               },
             },
           },
           title: {
-            text: item.media_name,
+            /*text: data[index].media_name,*/
             align: 'center',
             margin: 10,
             offsetY: 0,
@@ -33,7 +31,6 @@ const MediaTone = ({ className, charts, ...props }) => {
             },
           },
           labels: ['Positive', 'Negative', 'Neutral'],
-          colors: ['#1b81e2', '#df6264', '#0bbd91'],
           width: 100,
           tooltip: {
             theme: 'light',
@@ -41,9 +38,6 @@ const MediaTone = ({ className, charts, ...props }) => {
           },
           legend: {
             position: 'top',
-          },
-          stroke: {
-            show: false, // Menyembunyikan border (garis tepi) pada grafik
           },
           plotOptions: {
             pie: {
@@ -68,7 +62,7 @@ const MediaTone = ({ className, charts, ...props }) => {
               colors: ['#fff'],
             },
             formatter: function (val, opts) {
-              return `${val.toFixed(1)}%`;
+              return `${val.toFixed(1)}%`; // Display percentage on the data label
             },
           },
           annotations: {
@@ -78,9 +72,9 @@ const MediaTone = ({ className, charts, ...props }) => {
               marker: {
                 size: 0,
               },
-              onClick: function () {
-                onDonutClick(config.dataPointIndex, config.seriesIndex, config); // Pass config to onDonutClick
-                console.log(config);
+              onClick: function (config) {
+                onDonutClick(index, config);
+              
               },
             })),
           },
@@ -103,4 +97,4 @@ const MediaTone = ({ className, charts, ...props }) => {
   );
 };
 
-export default MediaTone;
+export default MediaTone:
