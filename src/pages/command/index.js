@@ -880,24 +880,24 @@ const handleAnalyticDetail = (body) => {
                           padding: 6,
                           borderRadius: 3,
                         }}>
-      <MediaTone
+     <MediaTone
         charts={{
           data: toneMedia.result.data || [],
-          onDonutClick: function (dataPointIndex, seriesIndex, body) {
-            handleAnalyticDetail({
-              type: "media",
-              page: 0,
-              maxSize: 10,
-              order_by: "datee",
-              order: "desc",
-              data: {
-                x: dataPointIndex,
-                y: seriesIndex,
-              },
-              dataPointIndex, // Optional: Pass the indices directly
-              seriesIndex,
-            });
-          },
+    onDonutClick: function (index, config) {
+     console.log(index, config, 'fcks 2');
+
+      handleAnalyticDetail({
+        type: "media",
+        page: 0,
+        maxSize: 10,
+        order_by: "datee",
+        order: "desc",
+        data: {
+          indexing: index,
+          tone: config.seriesIndex,
+        },
+      });
+    },
           chartOptions: {
             labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
