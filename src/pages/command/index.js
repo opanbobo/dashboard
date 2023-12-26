@@ -303,37 +303,29 @@ const CommandCenter = () => {
   };
 
 const handleAnalyticDetail = (body) => {
-  if (body.type === "media" && toneMedia.result.data && toneMedia.result.data[body.data.x]) {
-    const selectedMedia = toneMedia.result.data[body.data.x];
+  if (body.type === "media") {
+dispatch(
+    getAnalyticArticle({
+      ...filter.result,
+      maxSize: body.maxSize,
+      page: body.page,
+      media_id: toneMedia.result.data[body.data.indexing].media_id,
+      tone: `${body.data.tone - 1}`,
+    })
+  );
 
-    console.log(body.data.x);
-
-    dispatch(
-      getAnalyticArticle({
-        ...filter.result,
-        maxSize: body.maxSize,
-        page: body.page,
-        media_id: selectedMedia.media_id,
-        tone: `${body.data.y - 1}`,
-      })
-    );
-
-    setArticleData({
-      ...body,
-      desc: {
-        Media: selectedMedia.media_name,
-        Tone:
-          body.data.y - 1 === 1
-            ? "Positive"
-            : body.data.y - 1 === -1
-            ? "Negative"
-            : "Neutral",
-      },
-    });
-  // } else {
-  //   // Handle the case when toneMedia.result.data[body.data.x] is undefined
-  //   console.error("Selected media not found or undefined.");
-  // }
+  setArticleData({
+    ...body,
+    desc: {
+      Media: toneMedia.result.data[body.data.indexing].media_name,
+      Tone:
+        body.data.tone - 1 === 1
+          ? "Positive"
+          : body.data.tone - 1 === -1
+          ? "Negative"
+          : "Neutral",
+    },
+  });
 } else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
