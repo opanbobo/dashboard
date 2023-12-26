@@ -310,7 +310,7 @@ dispatch(
       maxSize: body.maxSize,
       page: body.page,
       media_id: toneMedia.result.data[body.data.indexing].media_id,
-      tone: `${body.data.tone - 1}`,
+      tone: `${body.data.tone}`,
     })
   );
 
