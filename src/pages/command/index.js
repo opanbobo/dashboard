@@ -886,7 +886,7 @@ dispatch(
         order: "desc",
         data: {
           indexing: index,
-          tone: config.seriesIndex,
+          tone: config.global.dataPoints,
         },
       });
     },
