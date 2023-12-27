@@ -1799,6 +1799,9 @@ const Analytic = (pagination) => {
                           )
                         : [" "],
                     },
+                    grid: {
+                      show: false, // Menghilangkan grid line dari sumbu-y
+                    },
                     stroke: LineOptions.stroke,
                     colors: ["#ff6b6b", "#1990ff", "#06d6a0"],
                     yaxis: {
