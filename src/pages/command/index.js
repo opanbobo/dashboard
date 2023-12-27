@@ -309,19 +309,19 @@ dispatch(
       ...filter.result,
       maxSize: body.maxSize,
       page: body.page,
-      media_id: toneMedia.result.data[body.data.indexing].media_id,
-      tone: `${body.data.tone -1 }`,
+      media_id: toneMedia.result.data[body.data.x].media_id,
+      tone: `${body.data.y -1}`,
     })
   );
 
   setArticleData({
     ...body,
     desc: {
-      Media: toneMedia.result.data[body.data.indexing].media_name,
+      Media: toneMedia.result.data[body.data.x].media_name,
       Tone:
-        body.data.tone === 1
+        body.data.y -1 === 1
           ? "Positive"
-          : body.data.tone === -1
+          : body.data.y -1 === -1
           ? "Negative"
           : "Neutral",
     },
@@ -885,8 +885,8 @@ dispatch(
         order_by: "datee",
         order: "desc",
         data: {
-          indexing: index,
-          tone: config.globals.selectedDataPoints,
+          x: index,
+          y: config.globals.selectedDataPoints,
         },
       });
     },
