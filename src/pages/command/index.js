@@ -875,21 +875,22 @@ dispatch(
      <MediaTone
         charts={{
           data: toneMedia.result.data || [],
-    onDonutClick: function (index, config) {
-     console.log(index, config.globals.selectedDataPoints, 'fcks 2');
+onDonutClick: function (index, config, tones) {
+  const selectedDataPoints = config.globals.selectedDataPoints;
+  const toneValue = selectedDataPoints.length > 0 ? selectedDataPoints[0] : 0; // Assuming only one selected data point
 
-      handleAnalyticDetail({
-        type: "media",
-        page: 0,
-        maxSize: 10,
-        order_by: "datee",
-        order: "desc",
-        data: {
-          x: index,
-          y: config.globals.selectedDataPoints,
-        },
-      });
+  handleAnalyticDetail({
+    type: "media",
+    page: 0,
+    maxSize: 10,
+    order_by: "datee",
+    order: "desc",
+    data: {
+      x: index,
+      y: toneValue,
     },
+  });
+},
           chartOptions: {
             labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
