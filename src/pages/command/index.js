@@ -886,7 +886,7 @@ dispatch(
     order: "desc",
     data: {
       x: index,
-      y: config.globals.selectedDataPoints[0].dataPointIndex,
+      y: config.globals.selectedDataPoints[0]
     },
   });
 },
