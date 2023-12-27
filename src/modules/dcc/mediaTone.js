@@ -15,7 +15,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             type: 'donut',
             events: {
               click: function (e, chart,config) {
-                onDonutClick(index, config);
+                onDonutClick(index, config, item.tones);
                 
               },
             },
@@ -77,7 +77,7 @@ const MediaTone = ({ className, charts, ...props }) => {
                 size: 0,
               },
               onClick: function (e, chart,config) {
-                onDonutClick(index, config);
+                onDonutClick(index, config, item.tones);
               
               },
             })),

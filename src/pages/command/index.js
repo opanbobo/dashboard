@@ -309,19 +309,19 @@ dispatch(
       ...filter.result,
       maxSize: body.maxSize,
       page: body.page,
-      media_id: toneMedia.result.data[body.data.indexing].media_id,
-      tone: `${body.data.tone -1 }`,
+      media_id: toneMedia.result.data[body.data.x].media_id,
+      tone: `${body.data.y -1}`,
     })
   );
 
   setArticleData({
     ...body,
     desc: {
-      Media: toneMedia.result.data[body.data.indexing].media_name,
+      Media: toneMedia.result.data[body.data.x].media_name,
       Tone:
-        body.data.tone - 1 === 1
+        body.data.y -1 === 1
           ? "Positive"
-          : body.data.tone - 1 === -1
+          : body.data.y -1 === -1
           ? "Negative"
           : "Neutral",
     },
@@ -878,18 +878,18 @@ dispatch(
     onDonutClick: function (index, config) {
      console.log(index, config.globals, 'fcks 2');
 
-      handleAnalyticDetail({
-        type: "media",
-        page: 0,
-        maxSize: 10,
-        order_by: "datee",
-        order: "desc",
-        data: {
-          indexing: index,
-          tone: config.globals.selectedDataPoints,
-        },
-      });
+  handleAnalyticDetail({
+    type: "media",
+    page: 0,
+    maxSize: 10,
+    order_by: "datee",
+    order: "desc",
+    data: {
+      x: index,
+      y: config.globals.selectedDataPoints,
     },
+  });
+},
           chartOptions: {
             // labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
