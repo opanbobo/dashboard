@@ -319,9 +319,9 @@ dispatch(
     desc: {
       Media: toneMedia.result.data[body.data.indexing].media_name,
       Tone:
-        body.data.tone - 1 === 1
+        body.data.tone === 1
           ? "Positive"
-          : body.data.tone - 1 === -1
+          : body.data.tone === -1
           ? "Negative"
           : "Neutral",
     },
