@@ -876,7 +876,7 @@ dispatch(
         charts={{
           data: toneMedia.result.data || [],
     onDonutClick: function (index, config) {
-     console.log(index, config.globals.selectedDataPoints, 'fcks 2');
+     console.log(index, config.globals, 'fcks 2');
 
       handleAnalyticDetail({
         type: "media",
@@ -891,7 +891,7 @@ dispatch(
       });
     },
           chartOptions: {
-            labels: ['Positive', 'Negative', 'Neutral'],
+            // labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
             tooltip: {
               theme: 'light',
