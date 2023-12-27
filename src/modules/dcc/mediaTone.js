@@ -16,7 +16,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             events: {
               click: function (e, chart,config) {
                 onDonutClick(index, config);
-                
+                console.log(config, 'tae')
               },
             },
           },
@@ -30,8 +30,10 @@ const MediaTone = ({ className, charts, ...props }) => {
               color: '#fff',
             },
           },
-          labels: ['Positive', 'Negative', 'Neutral'],
-          colors: ['#1b81e2', '#df6264', '#0bbd91'],
+          // labels: ['Positive', 'Negative', 'Neutral'],
+          // colors: ['#1b81e2', '#df6264', '#0bbd91'],
+          labels: ['Neutral', 'Negative', 'Positive'], // Ubah urutan label sesuai keinginan Anda
+          colors: ['#0bbd91', '#df6264', '#1b81e2'], // Ubah urutan warna sesuai keinginan Anda
           width: 100,
           tooltip: {
             theme: 'light',

@@ -317,13 +317,13 @@ dispatch(
   setArticleData({
     ...body,
     desc: {
-      Media: toneMedia.result.data[body.data.x].media_name,
-      Tone:
-        body.data.y -1 === 1
-          ? "Positive"
-          : body.data.y -1 === -1
-          ? "Negative"
-          : "Neutral",
+      media: toneMedia.result.data[body.data.x].media_name,
+      // tone:
+      //   body.data.y -1 === 2
+      //     ? "Positive"
+      //     : body.data.y -1 === 1
+      //     ? "Negative"
+      //     : "Neutral",
     },
   });
 } else if (body.type == "ews") {
@@ -875,23 +875,23 @@ dispatch(
      <MediaTone
         charts={{
           data: toneMedia.result.data || [],
-    onDonutClick: function (index, config) {
-     console.log(index, config.globals, 'fcks 2');
+          onDonutClick: function (index, config) {
+          console.log(index, config.globals.selectedDataPoints, 'fcks 2');
 
-  handleAnalyticDetail({
-    type: "media",
-    page: 0,
-    maxSize: 10,
-    order_by: "datee",
-    order: "desc",
-    data: {
-      x: index,
-      y: config.globals.selectedDataPoints,
-    },
-  });
-},
+            handleAnalyticDetail({
+              type: "media",
+              page: 0,
+              maxSize: 10,
+              order_by: "datee",
+              order: "desc",
+              data: {
+                x: index,
+                y: config.globals.selectedDataPoints,
+              },
+            });
+          },
           chartOptions: {
-            // labels: ['Positive', 'Negative', 'Neutral'],
+            labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
             tooltip: {
               theme: 'light',
