@@ -193,26 +193,34 @@ const CommandCenter = () => {
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
-
-    getGeoStatus({
-      client_id: userToken.client_id,
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data.message == "registered") {
-          setBacktrackStatus(true);
-
-          dispatch(
-            getGeo({
-              type_location: "article",
-              ...filter.result,
-            })
-          );
-        }
-
-        setDoneCheck(true);
+    setBacktrackStatus(true);
+    dispatch(
+      getGeo({
+        type_location: "article",
+        ...filter.result,
       })
-      .catch((err) => console.log(err));
+    );
+    setDoneCheck(true);
+
+    // getGeoStatus({
+    //   client_id: userToken.client_id,
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     if (data.message == "registered") {
+    //       setBacktrackStatus(true);
+
+    //       dispatch(
+    //         getGeo({
+    //           type_location: "article",
+    //           ...filter.result,
+    //         })
+    //       );
+    //     }
+
+    //     setDoneCheck(true);
+    //   })
+    //   .catch((err) => console.log(err));
     // dispatch(
     //   getGeo({
     //     start_date: filter.result.start_date,

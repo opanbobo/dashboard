@@ -1,13 +1,14 @@
-export const URL_API = 'https://api.digivla.id/api/v1'; 
-export const URL_API_V2 = 'https://api.digivla.id/api/v2'; 
-export const URL_API_GEO = 'https://geo.digivla.id/api/v2'; 
-export const URL_API_DEMO = 'https://demo.digivla.id/api/v1'; 
+// export const URL_API = 'https://api.digivla.id/api/v1'; 
+// export const URL_API_V2 = 'https://api.digivla.id/api/v2'; 
+// export const URL_API_GEO = 'https://geo.digivla.id/api/v2'; 
+// export const URL_API_DEMO = 'https://demo.digivla.id/api/v1'; 
 
 // endpoint update
-// export const URL_API = 'https://api.skema.co.id/v1'; 
-// export const URL_API_V2 = 'https://api.skema.co.id/v2'; 
-// export const URL_API_GEO = 'https://api-geo.skema.co.id/api'; 
-// export const URL_API_DEMO = 'https://api.skema.co.id/v1'; 
+export const URL_API = 'https://api.skema.co.id/api/v1'; 
+export const URL_API_V2 = 'https://api.skema.co.id/api/v2'; 
+export const URL_API_GEO = 'https://api-geo.skema.co.id/api/v2'; 
+export const URL_API_DEMO = 'https://api-influencer.skema.co.id/api/v1'; 
+console.log(URL_API_DEMO,'aaaa')
 
 export * from './analyticTypes';
 export * from './newsClippingTypes';

@@ -47,12 +47,12 @@ const Geospatial = () => {
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
 
-    getGeoStatus({
-      client_id: userToken.client_id,
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data.message == "registered") {
+    // getGeoStatus({
+    //   client_id: userToken.client_id,
+    // })
+      // .then((data) => data.json())
+      // .then((data) => {
+        // if (data.message == "registered") {
           setBacktrackStatus(true);
 
           dispatch(
@@ -61,11 +61,11 @@ const Geospatial = () => {
               ...filter.result,
             })
           );
-        }
+        // }
 
         setDoneCheck(true);
-      })
-      .catch((err) => console.log(err));
+      // })
+      // .catch((err) => console.log(err));
   }, [filter, defaultFilter]);
 
   const optionGeo = {

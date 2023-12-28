@@ -426,7 +426,7 @@ const DefaultLayout = ({
         {header && (
           <MainHeader
             className={styles["main-head"]}
-            url="https://admin.antara-insight.id/asset/images/"
+            url="https://api.skema.co.id/media/"
             // logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
             logo={parsedToken.comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
