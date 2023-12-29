@@ -371,7 +371,7 @@ const DefaultLayout = ({
 }) => {
   const dispatch = useDispatch();
   const [filterModal, setfilterModal] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(true);
   const router = useRouter();
   const filters = useSelector((state) => state.filter);
   const { filter } = filters;
