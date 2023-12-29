@@ -248,7 +248,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             </Form.Item>
 
           </Col>
-          <Col xs={12} md={4} lg={4} xl={4}>
+          <Col xs={24} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">Tone</label>
               <Select
@@ -320,7 +320,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               </Row>
             </Col>
           ) : null}
-          <Col xs={12} md={4} lg={4} xl={4}>
+          <Col xs={24} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">&nbsp;</label>
               <div style={{width: '100%', display: 'flex', gap: '8px'}}>
