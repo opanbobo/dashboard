@@ -25,12 +25,12 @@ const LoginLayout = ({ children, logo }) => {
 			</div>
 			<div className={styles["head-item-toolbar"]}>
           <div className={styles["toolbar-item"]}>
-						<Button size="small" type="text" icons="PhoneOutlined" style={{ textAlign: 'center', color: '#fff' }}>
+						{/* <Button size="small" type="text" icons="PhoneOutlined" style={{ textAlign: 'center', color: '#fff' }}>
 							021-27939365
-						</Button>
+						</Button> */}
 
 						<Button size="small" type="text" icons="MailOutlined" style={{ textAlign: 'center', color: '#fff' }}>
-							info@skema.co.id
+							admin@skema.co.id
 						</Button>
           </div>
         </div>
