@@ -12,6 +12,10 @@
 	right: 0;
 	display: grid;
 	
+	@include res.media(phone) {
+		overflow: hidden;
+	}
+
 	// YUDI
 	// grid-template: 1fr / 60px 1fr;
 	grid-template: 1fr/156px 1fr;
