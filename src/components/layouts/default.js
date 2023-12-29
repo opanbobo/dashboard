@@ -402,8 +402,8 @@ const DefaultLayout = ({
   console.log("Nilai logo:", parsedToken.comp_icon);
 
   return (
-    <div className={`${styles["layout-wrap"]} ${toggleMenu ? '' : styles["hidden-menu"] }`}>
-      <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(false)}}>
+    <div className={`${styles["layout-wrap"]} ${toggleMenu ? '' : styles["hidden-menu"]}`}>
+      <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(true)}}>
         <Menu
           logo={logoType}
           feature={feature.filter((item) =>
