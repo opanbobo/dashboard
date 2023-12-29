@@ -371,7 +371,7 @@ const DefaultLayout = ({
 }) => {
   const dispatch = useDispatch();
   const [filterModal, setfilterModal] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const router = useRouter();
   const filters = useSelector((state) => state.filter);
   const { filter } = filters;
@@ -402,7 +402,7 @@ const DefaultLayout = ({
   console.log("Nilai logo:", parsedToken.comp_icon);
 
   return (
-    <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
+    <div className={`${styles["layout-wrap"]} ${toggleMenu ? '' : styles["hidden-menu"] }`}>
       <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(false)}}>
         <Menu
           logo={logoType}
@@ -430,7 +430,7 @@ const DefaultLayout = ({
             // logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
             logo={parsedToken.comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
-            onClick={() => setToggleMenu(!toggleMenu) }
+            onClick={() => setToggleMenu(true) }
             search={{ onClick: handleSearch }}
             style={{ color: 'white', padding: '0 20px'}}
             {...props}
