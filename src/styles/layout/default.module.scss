@@ -164,6 +164,11 @@
 			// YUDI
 			
 			:global{
+				.ant-row{
+					@include res.media(phone) {
+						overflow: hidden;
+					}
+				}
 				.ant-tabs-tab{
 					.ant-tabs-tab-btn{
 						color: #ffffff;
