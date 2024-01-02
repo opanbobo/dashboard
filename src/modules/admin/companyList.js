@@ -606,7 +606,7 @@ const CompanyList = () => {
 										style={{ position: 'relative', width: '100%', height: 'auto' }}
 										preview={false}
 										src={
-											companyDetail.company_logo ? `https://api.digivla.id/media/${companyDetail.company_logo}` : null
+											companyDetail.company_logo ? `https://api.skema.co.id/v1/media/${companyDetail.company_logo}` : null
 										}
 										alt=''
 									/>

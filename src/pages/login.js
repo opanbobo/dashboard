@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      let res = await fetch("https://api.digivla.id/api/v1/login/", {
+      let res = await fetch("https://api.skema.co.id/api/v1/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

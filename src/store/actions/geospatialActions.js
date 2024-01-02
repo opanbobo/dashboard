@@ -62,7 +62,7 @@ export const getGeoStatus = (body) => {
 	return new Promise((resolve, reject) => {
 		const userToken = JSON.parse(localStorage.getItem("userToken"));
 
-		return fetchPost('geo/get/status/', userToken.token, body).then((data) => resolve(data));
+		return fetchPostGeo('all-count/', userToken.token, body).then((data) => resolve(data));
 	});
 };
 

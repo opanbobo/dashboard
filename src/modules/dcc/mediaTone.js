@@ -13,15 +13,15 @@ const MediaTone = ({ className, charts, ...props }) => {
         const chartOptions = {
           chart: {
             type: 'donut',
-						events: {
-							click: function () {
-								onDonutClick(item.dataPointIndex, item.seriesIndex);
-								console.log(item);
-							}
-						},
+            events: {
+              click: function (e, chart,config) {
+                onDonutClick(index, config);
+                console.log(config, 'tae')
+              },
+            },
           },
           title: {
-            text: item.media_name,
+            text: data[index].media_name,
             align: 'center',
             margin: 10,
             offsetY: 0,
@@ -30,7 +30,10 @@ const MediaTone = ({ className, charts, ...props }) => {
               color: '#fff',
             },
           },
-          labels: ['Positive', 'Negative', 'Neutral'],
+          // labels: ['Positive', 'Negative', 'Neutral'],
+          // colors: ['#1b81e2', '#df6264', '#0bbd91'],
+          labels: ['Neutral', 'Negative', 'Positive'], // Ubah urutan label sesuai keinginan Anda
+          colors: ['#0bbd91', '#df6264', '#1b81e2'], // Ubah urutan warna sesuai keinginan Anda
           width: 100,
           tooltip: {
             theme: 'light',
@@ -38,6 +41,9 @@ const MediaTone = ({ className, charts, ...props }) => {
           },
           legend: {
             position: 'top',
+          },
+          stroke: {
+            show: false, // Menyembunyikan border (garis tepi) pada grafik
           },
           plotOptions: {
             pie: {
@@ -72,26 +78,25 @@ const MediaTone = ({ className, charts, ...props }) => {
               marker: {
                 size: 0,
               },
-              onClick: function () {
-								onDonutClick(item.dataPointIndex, item.seriesIndex);
-								console.log(item);
-							}
+              onClick: function (e, chart,config) {
+                onDonutClick(index, config);
+              
+              },
             })),
           },
         };
 
         return (
-					<Col xl={12} md={12}>
-						<ApexChart
-							key={index}
-							id={`mediaTone_${index}`}
-							type='donut'
-							className={className}
-							options={chartOptions}
-							series={percentages.slice(0, chartOptions.labels.length)}
-							{...props}
-						/>
-					</Col>
+          <Col xl={12} md={12} key={index}>
+            <ApexChart
+              id={`mediaTone_${index}`}
+              type='donut'
+              className={className}
+              options={chartOptions}
+              series={percentages.slice(0, chartOptions.labels.length)}
+              {...props}
+            />
+          </Col>
         );
       })}
     </Row>

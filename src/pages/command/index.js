@@ -193,26 +193,34 @@ const CommandCenter = () => {
 
   useEffect(() => {
     const userToken = JSON.parse(localStorage.getItem("userToken"));
-
-    getGeoStatus({
-      client_id: userToken.client_id,
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        if (data.message == "registered") {
-          setBacktrackStatus(true);
-
-          dispatch(
-            getGeo({
-              type_location: "article",
-              ...filter.result,
-            })
-          );
-        }
-
-        setDoneCheck(true);
+    setBacktrackStatus(true);
+    dispatch(
+      getGeo({
+        type_location: "article",
+        ...filter.result,
       })
-      .catch((err) => console.log(err));
+    );
+    setDoneCheck(true);
+
+    // getGeoStatus({
+    //   client_id: userToken.client_id,
+    // })
+    //   .then((data) => data.json())
+    //   .then((data) => {
+    //     if (data.message == "registered") {
+    //       setBacktrackStatus(true);
+
+    //       dispatch(
+    //         getGeo({
+    //           type_location: "article",
+    //           ...filter.result,
+    //         })
+    //       );
+    //     }
+
+    //     setDoneCheck(true);
+    //   })
+    //   .catch((err) => console.log(err));
     // dispatch(
     //   getGeo({
     //     start_date: filter.result.start_date,
@@ -302,34 +310,31 @@ const CommandCenter = () => {
     ];
   };
 
-  const handleAnalyticDetail = (body) => {
-    if (body.type == "media") {
+const handleAnalyticDetail = (body) => {
+  if (body.type === "media") {
+dispatch(
+    getAnalyticArticle({
+      ...filter.result,
+      maxSize: body.maxSize,
+      page: body.page,
+      media_id: toneMedia.result.data[body.data.x].media_id,
+      tone: `${body.data.y -1}`,
+    })
+  );
 
-      console.log(body.data.x)
-      // dispatch(
-      //   getAnalyticArticle({
-      //     ...filter.result,
-      //     maxSize: body.maxSize,
-      //     page: body.page,
-      //     media_id: toneMedia.result.data[body.data.x].media_id,
-      //     tone: `${body.data.y - 1}`,
-      //   })
-      // );
-
-      // setArticleData({
-      //   ...body,
-      //   desc: {
-      //     Media: toneMedia.result.data[body.data.x].media_name,
-      //     Tone:
-      //       body.data.y - 1 == 1
-      //         ? "Positive"
-      //         : body.data.y - 1 == -1
-      //         ? "Negative"
-      //         : "Neutral",
-      //   },
-      // });
-
-    } else if (body.type == "ews") {
+  setArticleData({
+    ...body,
+    desc: {
+      media: toneMedia.result.data[body.data.x].media_name,
+      // tone:
+      //   body.data.y -1 === 2
+      //     ? "Positive"
+      //     : body.data.y -1 === 1
+      //     ? "Negative"
+      //     : "Neutral",
+    },
+  });
+} else if (body.type == "ews") {
       dispatch(
         getAnalyticArticle({
           ...filter.result,
@@ -876,48 +881,50 @@ const CommandCenter = () => {
                           padding: 6,
                           borderRadius: 3,
                         }}>
-                        <MediaTone
-                          charts={{
-                            data: toneMedia.result.data || [],
-                            onDonutClick: function (selectedDataX, selectedDataY) {
-                              handleAnalyticDetail({
-                                type: "media",
-                                page: 0,
-                                maxSize: 10,
-                                order_by: "datee",
-                                order: "desc",
-                                data: {
-                                  x: selectedDataX,
-                                  y: selectedDataY,
-                                },
-                              });
-                            },
-                            chartOptions: {
-                              labels: ['Positive', 'Negative', 'Neutral'],
-                              width: 100,
-                              tooltip: {
-                                theme: 'light',
-                                fillSeriesColor: true,
-                              },
-                              legend: {
-                                position: "top",
-                              },
-                              plotOptions: {
-                                pie: {
-                                  donut: {
-                                    labels: {
-                                      show: false,
-                                      total: {
-                                        showAlways: false,
-                                        show: false,
-                                      }
-                                    }
-                                  }
-                                }
-                              },
-                            },
-                          }}
-                        />
+     <MediaTone
+        charts={{
+          data: toneMedia.result.data || [],
+          onDonutClick: function (index, config) {
+          console.log(index, config.globals.selectedDataPoints, 'fcks 2');
+
+            handleAnalyticDetail({
+              type: "media",
+              page: 0,
+              maxSize: 10,
+              order_by: "datee",
+              order: "desc",
+              data: {
+                x: index,
+                y: config.globals.selectedDataPoints,
+              },
+            });
+          },
+          chartOptions: {
+            labels: ['Positive', 'Negative', 'Neutral'],
+            width: 100,
+            tooltip: {
+              theme: 'light',
+              fillSeriesColor: true,
+            },
+            legend: {
+              position: "top",
+            },
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: {
+                    show: false,
+                    total: {
+                      showAlways: false,
+                      show: false,
+                    }
+                  }
+                }
+              }
+            },
+          },
+        }}
+      />
                       </div>
                   </Card>
                   {/* </Col>

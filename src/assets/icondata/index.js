@@ -69,4 +69,5 @@ export { default as MessageTwotone } from '@ant-design/icons/MessageTwoTone';
 export { default as EditTwotone } from '@ant-design/icons/EditTwoTone';
 export { default as DeleteTwotone } from '@ant-design/icons/DeleteTwoTone';
 export { default as CalendarTwoTone } from '@ant-design/icons/CalendarTwoTone';
-export { default as CloseSquareTwoTone } from '@ant-design/icons/CloseSquareTwoTone';
+export { default as CloseSquareTwoTone } from '@ant-design/icons/CloseOutlined';
+ 

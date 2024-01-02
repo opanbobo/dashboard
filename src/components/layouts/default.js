@@ -248,7 +248,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
             </Form.Item>
 
           </Col>
-          <Col xs={12} md={4} lg={4} xl={4}>
+          <Col xs={24} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">Tone</label>
               <Select
@@ -320,7 +320,7 @@ const ModalFilter = ({ filterModal, setfilterModal }) => {
               </Row>
             </Col>
           ) : null}
-          <Col xs={12} md={4} lg={4} xl={4}>
+          <Col xs={24} md={4} lg={4} xl={4}>
             <Form.Item>
               <label htmlFor="tone">&nbsp;</label>
               <div style={{width: '100%', display: 'flex', gap: '8px'}}>
@@ -392,8 +392,8 @@ const DefaultLayout = ({
   useEffect(() => {
     dispatch(getFilterCategory());
     dispatch(getFilterMedia());
-    dispatch(getFilterSubCategory(filter.result.category_set));
-    dispatch(getFilterSubMedia(filter.result.user_media_type_id));
+    // dispatch(getFilterSubCategory(filter.result.category_set));
+    // dispatch(getFilterSubMedia(filter.result.user_media_type_id));
   }, []);
 
   const userToken = localStorage.getItem("userToken");
@@ -402,8 +402,8 @@ const DefaultLayout = ({
   console.log("Nilai logo:", parsedToken.comp_icon);
 
   return (
-    <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
-      <div className={styles["layout-side"]}>
+    <div className={`${styles["layout-wrap"]} ${toggleMenu ? '' : styles["hidden-menu"]}`}>
+      <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(true)}}>
         <Menu
           logo={logoType}
           onClick={() => setToggleMenu(!toggleMenu) }
@@ -427,11 +427,11 @@ const DefaultLayout = ({
         {header && (
           <MainHeader
             className={styles["main-head"]}
-            url="https://admin.antara-insight.id/asset/images/"
+            url="https://api.skema.co.id/media/"
             // logo={JSON.parse(localStorage.getItem("userToken")).comp_icon}
             logo={parsedToken.comp_icon}
             filters={{ onClick: () => setfilterModal(true) }}
-            onClick={() => setToggleMenu(!toggleMenu) }
+            onClick={() => setToggleMenu(true) }
             search={{ onClick: handleSearch }}
             style={{ color: 'white', padding: '0 20px'}}
             {...props}

@@ -75,7 +75,8 @@ const UserList = () => {
 			dispatch(
 				getAdminList({
 					...filter,
-					page: page.current + 1,
+					// page: page.current + 1,
+					page: page.current,
 					max_size: page.pageSize,
 				}),
 			);

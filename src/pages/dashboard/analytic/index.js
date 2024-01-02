@@ -1791,6 +1791,11 @@ const Analytic = (pagination) => {
                     },
                     markers: LineOptions.markers,
                     xaxis: {
+                      labels: {
+                        style: {
+                          colors: "#ffffff"
+                        }
+                      },
                       categories: coverageTonality.result.data
                         ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
                             (item) => {
@@ -1798,6 +1803,9 @@ const Analytic = (pagination) => {
                             }
                           )
                         : [" "],
+                    },
+                    grid: {
+                      show: false, // Menghilangkan grid line dari sumbu-y
                     },
                     stroke: LineOptions.stroke,
                     colors: ["#ff6b6b", "#1990ff", "#06d6a0"],

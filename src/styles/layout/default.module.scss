@@ -12,6 +12,10 @@
 	right: 0;
 	display: grid;
 	
+	@include res.media(phone) {
+		overflow: hidden;
+	}
+
 	// YUDI
 	// grid-template: 1fr / 60px 1fr;
 	grid-template: 1fr/156px 1fr;
@@ -161,6 +165,11 @@
 			// YUDI
 			
 			:global{
+				.ant-row{
+					@include res.media(phone) {
+						overflow: hidden;
+					}
+				}
 				.ant-tabs-tab{
 					.ant-tabs-tab-btn{
 						color: #ffffff;
@@ -209,6 +218,7 @@
 		.ant-collapse-content > .ant-collapse-content-box{
 			padding: 0
 		}
+		
 
 		.ant-table.ant-table-small{
 			background: none;

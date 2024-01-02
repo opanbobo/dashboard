@@ -9,12 +9,12 @@
 	// height: 100%;
 
 	@include res.media(phone) {
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-around;
 	}
 
 	@include res.media(tablet) {
-		flex-direction: row;
+		flex-direction: column;
 		justify-content: space-around;
 	}
 
@@ -76,7 +76,8 @@
 		}
 
 		@include res.media(phone) {
-			width: 44%;
+			width: 100%;
+			margin-bottom: 10px;
 		}
 	}
 }
