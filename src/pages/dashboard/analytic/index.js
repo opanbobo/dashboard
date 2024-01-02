@@ -1791,6 +1791,11 @@ const Analytic = (pagination) => {
                     },
                     markers: LineOptions.markers,
                     xaxis: {
+                      labels: {
+                        style: {
+                          colors: "#ffffff"
+                        }
+                      },
                       categories: coverageTonality.result.data
                         ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
                             (item) => {
