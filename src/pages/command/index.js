@@ -650,6 +650,7 @@ const CommandCenter = () => {
                               }).doc_count
                             : 0
                           }
+                          {console.log(coverageTonality?.result?.data)}
                         </div>
                         <div className={styles2['item-label']}>Total Article</div>
                       </div>

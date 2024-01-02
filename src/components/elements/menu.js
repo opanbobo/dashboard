@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { forwardRef, useState, useEffect } from 'react';
 import { Button, Tooltip } from 'components';
 import { notification, Collapse} from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 // import { Tooltip } from 'antd';
 import styles from 'styles/elements/menu.module.scss';
 import Image from 'next/image';
@@ -20,7 +21,7 @@ const ButtonMenu = forwardRef(function ButtonMenu(props, ref) {
 	return <Button {...props} />;
 });
 
-const Menu = ({ className, feature, data, logo, ...props }) => {
+const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 	const router = useRouter();
 
 	const [breakPoint, setbreakPoint] = useState();
@@ -49,6 +50,7 @@ const Menu = ({ className, feature, data, logo, ...props }) => {
 				<div className={styles['head-item']}>
 					<Image src={logo} objectFit='cover' alt='headLogo' height={100} width={100} priority='true' />
 				</div>
+        <CloseOutlined className={styles["close-menu"]} onClick={onClick}/>
 			</div>
 			<Collapse accordion className='dashboard-menux'>
 				<Panel header="Dashboard Menu" key="1">

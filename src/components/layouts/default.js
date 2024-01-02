@@ -403,9 +403,10 @@ const DefaultLayout = ({
 
   return (
     <div className={`${styles["layout-wrap"]} ${toggleMenu ? styles["hidden-menu"] : ''}`}>
-      <div className={styles["layout-side"]} onTouchStart={() => {setToggleMenu(true)}}>
+      <div className={styles["layout-side"]}>
         <Menu
           logo={logoType}
+          onClick={() => setToggleMenu(!toggleMenu) }
           feature={feature.filter((item) =>
             JSON.parse(localStorage.getItem("userToken")).menu_v3.find(
               (temp) => temp == item.label

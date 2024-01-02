@@ -18,6 +18,7 @@
 			position: relative;
 			width: 100px;
 			height: 100px;
+			margin-top: 20px;
 		}
 
 		@include res.media(tablet) {
@@ -157,6 +158,14 @@
 		color: #00bdc2 !important;
 		box-shadow: unset !important;
 	}
+}
+
+.close-menu{
+	position: absolute;
+	color: #fff;
+	right: 10px;
+	top: 10px;
+	font-size: 20px;
 }
 
 .menu-active {
