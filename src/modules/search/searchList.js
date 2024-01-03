@@ -104,8 +104,8 @@ const SearchList = ({ data = [], pagination, dataPag, searchForm, handleSearch }
                       style={{
                         display: "flex",
                         width: "100%",
-                        width: "90vw",
-                        maxWidth: "90vw",
+                        // width: "90vw",
+                        // maxWidth: "90vw",
                         position: "relative",
                         flexDirection: "column",
                         "&:hover": {
@@ -116,6 +116,7 @@ const SearchList = ({ data = [], pagination, dataPag, searchForm, handleSearch }
                       <h5
                         style={{ margin: 0, cursor: "pointer" }}
                         onClick={() => handleModal(item.article_id, item)}
+                        className="title-search"
                       >
                         {item.title}
                       </h5>

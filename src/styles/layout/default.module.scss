@@ -165,6 +165,9 @@
 			// YUDI
 			
 			:global{
+				.title-search{
+					color: #fff;
+				}
 				.ant-row{
 					@include res.media(phone) {
 						overflow: hidden;

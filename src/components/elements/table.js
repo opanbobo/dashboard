@@ -93,7 +93,7 @@ const styleEllipsis = {
 	display: 'flex',
 	flexDirection: 'column',
 	justifyContent: 'space-between',
-	alignItems: 'flex-start',
+	// alignItems: 'flex-start',
 	marginBottom: 5,
 };
 
