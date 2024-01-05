@@ -638,7 +638,7 @@ dispatch(
                     // bodyStyle={{ height: "100%" }}
                     data={
                       mediaListCount.result.data
-                        ? mediaListCount.result.data.map((item) => {
+                        ? mediaListCount.result.data.map((item, index) => {
                             return item;
                           })
                         : []
@@ -648,14 +648,7 @@ dispatch(
                       <div
                         className={styles2['list-item']}
                         >
-                        <div className={styles2['item-total']}>{
-                          coverageTonality?.result?.data
-                            ? coverageTonality.result.data.chart_bar.reduce((a, b) => {
-                                return { doc_count: a.doc_count + b.doc_count };
-                              }).doc_count
-                            : 0
-                          }
-                          {console.log(coverageTonality?.result?.data)}
+                        <div className={styles2['item-total']}>{mediaListCount.result.data[0].total + mediaListCount.result.data[1].total + mediaListCount.result.data[2].total}
                         </div>
                         <div className={styles2['item-label']}>Total Article</div>
                       </div>
