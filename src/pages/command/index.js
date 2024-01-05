@@ -312,13 +312,14 @@ const CommandCenter = () => {
 
 const handleAnalyticDetail = (body) => {
   if (body.type === "media") {
+    console.log(body.data.y)
 dispatch(
     getAnalyticArticle({
       ...filter.result,
       maxSize: body.maxSize,
       page: body.page,
       media_id: toneMedia.result.data[body.data.x].media_id,
-      tone: `${body.data.y -1}`,
+      tone: `${body.data.y - 1}`,
     })
   );
 
@@ -326,12 +327,12 @@ dispatch(
     ...body,
     desc: {
       media: toneMedia.result.data[body.data.x].media_name,
-      // tone:
-      //   body.data.y -1 === 2
-      //     ? "Positive"
-      //     : body.data.y -1 === 1
-      //     ? "Negative"
-      //     : "Neutral",
+      tone:
+        body.data.y === 2
+          ? "Positive"
+          : body.data.y === 0
+          ? "Neutral"
+          : "Negative",
     },
   });
 } else if (body.type == "ews") {
@@ -648,8 +649,12 @@ dispatch(
                       <div
                         className={styles2['list-item']}
                         >
-                        <div className={styles2['item-total']}>{mediaListCount.result.data[0].total + mediaListCount.result.data[1].total + mediaListCount.result.data[2].total}
-                        </div>
+                        {mediaListCount.result.data ? 
+                          <div className={styles2['item-total']}>{mediaListCount?.result?.data[0]?.total + mediaListCount?.result?.data[1]?.total + mediaListCount.result?.data[2]?.total}
+                          </div>
+                          :
+                          null
+                        }
                         <div className={styles2['item-label']}>Total Article</div>
                       </div>
                     }
@@ -888,7 +893,7 @@ dispatch(
               order: "desc",
               data: {
                 x: index,
-                y: config.globals.selectedDataPoints,
+                y: config.globals.selectedDataPoints[0][0],
               },
             });
           },
