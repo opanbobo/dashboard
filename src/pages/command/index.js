@@ -312,7 +312,9 @@ const CommandCenter = () => {
 
 const handleAnalyticDetail = (body) => {
   if (body.type === "media") {
-    console.log(body.data.y)
+    console.log( body, 'bodinya')
+    console.log( body.type, 'tipe')
+    console.log(body.data.y, '>>')
 dispatch(
     getAnalyticArticle({
       ...filter.result,
@@ -885,17 +887,19 @@ dispatch(
           onDonutClick: function (index, config) {
           console.log(index, config.globals.selectedDataPoints, 'fcks 2');
 
-            handleAnalyticDetail({
-              type: "media",
-              page: 0,
-              maxSize: 10,
-              order_by: "datee",
-              order: "desc",
-              data: {
-                x: index,
-                y: config.globals.selectedDataPoints[0][0],
-              },
-            });
+          if (config.globals.selectedDataPoints && config.globals.selectedDataPoints[0] && config.globals.selectedDataPoints[0][0] !== undefined) {
+              handleAnalyticDetail({
+                type: "media",
+                page: 0,
+                maxSize: 10,
+                order_by: "datee",
+                order: "desc",
+                data: {
+                  x: index,
+                  y: config.globals.selectedDataPoints[0][0],
+                },
+              });
+            }
           },
           chartOptions: {
             labels: ['Positive', 'Negative', 'Neutral'],
