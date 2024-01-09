@@ -312,9 +312,6 @@ const CommandCenter = () => {
 
 const handleAnalyticDetail = (body) => {
   if (body.type === "media") {
-    console.log( body, 'bodinya')
-    console.log( body.type, 'tipe')
-    console.log(body.data.y, '>>')
 dispatch(
     getAnalyticArticle({
       ...filter.result,
@@ -330,7 +327,7 @@ dispatch(
     desc: {
       media: toneMedia.result.data[body.data.x].media_name,
       tone:
-        body.data.y === 2
+        body.data.y - 1 === 1
           ? "Positive"
           : body.data.y === 0
           ? "Neutral"
@@ -882,6 +879,7 @@ dispatch(
                           borderRadius: 3,
                         }}>
      <MediaTone
+        activeTone={filter.result.tonee === 1 ? "Positive" : filter.result.tonee === 0 ? "Neutral" : filter.result.tonee === -1 ? "Negative" : undefined}
         charts={{
           data: toneMedia.result.data || [],
           onDonutClick: function (index, config) {

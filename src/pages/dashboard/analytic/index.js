@@ -1853,21 +1853,44 @@ const Analytic = (pagination) => {
 
         {/* YUDI */}
         <Row>
+        {
+          filter.result.tonee === 1 ?
           <Col xs={24} md={24} lg={8} xl={8}>
             <Card title={'Positive'}>
               <ModalChartHiddenPositive/>
             </Card>
           </Col>
+          : filter.result.tonee === 0 ?
           <Col xs={24} md={24} lg={8} xl={8}>
             <Card title={'Neutral'}>
               <ModalChartHiddenNeutral/>
             </Card>
           </Col>
+          : filter.result.tonee === -1 ?
           <Col xs={24} md={24} lg={8} xl={8}>
             <Card title={'negative'}>
               <ModalChartHiddenNegative/>
             </Card>
           </Col>
+          :
+          <>
+            <Col xs={24} md={24} lg={8} xl={8}>
+              <Card title={'Positive'}>
+                <ModalChartHiddenPositive/>
+              </Card>
+            </Col>
+            <Col xs={24} md={24} lg={8} xl={8}>
+              <Card title={'Neutral'}>
+                <ModalChartHiddenNeutral/>
+              </Card>
+            </Col>
+            <Col xs={24} md={24} lg={8} xl={8}>
+              <Card title={'negative'}>
+                <ModalChartHiddenNegative/>
+              </Card>
+            </Col>
+          </>
+        }
         </Row>
         {/* END YUDI */}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApexChart, Row, Col } from 'components';
 
-const MediaTone = ({ className, charts, ...props }) => {
+const MediaTone = ({ className, charts, activeTone, ...props }) => {
   const { data = [], onDonutClick } = charts;
 
   return (
@@ -14,9 +14,9 @@ const MediaTone = ({ className, charts, ...props }) => {
           chart: {
             type: 'donut',
             events: {
-              click: function (e, chart,config) {
+              click: function (e, chart, config) {
                 onDonutClick(index, config);
-                console.log(config, 'tae')
+                console.log(config, 'tae');
               },
             },
           },
@@ -30,10 +30,8 @@ const MediaTone = ({ className, charts, ...props }) => {
               color: '#fff',
             },
           },
-          // labels: ['Positive', 'Negative', 'Neutral'],
-          // colors: ['#1b81e2', '#df6264', '#0bbd91'],
-          labels: ['Neutral', 'Negative', 'Positive'], // Ubah urutan label sesuai keinginan Anda
-          colors: ['#0bbd91', '#df6264', '#1b81e2'], // Ubah urutan warna sesuai keinginan Anda
+          labels: ['Neutral', 'Negative', 'Positive'],
+          colors: ['#0bbd91', '#df6264', '#1b81e2'],
           width: 100,
           tooltip: {
             theme: 'light',
@@ -43,7 +41,7 @@ const MediaTone = ({ className, charts, ...props }) => {
             position: 'top',
           },
           stroke: {
-            show: false, // Menyembunyikan border (garis tepi) pada grafik
+            show: false,
           },
           plotOptions: {
             pie: {
@@ -68,7 +66,7 @@ const MediaTone = ({ className, charts, ...props }) => {
               colors: ['#fff'],
             },
             formatter: function (val, opts) {
-              return `${val.toFixed(1)}%`; // Display percentage on the data label
+              return `${val.toFixed(1)}%`;
             },
           },
           annotations: {
@@ -78,13 +76,24 @@ const MediaTone = ({ className, charts, ...props }) => {
               marker: {
                 size: 0,
               },
-              onClick: function (e, chart,config) {
+              onClick: function (e, chart, config) {
                 onDonutClick(index, config);
-              
               },
             })),
           },
         };
+
+        if(activeTone !== undefined) {
+          console.log(activeTone);
+          const activeIndex = chartOptions.labels.indexOf(activeTone);
+          percentages.forEach((percentage, i) => {
+            if (i !== activeIndex) {
+              percentages[i] = 0;
+            }
+          });
+        }else{
+          percentages = item.tones.map((tone) => (Object.values(tone)[0] / total) * 100);
+        }
 
         return (
           <Col xl={12} md={12} key={index}>
