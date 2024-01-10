@@ -197,6 +197,12 @@
 	
 	:global{
 
+		.ant-table-expanded-row .ant-table-cell{
+			background: #2b2d3e;
+		}
+		.ant-table-tbody > tr.ant-table-row-selected > td{
+			background: #343e59;
+		}
 		.anticon-close{
 			padding-top: 10px;
 			color: #fff !important;
