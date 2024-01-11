@@ -197,6 +197,10 @@
 	
 	:global{
 
+		.ant-table-tbody > tr > td{
+			background-color: #2b2d3e;
+		}
+
 		.ant-table-expanded-row .ant-table-cell{
 			background: #2b2d3e;
 		}
