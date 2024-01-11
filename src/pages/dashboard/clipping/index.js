@@ -574,6 +574,8 @@ const Clipping = () => {
                     ? newsClippingList.result.data
                     : [],
                   pagination: {
+                    defaultPageSize: 10,
+                    pageSizeOptions: [10, 20, 50, 100, 1000],
                     showSizeChanger: true,
                     total: newsClippingList.result.recordsTotal,
                     showTotal: (total) => `Total ${total} article`,
@@ -1001,6 +1003,8 @@ const Clipping = () => {
                 tables={{
                   data: newsClippingList.result.data,
                   pagination: {
+                    defaultPageSize: 10,
+                    pageSizeOptions: [10, 20, 50, 100, 1000],
                     showSizeChanger: true,
                     total: newsClippingList.result.recordsTotal,
                     showTotal: (total) => `Total ${total} article`,

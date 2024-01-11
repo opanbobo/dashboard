@@ -310,7 +310,7 @@ const Spokeperson = () => {
                       onLoading={spokepersonStatistic.loading}
                       {...props}
                       hoverable
-                      style={{ height: 65, width: 65 }}
+                      style={{ height: 65, width: 65, minWidth: 65, maxWidth: 65 }}
                       cover={item.image}
                       onClick={() => {
                         dispatch(
