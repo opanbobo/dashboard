@@ -63,7 +63,6 @@ const Analytic = (pagination) => {
 	const [articleDetail, setArticleDetail] = useState({});
 	const [detailOpen, setDetailOpen] = useState(false);
 	const [saveArticlePop, setsaveArticlePop] = useState(false);
-  const [series, setSeries] = useState([])
 
   const {
     mediaVisibility,
@@ -77,6 +76,7 @@ const Analytic = (pagination) => {
     articleNegative,
     articleNeutral,
   } = analytic;
+
   const { filter, category } = filters;
   const { excelCol } = excellconfig;
 
@@ -555,162 +555,169 @@ const Analytic = (pagination) => {
   };
 
   const ModalChartHiddenPositive = () => {
-    console.log(analytic);
     return (
-      <InsideBox
-        onDetailClick={(e) => {
-          setArticleDetail(e);
-          setDetailOpen(true);
-        }}
-        data={
-          articlePositive.result.data?.map((item) => {
-            return {
-              id: item.article_id,
-              title: item.title,
-              content: item.content,
-              detail: item,
-            };
-          }) || []
-        }
-        onLoading={articlePositive.loading}
-        pagination={{
-          showSizeChanger: true,
-          total: articlePositive.result.recordsTotal || 0,
-          showTotal: (total) => `Total ${articlePositive.result.recordsTotal} data`,
-          defaultPageSize: articleDataPositive.maxSize || 0,
-          defaultCurrent: articleDataPositive.page + 1 || 0,
-          onChange: (page, pageSize) =>
-            loadedFetch({
-              ...articleDataPositive,
-              type: "article-positive",
-              page: page - 1,
-              maxSize: pageSize,
-            }),
-        }}
-      />
+      articlePositive?.result?.data ?
+        <InsideBox
+          onDetailClick={(e) => {
+            setArticleDetail(e);
+            setDetailOpen(true);
+          }}
+          data={
+            articlePositive.result.data?.map((item) => {
+              return {
+                id: item.article_id,
+                title: item.title,
+                content: item.content,
+                detail: item,
+              };
+            }) || []
+          }
+          onLoading={articlePositive.loading}
+          pagination={{
+            showSizeChanger: true,
+            total: articlePositive.result.recordsTotal || 0,
+            showTotal: (total) => `Total ${articlePositive.result.recordsTotal} data`,
+            defaultPageSize: articleDataPositive.maxSize || 0,
+            defaultCurrent: articleDataPositive.page + 1 || 0,
+            onChange: (page, pageSize) =>
+              loadedFetch({
+                ...articleDataPositive,
+                type: "article-positive",
+                page: page - 1,
+                maxSize: pageSize,
+              }),
+          }}
+        />
+      : null
     );
   };
 
   const ModalChartHiddenNeutral = () => {
     console.log(analytic);
     return (
-      <InsideBox
-        onDetailClick={(e) => {
-          setArticleDetail(e);
-          setDetailOpen(true);
-        }}
-        data={
-          articleNeutral.result.data?.map((item) => {
-            return {
-              id: item.article_id,
-              title: item.title,
-              content: item.content,
-              detail: item,
-            };
-          }) || []
-        }
-        onLoading={articleNeutral.loading}
-        pagination={{
-          showSizeChanger: true,
-          total: articleNeutral.result.recordsTotal || 0,
-          showTotal: (total) => `Total ${articleNeutral.result.recordsTotal} data`,
-          defaultPageSize: articleDataNeutral.maxSize || 0,
-          defaultCurrent: articleDataNeutral.page + 1 || 0,
-          onChange: (page, pageSize) =>
-            loadedFetch({
-              ...articleDataNeutral,
-              type: "article-neutral",
-              page: page - 1,
-              maxSize: pageSize,
-            }),
-        }}
-      />
+      articleNeutral?.result?.data ?
+        <InsideBox
+          onDetailClick={(e) => {
+            setArticleDetail(e);
+            setDetailOpen(true);
+          }}
+          data={
+            articleNeutral.result.data?.map((item) => {
+              return {
+                id: item.article_id,
+                title: item.title,
+                content: item.content,
+                detail: item,
+              };
+            }) || []
+          }
+          onLoading={articleNeutral.loading}
+          pagination={{
+            showSizeChanger: true,
+            total: articleNeutral.result.recordsTotal || 0,
+            showTotal: (total) => `Total ${articleNeutral.result.recordsTotal} data`,
+            defaultPageSize: articleDataNeutral.maxSize || 0,
+            defaultCurrent: articleDataNeutral.page + 1 || 0,
+            onChange: (page, pageSize) =>
+              loadedFetch({
+                ...articleDataNeutral,
+                type: "article-neutral",
+                page: page - 1,
+                maxSize: pageSize,
+              }),
+          }}
+        />
+      : null
     );
   };
 
   const ModalChartHiddenNegative = () => {
     console.log(analytic);
     return (
-      <InsideBox
-        onDetailClick={(e) => {
-          setArticleDetail(e);
-          setDetailOpen(true);
-        }}
-        data={
-          articleNegative.result.data?.map((item) => {
-            return {
-              id: item.article_id,
-              title: item.title,
-              content: item.content,
-              detail: item,
-            };
-          }) || []
-        }
-        onLoading={articleNegative.loading}
-        pagination={{
-          showSizeChanger: true,
-          total: articleNegative.result.recordsTotal || 0,
-          showTotal: (total) => `Total ${articleNegative.result.recordsTotal} data`,
-          defaultPageSize: articleDataNegative.maxSize || 0,
-          defaultCurrent: articleDataNegative.page + 1 || 0,
-          onChange: (page, pageSize) =>
-            handleClikable({
-              ...articleDataNegative,
-              type: "article-negative",
-              page: page - 1,
-              maxSize: pageSize,
-            }),
-        }}
-      />
+      articleNegative?.result?.data ?
+        <InsideBox
+          onDetailClick={(e) => {
+            setArticleDetail(e);
+            setDetailOpen(true);
+          }}
+          data={
+            articleNegative.result.data?.map((item) => {
+              return {
+                id: item.article_id,
+                title: item.title,
+                content: item.content,
+                detail: item,
+              };
+            }) || []
+          }
+          onLoading={articleNegative.loading}
+          pagination={{
+            showSizeChanger: true,
+            total: articleNegative.result.recordsTotal || 0,
+            showTotal: (total) => `Total ${articleNegative.result.recordsTotal} data`,
+            defaultPageSize: articleDataNegative.maxSize || 0,
+            defaultCurrent: articleDataNegative.page + 1 || 0,
+            onChange: (page, pageSize) =>
+              handleClikable({
+                ...articleDataNegative,
+                type: "article-negative",
+                page: page - 1,
+                maxSize: pageSize,
+              }),
+          }}
+        />
+      : null
     );
   };
 
   const ModalChart = () => {
     console.log(articleData);
     return (
-      <Popchart
-        onDetailClick={(e) => {
-          setArticleDetail(e);
-          setDetailOpen(true);
-        }}
-        onLoading={article.loading}
-        modal={{
-          title: `Article List ${
-            articleData.desc
-              ? "(" +
-                Object.keys(articleData.desc).map(
-                  (key) => key + ": " + articleData.desc[key]
-                ) +
-                ")"
-              : ""
-          }`,
-          visible: modal && !article.loading,
-          close: () => setModal(false),
-        }}
-        data={
-          article.result.data?.map((item) => {
-            return {
-              id: item.article_id,
-              title: item.title,
-              content: item.content,
-              detail: item,
-            };
-          }) || []
-        }
-        pagination={{
-          showSizeChanger: true,
-          total: article.result.recordsTotal || 0,
-          showTotal: (total) => `Total ${article.result.recordsTotal} data`,
-          defaultPageSize: articleData.maxSize || 0,
-          defaultCurrent: articleData.page + 1 || 0,
-          onChange: (page, pageSize) =>
-            handleClikable({
-              ...articleData,
-              page: page - 1,
-              maxSize: pageSize,
-            }),
-        }}
-      />
+      articleData?.result?.data ?
+        <Popchart
+          onDetailClick={(e) => {
+            setArticleDetail(e);
+            setDetailOpen(true);
+          }}
+          onLoading={article.loading}
+          modal={{
+            title: `Article List ${
+              articleData.desc
+                ? "(" +
+                  Object.keys(articleData.desc).map(
+                    (key) => key + ": " + articleData.desc[key]
+                  ) +
+                  ")"
+                : ""
+            }`,
+            visible: modal && !article.loading,
+            close: () => setModal(false),
+          }}
+          data={
+            article.result.data?.map((item) => {
+              return {
+                id: item.article_id,
+                title: item.title,
+                content: item.content,
+                detail: item,
+              };
+            }) || []
+          }
+          pagination={{
+            showSizeChanger: true,
+            total: article.result.recordsTotal || 0,
+            showTotal: (total) => `Total ${article.result.recordsTotal} data`,
+            defaultPageSize: articleData.maxSize || 0,
+            defaultCurrent: articleData.page + 1 || 0,
+            onChange: (page, pageSize) =>
+              handleClikable({
+                ...articleData,
+                page: page - 1,
+                maxSize: pageSize,
+              }),
+          }}
+        />
+      : null
     );
   };
 
@@ -934,8 +941,8 @@ const Analytic = (pagination) => {
                   type="line"
                   {...{
                     title: "visibility chart",
-                    series: mediaVisibility.result.data
-                      ? mediaVisibility.result.data.map((item) => {
+                    series: mediaVisibility?.result?.data
+                      ? mediaVisibility?.result?.data.map((item) => {
                           return {
                             name: item.key,
                             data: item.category_id_per_day.buckets.map(
@@ -952,8 +959,8 @@ const Analytic = (pagination) => {
                       markers: LineOptions.markers,
                       xaxis: {
                         categories:
-                          mediaVisibility.result.data?.length > 0
-                            ? mediaVisibility.result.data[0].category_id_per_day.buckets.map(
+                          mediaVisibility?.result?.data?.length > 0
+                            ? mediaVisibility?.result?.data[0].category_id_per_day.buckets.map(
                                 (item) => {
                                   return item.key_as_string;
                                 }
@@ -979,14 +986,14 @@ const Analytic = (pagination) => {
                   type="pie"
                   {...{
                     title: "visibility pie",
-                    series: mediaVisibility.result.data
-                      ? mediaVisibility.result.data.map((item) => {
+                    series: mediaVisibility?.result?.data
+                      ? mediaVisibility?.result?.data.map((item) => {
                           return item.doc_count;
                         })
                       : [],
                     options: {
-                      labels: mediaVisibility.result.data
-                        ? mediaVisibility.result.data.map((item) => item.key)
+                      labels: mediaVisibility?.result?.data
+                        ? mediaVisibility?.result?.data.map((item) => item.key)
                         : [],
                     },
                     chartOptions: {
@@ -1006,8 +1013,8 @@ const Analytic = (pagination) => {
                   type="bar"
                   {...{
                     title: "coverage tone",
-                    series: coverageTonality.result.data
-                      ? coverageTonality.result.data.chart_bar
+                    series: coverageTonality?.result?.data
+                      ? coverageTonality?.result?.data.chart_bar
                           .sort((a, b) => (a.key > b.key && 1) || -1)
                           .map((item) => {
                             return {
@@ -1033,8 +1040,8 @@ const Analytic = (pagination) => {
                         },
                       },
                       xaxis: {
-                        categories: coverageTonality.result.data
-                          ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
+                        categories: coverageTonality?.result?.data
+                          ? coverageTonality?.result?.data.chart_bar[0].tone_per_day.buckets.map(
                               (bucket) => bucket.key_as_string
                             )
                           : [],
@@ -1061,16 +1068,16 @@ const Analytic = (pagination) => {
                   type="bar"
                   {...{
                     title: "tone by media selection",
-                    series: toneMedia.result.data
-                      ? getMediaSelection(toneMedia.result.data)
+                    series: toneMedia?.result?.data
+                      ? getMediaSelection(toneMedia?.result?.data)
                       : [],
                     chartOptions: BarHorizontal.chartOptions,
                     options: {
                       colors: BarHorizontal.colors,
                       plotOptions: BarHorizontal.plotOptions,
                       xaxis: {
-                        categories: toneMedia.result.data
-                          ? toneMedia.result.data.map((item) => item.media_name)
+                        categories: toneMedia?.result?.data
+                          ? toneMedia?.result?.data.map((item) => item.media_name)
                           : [],
                       },
                       legend: BarHorizontal.legend,
@@ -1088,8 +1095,8 @@ const Analytic = (pagination) => {
                   type="bar"
                   {...{
                     title: "tone by category",
-                    series: toneCategory.result.data
-                      ? getMediaSelection(toneCategory.result.data)
+                    series: toneCategory?.result?.data
+                      ? getMediaSelection(toneCategory?.result?.data)
                       : [],
                     chartOptions: BarHorizontal.chartOptions,
                     options: {
@@ -1101,8 +1108,8 @@ const Analytic = (pagination) => {
                         },
                       },
                       xaxis: {
-                        categories: toneCategory.result.data
-                          ? toneCategory.result.data
+                        categories: toneCategory?.result?.data
+                          ? toneCategory?.result?.data
                               .filter((item) => {
                                 if (item.tones.length > 0) {
                                   return 1;
@@ -1121,45 +1128,47 @@ const Analytic = (pagination) => {
             </div>
           </Col>
           <div style={{ width: "100%" }} ref={ref6}>
-            <Card onLoading={ews.loading} title="Early Warning System">
-              <EarlyWarning
-                height={300}
-                width={"100%"}
-                charts={{
-                  series: ews.result.series,
-                  options: {
-                    tooltip: {
-                      shared: true,
-                    },
-                    markers: LineOptions.markers,
-                    stroke: LineOptions.stroke,
-                    colors: LineOptions.colors,
-                    xaxis: {
-                      categories: ews.result.date,
-                    },
-                    yaxis: {
-                      show: true,
-                      tickAmount: 3,
-                      min: 0,
-                      max: 20,
-                      labels: {
-                        formatter: function (value, index) {
-                          if (value == 0 && value < 5) {
-                            return "Potential";
-                          } else if (value > 5 && value < 9) {
-                            return "Emerging";
-                          } else if (value > 10 && value < 20) {
-                            return "Current";
-                          } else {
-                            return "Crisis";
-                          }
+            {ews?.result?.series ?
+              <Card onLoading={ews.loading} title="Early Warning System">
+                <EarlyWarning
+                  height={300}
+                  width={"100%"}
+                  charts={{
+                    series: ews.result.series,
+                    options: {
+                      tooltip: {
+                        shared: true,
+                      },
+                      markers: LineOptions.markers,
+                      stroke: LineOptions.stroke,
+                      colors: LineOptions.colors,
+                      xaxis: {
+                        categories: ews.result.date,
+                      },
+                      yaxis: {
+                        show: true,
+                        tickAmount: 3,
+                        min: 0,
+                        max: 20,
+                        labels: {
+                          formatter: function (value, index) {
+                            if (value == 0 && value < 5) {
+                              return "Potential";
+                            } else if (value > 5 && value < 9) {
+                              return "Emerging";
+                            } else if (value > 10 && value < 20) {
+                              return "Current";
+                            } else {
+                              return "Crisis";
+                            }
+                          },
                         },
                       },
                     },
-                  },
-                }}
-              />
-            </Card>
+                  }}
+                />
+              </Card>
+            : null}
           </div>
         </Row>
       </Modal>
@@ -1180,141 +1189,143 @@ const Analytic = (pagination) => {
       title: "Media Visibility",
       content: (
         <div id="media-visibility-chart">
-          <MediaTabs
-            onLoading={mediaVisibility.loading}
-            visibility={{
-              title: "visibility chart",
-              series: mediaVisibility.result.data
-                ? mediaVisibility.result.data.map((item) => {
-                    return {
-                      name: item.key,
-                      data: item.category_id_per_day.buckets.map((bucket) => {
-                        return bucket.doc_count;
-                      }),
-                    };
-                  })
-                : [],
-              chartOptions: LineOptions.chartOptions,
-              events: {
-                markerClick(e, chart, config) {
-                  return handleClikable({
-                    type: "visibility",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      x: mediaVisibility.result.data[config.seriesIndex]
-                        .category_id_per_day.buckets[config.dataPointIndex]
-                        .key_as_string,
-                      y: mediaVisibility.result.data[config.seriesIndex].key,
-                    },
-                  });
-                },
-              },
-              options: {
-                // colors: ['#36414c', '#1990ff', '#06d6a0', '#ff6b6b', '#ffe66d', '#e76f51', '#495867'],
-                markers: LineOptions.markers,
-                xaxis: {
-                  categories:
-                    mediaVisibility.result.data?.length > 0
-                      ? mediaVisibility.result.data[0].category_id_per_day.buckets.map(
-                          (item) => {
-                            return item.key_as_string;
-                          }
-                        )
-                      : [],
-                      labels: {
-                        style: {
-                          colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
-                        },
+          {mediaVisibility?.result?.data ?
+            <MediaTabs
+              onLoading={mediaVisibility.loading}
+              visibility={{
+                title: "visibility chart",
+                series: mediaVisibility.result.data
+                  ? mediaVisibility.result.data.map((item) => {
+                      return {
+                        name: item.key,
+                        data: item.category_id_per_day.buckets.map((bucket) => {
+                          return bucket.doc_count;
+                        }),
+                      };
+                    })
+                  : [],
+                chartOptions: LineOptions.chartOptions,
+                events: {
+                  markerClick(e, chart, config) {
+                    return handleClikable({
+                      type: "visibility",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        x: mediaVisibility.result.data[config.seriesIndex]
+                          .category_id_per_day.buckets[config.dataPointIndex]
+                          .key_as_string,
+                        y: mediaVisibility.result.data[config.seriesIndex].key,
                       },
-                },
-                yaxis: {
-                  labels: {
-                    style: {
-                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
-                    },
+                    });
                   },
                 },
-                legend: LineOptions.legend,
-                tooltip: {
-                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                  fillSeriesColor: false, // Untuk mengisi warna tooltip
-                },
-              },
-            }}
-            pie={{
-              title: "visibility pie",
-              series: mediaVisibility.result.data
-                ? mediaVisibility.result.data.map((item) => {
-                    return item.doc_count;
-                  })
-                : [],
-              options: {
-                labels: mediaVisibility.result.data
-                  ? mediaVisibility.result.data.map((item) => item.key)
-                  : [],
-              },
-              chartOptions: {
-                type: "pie",
-                height: 300,
-              },
-              events: {
-                dataPointSelection(e, chart, config) {
-                  return handleClikable({
-                    type: "pie",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      y: mediaVisibility.result.data[config.dataPointIndex].key,
+                options: {
+                  // colors: ['#36414c', '#1990ff', '#06d6a0', '#ff6b6b', '#ffe66d', '#e76f51', '#495867'],
+                  markers: LineOptions.markers,
+                  xaxis: {
+                    categories:
+                      mediaVisibility.result.data?.length > 0
+                        ? mediaVisibility.result.data[0].category_id_per_day.buckets.map(
+                            (item) => {
+                              return item.key_as_string;
+                            }
+                          )
+                        : [],
+                        labels: {
+                          style: {
+                            colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                          },
+                        },
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
                     },
-                  });
+                  },
+                  legend: LineOptions.legend,
+                  tooltip: {
+                    theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                    fillSeriesColor: false, // Untuk mengisi warna tooltip
+                  },
                 },
-              },
-            }}
-            // headline={
-            //   <div
-            //     style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
-            //   >
-            //     <Row>
-            //       {trendingHighLights.result.data?.map((item) => {
-            //         return (
-            //           <Col span={24} key={item.article_id}>
-            //             <ColumnList
-            //               ellipsis
-            //               // title={item.title}
-            //               title={
-            //                 <Row>
-            //                   <Col span={24}>
-            //                     <span>{item.title}</span>
-            //                     <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
-            //                   </Col>
-            //                 </Row>
-            //               }
-            //               content={item.content}
-            //               onClick={() => {
-            //                 getKeywordArticle({
-            //                   article_id: item.article_id,
-            //                 })
-            //                   .then((data) => data.json())
-            //                   .then((data) => {
-            //                     setTrendingDetail(item);
-            //                     setModalTrending(true);
-            //                     setKeyword(data.data);
-            //                   })
-            //                   .catch((err) => console.log(err));
-            //               }}
-            //             />
-            //           </Col>
-            //         );
-            //       })}
-            //     </Row>
-            //   </div>
-            // }
-          />
+              }}
+              pie={{
+                title: "visibility pie",
+                series: mediaVisibility.result.data
+                  ? mediaVisibility.result.data.map((item) => {
+                      return item.doc_count;
+                    })
+                  : [],
+                options: {
+                  labels: mediaVisibility.result.data
+                    ? mediaVisibility.result.data.map((item) => item.key)
+                    : [],
+                },
+                chartOptions: {
+                  type: "pie",
+                  height: 300,
+                },
+                events: {
+                  dataPointSelection(e, chart, config) {
+                    return handleClikable({
+                      type: "pie",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        y: mediaVisibility.result.data[config.dataPointIndex].key,
+                      },
+                    });
+                  },
+                },
+              }}
+              // headline={
+              //   <div
+              //     style={{ overflowY: "auto", overflowX: "hidden", height: 300 }}
+              //   >
+              //     <Row>
+              //       {trendingHighLights.result.data?.map((item) => {
+              //         return (
+              //           <Col span={24} key={item.article_id}>
+              //             <ColumnList
+              //               ellipsis
+              //               // title={item.title}
+              //               title={
+              //                 <Row>
+              //                   <Col span={24}>
+              //                     <span>{item.title}</span>
+              //                     <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
+              //                   </Col>
+              //                 </Row>
+              //               }
+              //               content={item.content}
+              //               onClick={() => {
+              //                 getKeywordArticle({
+              //                   article_id: item.article_id,
+              //                 })
+              //                   .then((data) => data.json())
+              //                   .then((data) => {
+              //                     setTrendingDetail(item);
+              //                     setModalTrending(true);
+              //                     setKeyword(data.data);
+              //                   })
+              //                   .catch((err) => console.log(err));
+              //               }}
+              //             />
+              //           </Col>
+              //         );
+              //       })}
+              //     </Row>
+              //   </div>
+              // }
+            />
+          : null}
         </div>
       ),
     },
@@ -1323,247 +1334,249 @@ const Analytic = (pagination) => {
       title: "Coverage Tone",
       content: (
         <div id="coverage-tone-chart">
-          <ToneTabs
-            onLoading={coverageTonality.loading}
-            onLoadingMedia={toneMedia.loading}
-            onLoadingCategory={toneCategory.loading}
-            coverage={{
-              title: "coverage tone",
-              series: coverageTonality.result.data
-                ? coverageTonality.result.data.chart_bar
-                    .sort((a, b) => (a.key > b.key && 1) || -1)
-                    .map((item) => {
-                      return {
-                        name:
-                          item.key == 1
-                            ? "Positive"
-                            : item.key == 0
-                            ? "Neutral"
-                            : "Negative",
-                        data: item.tone_per_day.buckets.map(
-                          (bucket) => bucket.doc_count
-                        ),
-                      };
-                    })
-                : [],
-              chartOptions: BarHorizontal.chartOptions,
-              events: {
-                dataPointSelection(e, chart, config) {
-                  return handleClikable({
-                    type: "coverage",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      y:
-                        config.seriesIndex == "2"
-                          ? "1"
-                          : config.seriesIndex == "0"
-                          ? "-1"
-                          : "0",
-                      x: coverageTonality.result.data.chart_bar.find((item) => {
-                        const temp =
+          {coverageTonality?.result?.data && toneMedia?.result?.data && toneCategory?.result?.data ?
+            <ToneTabs
+              onLoading={coverageTonality.loading}
+              onLoadingMedia={toneMedia.loading}
+              onLoadingCategory={toneCategory.loading}
+              coverage={{
+                title: "coverage tone",
+                series: coverageTonality.result.data
+                  ? coverageTonality.result.data.chart_bar
+                      .sort((a, b) => (a.key > b.key && 1) || -1)
+                      .map((item) => {
+                        return {
+                          name:
+                            item.key == 1
+                              ? "Positive"
+                              : item.key == 0
+                              ? "Neutral"
+                              : "Negative",
+                          data: item.tone_per_day.buckets.map(
+                            (bucket) => bucket.doc_count
+                          ),
+                        };
+                      })
+                  : [],
+                chartOptions: BarHorizontal.chartOptions,
+                events: {
+                  dataPointSelection(e, chart, config) {
+                    return handleClikable({
+                      type: "coverage",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        y:
                           config.seriesIndex == "2"
                             ? "1"
                             : config.seriesIndex == "0"
                             ? "-1"
-                            : "0";
+                            : "0",
+                        x: coverageTonality.result.data.chart_bar.find((item) => {
+                          const temp =
+                            config.seriesIndex == "2"
+                              ? "1"
+                              : config.seriesIndex == "0"
+                              ? "-1"
+                              : "0";
 
-                        if (item.key == temp) {
-                          return item;
-                        } else {
-                          return -1;
-                        }
-                      }).tone_per_day.buckets[config.dataPointIndex]
-                        .key_as_string,
-                    },
-                  });
-                },
-              },
-              options: {
-                colors: BarHorizontal.colors,
-                plotOptions: {
-                  bar: {
-                    horizontal: false,
-                    borderRadius: 6,
-                  },
-                },
-                xaxis: {
-                  categories: coverageTonality.result.data
-                    ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
-                        (bucket) => bucket.key_as_string
-                      )
-                    : [],
-                },
-                yaxis: {
-                  labels: {
-                    style: {
-                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
-                    },
-                  },
-                },
-                legend: BarHorizontal.legend,
-                tooltip: {
-                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                  fillSeriesColor: false, // Untuk mengisi warna tooltip
-                },
-              },
-            }}
-
-            pie={{
-              title: "Coverage pie",
-              series: coverageTonality.result.data
-                ? coverageTonality.result.data.chart_bar
-                    .sort((a, b) => (a.key > b.key && 1) || -1)
-                    .map((item) => {
-                      return item.doc_count;
-                    })
-                : [],
-              options: {
-                labels: ["Negative", "Neutral", "Positive"],
-                colors: BarHorizontal.colors,
-                legend: {
-                  position: "right",
-                  horizontalAlign: "center",
-                  verticalAlign: "center",
-                  markers: {
-                    width: 8,
-                    height: 8,
-                    radius: 2,
-                    offsetY: 0,
-                  },
-                },
-              },
-              chartOptions: {
-                type: "pie",
-                height: 300,
-              },
-              events: {
-                dataPointSelection(e, chart, config) {
-                  return handleClikable({
-                    type: "pie-cov",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      y: coverageTonality.result.data.chart_bar.sort(
-                        (a, b) => (a.key > b.key && 1) || -1
-                      )[config.dataPointIndex].key,
-                    },
-                  });
-                },
-              },
-            }}
-            selection={{
-              title: "tone by media selection",
-              series: toneMedia.result.data
-                ? getMediaSelection(toneMedia.result.data)
-                : [],
-              chartOptions: BarHorizontal.chartOptions,
-              events: {
-                dataPointSelection(e, chart, config) {
-                  return handleClikable({
-                    type: "coverage-bar",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      y: toneMedia.result.data[config.dataPointIndex].media_id,
-                      x: config.seriesIndex - 1,
-                    },
-                    media_name:
-                      toneMedia.result.data[config.dataPointIndex].media_name,
-                  });
-                },
-              },
-              options: {
-                colors: BarHorizontal.colors,
-                plotOptions: BarHorizontal.plotOptions,
-                xaxis: {
-                  categories: toneMedia.result.data
-                    ? toneMedia.result.data.map((item) => item.media_name)
-                    : [],
-                },
-                yaxis: {
-                  labels: {
-                    style: {
-                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
-                    },
-                  },
-                },
-                legend: BarHorizontal.legend,
-                tooltip: {
-                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                  fillSeriesColor: false, // Untuk mengisi warna tooltip
-                },
-              },
-            }}
-            media={{
-              title: "tone by category",
-              series: toneCategory.result.data
-                ? getMediaSelection(toneCategory.result.data)
-                : [],
-              chartOptions: BarHorizontal.chartOptions,
-              events: {
-                click(e, chart, config) {
-                  return handleClikable({
-                    type: "coverage-barhor",
-                    page: 0,
-                    maxSize: 10,
-                    order_by: "datee",
-                    order: "desc",
-                    data: {
-                      y: toneCategory.result.data[config.dataPointIndex]
-                        .category_id,
-                      x: config.seriesIndex - 1,
-                    },
-                  });
-                },
-              },
-              options: {
-                colors: BarHorizontal.colors,
-                plotOptions: {
-                  bar: {
-                    horizontal: false,
-                    borderRadius: 6,
-                  },
-                },
-                xaxis: {
-                  categories: toneCategory.result.data
-                    ? toneCategory.result.data
-                        .filter((item) => {
-                          if (item.tones.length > 0) {
-                            return 1;
+                          if (item.key == temp) {
+                            return item;
                           } else {
-                            return 0;
+                            return -1;
                           }
-                        })
-                        .map((selected) => selected.category_id)
-                    : [],
+                        }).tone_per_day.buckets[config.dataPointIndex]
+                          .key_as_string,
+                      },
+                    });
+                  },
+                },
+                options: {
+                  colors: BarHorizontal.colors,
+                  plotOptions: {
+                    bar: {
+                      horizontal: false,
+                      borderRadius: 6,
+                    },
+                  },
+                  xaxis: {
+                    categories: coverageTonality.result.data
+                      ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
+                          (bucket) => bucket.key_as_string
+                        )
+                      : [],
+                  },
+                  yaxis: {
                     labels: {
                       style: {
-                        colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
                       },
                     },
+                  },
+                  legend: BarHorizontal.legend,
+                  tooltip: {
+                    theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                    fillSeriesColor: false, // Untuk mengisi warna tooltip
+                  },
                 },
-                yaxis: {
-                  labels: {
-                    style: {
-                      colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+              }}
+
+              pie={{
+                title: "Coverage pie",
+                series: coverageTonality.result.data
+                  ? coverageTonality.result.data.chart_bar
+                      .sort((a, b) => (a.key > b.key && 1) || -1)
+                      .map((item) => {
+                        return item.doc_count;
+                      })
+                  : [],
+                options: {
+                  labels: ["Negative", "Neutral", "Positive"],
+                  colors: BarHorizontal.colors,
+                  legend: {
+                    position: "right",
+                    horizontalAlign: "center",
+                    verticalAlign: "center",
+                    markers: {
+                      width: 8,
+                      height: 8,
+                      radius: 2,
+                      offsetY: 0,
                     },
                   },
                 },
-                legend: BarHorizontal.legend,
-                tooltip: {
-                  theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                  fillSeriesColor: false, // Untuk mengisi warna tooltip
+                chartOptions: {
+                  type: "pie",
+                  height: 300,
                 },
-              },
-            }}
-          />
+                events: {
+                  dataPointSelection(e, chart, config) {
+                    return handleClikable({
+                      type: "pie-cov",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        y: coverageTonality.result.data.chart_bar.sort(
+                          (a, b) => (a.key > b.key && 1) || -1
+                        )[config.dataPointIndex].key,
+                      },
+                    });
+                  },
+                },
+              }}
+              selection={{
+                title: "tone by media selection",
+                series: toneMedia.result.data
+                  ? getMediaSelection(toneMedia.result.data)
+                  : [],
+                chartOptions: BarHorizontal.chartOptions,
+                events: {
+                  dataPointSelection(e, chart, config) {
+                    return handleClikable({
+                      type: "coverage-bar",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        y: toneMedia.result.data[config.dataPointIndex].media_id,
+                        x: config.seriesIndex - 1,
+                      },
+                      media_name:
+                        toneMedia.result.data[config.dataPointIndex].media_name,
+                    });
+                  },
+                },
+                options: {
+                  colors: BarHorizontal.colors,
+                  plotOptions: BarHorizontal.plotOptions,
+                  xaxis: {
+                    categories: toneMedia.result.data
+                      ? toneMedia.result.data.map((item) => item.media_name)
+                      : [],
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
+                  },
+                  legend: BarHorizontal.legend,
+                  tooltip: {
+                    theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                    fillSeriesColor: false, // Untuk mengisi warna tooltip
+                  },
+                },
+              }}
+              media={{
+                title: "tone by category",
+                series: toneCategory.result.data
+                  ? getMediaSelection(toneCategory.result.data)
+                  : [],
+                chartOptions: BarHorizontal.chartOptions,
+                events: {
+                  click(e, chart, config) {
+                    return handleClikable({
+                      type: "coverage-barhor",
+                      page: 0,
+                      maxSize: 10,
+                      order_by: "datee",
+                      order: "desc",
+                      data: {
+                        y: toneCategory.result.data[config.dataPointIndex]
+                          .category_id,
+                        x: config.seriesIndex - 1,
+                      },
+                    });
+                  },
+                },
+                options: {
+                  colors: BarHorizontal.colors,
+                  plotOptions: {
+                    bar: {
+                      horizontal: false,
+                      borderRadius: 6,
+                    },
+                  },
+                  xaxis: {
+                    categories: toneCategory.result.data
+                      ? toneCategory.result.data
+                          .filter((item) => {
+                            if (item.tones.length > 0) {
+                              return 1;
+                            } else {
+                              return 0;
+                            }
+                          })
+                          .map((selected) => selected.category_id)
+                      : [],
+                      labels: {
+                        style: {
+                          colors: '#FFFFFF', // Ubah warna teks label sumbu-x menjadi putih
+                        },
+                      },
+                  },
+                  yaxis: {
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
+                  },
+                  legend: BarHorizontal.legend,
+                  tooltip: {
+                    theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                    fillSeriesColor: false, // Untuk mengisi warna tooltip
+                  },
+                },
+              }}
+            />
+          : null}
         </div>
       ),
     },
@@ -1666,39 +1679,41 @@ const Analytic = (pagination) => {
             <div
               style={{ overflowY: "auto", overflowX: "hidden", height: 270 }}
             >
+            {trendingHighLights ?
               <Row>
-                {trendingHighLights.result.data?.map((item) => {
-                  return (
-                    <Col span={24} key={item.article_id}>
-                      <ColumnList
-                        ellipsis
-                        // title={item.title}
-                        title={
-                          <Row>
-                            <Col span={24}>
-                              <span>{item.title}</span>
-                              <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
-                            </Col>
-                          </Row>
-                        }
-                        content={item.content}
-                        onClick={() => {
-                          getKeywordArticle({
-                            article_id: item.article_id,
-                          })
-                            .then((data) => data.json())
-                            .then((data) => {
-                              setTrendingDetail(item);
-                              setModalTrending(true);
-                              setKeyword(data.data);
+                  {trendingHighLights.result.data?.map((item) => {
+                    return (
+                      <Col span={24} key={item.article_id}>
+                        <ColumnList
+                          ellipsis
+                          // title={item.title}
+                          title={
+                            <Row>
+                              <Col span={24}>
+                                <span>{item.title}</span>
+                                <span style={{ fontSize: '12px', fontWeight: 'bold', display: 'block'}}>{item.datee}</span>
+                              </Col>
+                            </Row>
+                          }
+                          content={item.content}
+                          onClick={() => {
+                            getKeywordArticle({
+                              article_id: item.article_id,
                             })
-                            .catch((err) => console.log(err));
-                        }}
-                      />
-                    </Col>
-                  );
-                })}
+                              .then((data) => data.json())
+                              .then((data) => {
+                                setTrendingDetail(item);
+                                setModalTrending(true);
+                                setKeyword(data.data);
+                              })
+                              .catch((err) => console.log(err));
+                          }}
+                        />
+                      </Col>
+                    );
+                  })}
               </Row>
+              : null}
             </div>
           </Card>
           {/* <Row>
@@ -1754,99 +1769,101 @@ const Analytic = (pagination) => {
         </Col>
 
         <Col xs={24} md={24} lg={18}>
-          <Card onLoading={coverageTonality.loading}>
-            <div id="coverage-tonality-chart">
-              <SummaryTone
-                height={290}
-                charts={{
-                  events: {
-                    markerClick(e, chart, config) {
-                      return handleClikable({
-                        type: "tonality",
-                        page: 0,
-                        maxSize: 10,
-                        order_by: "datee",
-                        order: "desc",
-                        data: {
-                          x: config.seriesIndex - 1,
-                          y: ews.result.date[config.dataPointIndex],
-                        },
-                      });
-                    },
-                  },
-                  options: {
-                    title: {
-                      text: "Media Sentiment Breakdown",
-                      align: "left",
-                      offsetY: 5,
-                      floating: true,
-                      style: {
-                        fontSize: "14px",
-                        fontWeight: 500,
-                        color: "#fff",
+          {coverageTonality ?
+            <Card onLoading={coverageTonality.loading}>
+              <div id="coverage-tonality-chart">
+                <SummaryTone
+                  height={290}
+                  charts={{
+                    events: {
+                      markerClick(e, chart, config) {
+                        return handleClikable({
+                          type: "tonality",
+                          page: 0,
+                          maxSize: 10,
+                          order_by: "datee",
+                          order: "desc",
+                          data: {
+                            x: config.seriesIndex - 1,
+                            y: ews.result.date[config.dataPointIndex],
+                          },
+                        });
                       },
                     },
-                    tooltip: {
-                      shared: true,
-                    },
-                    markers: LineOptions.markers,
-                    xaxis: {
-                      labels: {
+                    options: {
+                      title: {
+                        text: "Media Sentiment Breakdown",
+                        align: "left",
+                        offsetY: 5,
+                        floating: true,
                         style: {
-                          colors: "#ffffff"
-                        }
-                      },
-                      categories: coverageTonality.result.data
-                        ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
-                            (item) => {
-                              return item.key_as_string;
-                            }
-                          )
-                        : [" "],
-                    },
-                    grid: {
-                      show: false, // Menghilangkan grid line dari sumbu-y
-                    },
-                    stroke: LineOptions.stroke,
-                    colors: ["#ff6b6b", "#1990ff", "#06d6a0"],
-                    yaxis: {
-                      labels: {
-                        style: {
-                          colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                          fontSize: "14px",
+                          fontWeight: 500,
+                          color: "#fff",
                         },
                       },
+                      tooltip: {
+                        shared: true,
+                      },
+                      markers: LineOptions.markers,
+                      xaxis: {
+                        labels: {
+                          style: {
+                            colors: "#ffffff"
+                          }
+                        },
+                        categories: coverageTonality.result.data
+                          ? coverageTonality.result.data.chart_bar[0].tone_per_day.buckets.map(
+                              (item) => {
+                                return item.key_as_string;
+                              }
+                            )
+                          : [" "],
+                      },
+                      grid: {
+                        show: false, // Menghilangkan grid line dari sumbu-y
+                      },
+                      stroke: LineOptions.stroke,
+                      colors: ["#ff6b6b", "#1990ff", "#06d6a0"],
+                      yaxis: {
+                        labels: {
+                          style: {
+                            colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                          },
+                        },
+                      },
+                      legend: {
+                        position: "top",
+                        horizontalAlign: "right",
+                        markers: LineOptions.legend.markers,
+                      },
+                      tooltip: {
+                        theme: 'dark', // Mengatur tema tooltip ke tema gelap
+                        fillSeriesColor: false, // Untuk mengisi warna tooltip
+                      },
                     },
-                    legend: {
-                      position: "top",
-                      horizontalAlign: "right",
-                      markers: LineOptions.legend.markers,
-                    },
-                    tooltip: {
-                      theme: 'dark', // Mengatur tema tooltip ke tema gelap
-                      fillSeriesColor: false, // Untuk mengisi warna tooltip
-                    },
-                  },
-                  series: coverageTonality.result.data
-                    ? coverageTonality.result.data.chart_bar
-                        .sort((a, b) => (a.key > b.key && 1) || -1)
-                        .map((item) => {
-                          return {
-                            name:
-                              item.key == 1
-                                ? "Positive"
-                                : item.key == -1
-                                ? "Negative"
-                                : "Neutral",
-                            data: item.tone_per_day.buckets.map(
-                              (bucket) => bucket.doc_count
-                            ),
-                          };
-                        })
-                    : [],
-                }}
-              />
-            </div>
-          </Card>
+                    series: coverageTonality.result.data
+                      ? coverageTonality.result.data.chart_bar
+                          .sort((a, b) => (a.key > b.key && 1) || -1)
+                          .map((item) => {
+                            return {
+                              name:
+                                item.key == 1
+                                  ? "Positive"
+                                  : item.key == -1
+                                  ? "Negative"
+                                  : "Neutral",
+                              data: item.tone_per_day.buckets.map(
+                                (bucket) => bucket.doc_count
+                              ),
+                            };
+                          })
+                      : [],
+                  }}
+                />
+              </div>
+            </Card>
+            : null}
         </Col>
 
         <Divider />

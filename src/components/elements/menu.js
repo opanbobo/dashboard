@@ -26,11 +26,11 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 
 	const [breakPoint, setbreakPoint] = useState();
 
-	const handleMenuClick = (item) => {
-    // Fungsi yang akan dipanggil saat menu diklik
-    console.log('Menu clicked:', item);
-    // Tambahkan logika navigasi atau yang diinginkan saat menu diklik
-  };
+	// const handleMenuClick = (item) => {
+  //   // Fungsi yang akan dipanggil saat menu diklik
+  //   console.log('Menu clicked:', item);
+  //   // Tambahkan logika navigasi atau yang diinginkan saat menu diklik
+  // };
 
 	useEffect(() => {
 		breakPointOberver(breakPoints, setbreakPoint);
@@ -58,8 +58,46 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 						{feature.map((item, index) => {
 							return (
 								<div key={index} title={item.text} placement='right'>
-									<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
-										<a className={`${styles['ant-menu-submenu-title']} ${router.pathname === item.link ? styles['menu-active'] : ''}`} href={item.link} passHref>
+									<Link href={item.link} passHref>
+										<a className={`${styles['feature-item']} mn ${router.pathname === item.link ? styles['menu-active'] : ''}`}>
+											<span className={`${styles['ant-menu-submenu-title']}`}>
+												<>
+													<ButtonMenu
+														className={`${styles['feature-button']} ${item.link}`}
+														style={{
+															background:
+																router.pathname == item.link
+																	? '#4b79be'
+																	: '' || item.id == 1
+																	? '#77a1b8'
+																	: '#ff6b6b' && item.id == 2
+																	? '#494e6d'
+																	: '#ff941d' && item.id == 3
+																	? '#ff941d'
+																	: '#1990ff',
+															color: router.pathname == item.link ? '#fff' : '' || item.id ? '#fff' : '',
+														}}
+														type={router.pathname == item.link ? 'primary' : 'ghost'}
+														icons={item.icon}
+													/>
+													{item.text}
+												</>
+											</span>
+										</a>
+									</Link>
+								</div>
+							);
+						})}
+					</div>
+				</Panel>
+			</Collapse>
+			<div className={styles['menu-feature']}>
+				{data.map((item, index) => {
+					return (
+						<div key={index} title={item.text} placement='right'>
+							<Link href={item.link} passHref>
+								<a className={`${styles['feature-item']} mn ${router.pathname === item.link ? styles['menu-active'] : ''}`}>
+									<span className={`${styles['ant-menu-submenu-title']}`}>
 											<>
 												<ButtonMenu
 													className={`${styles['feature-button']} ${item.link}`}
@@ -81,43 +119,9 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 												/>
 												{item.text}
 											</>
-										</a>
-									</div>
-								</div>
-							);
-						})}
-					</div>
-				</Panel>
-			</Collapse>
-			<div className={styles['menu-feature']}>
-				{data.map((item, index) => {
-					return (
-						<div key={index} title={item.text} placement='right'>
-							<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
-								<a className={`${styles['ant-menu-submenu-title']} ${router.pathname === item.link ? styles['menu-active'] : ''}`} href={item.link} passHref>
-									<>
-										<ButtonMenu
-											className={`${styles['feature-button']} ${item.link}`}
-											style={{
-												background:
-													router.pathname == item.link
-														? '#4b79be'
-														: '' || item.id == 1
-														? '#77a1b8'
-														: '#ff6b6b' && item.id == 2
-														? '#494e6d'
-														: '#ff941d' && item.id == 3
-														? '#ff941d'
-														: '#1990ff',
-												color: router.pathname == item.link ? '#fff' : '' || item.id ? '#fff' : '',
-											}}
-											type={router.pathname == item.link ? 'primary' : 'ghost'}
-											icons={item.icon}
-										/>
-										{item.text}
-									</>
+									</span>
 								</a>
-							</div>
+							</Link>
 						</div>
 					);
 				})}
@@ -125,8 +129,8 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 			
 			<div className={styles['menu-feature']}>
 				<div placement='right'>
-					<div className={`${styles['feature-item']} ant-menu-submenu ant-menu-submenu-inline`}>
-						<a className={`${styles['ant-menu-submenu-title']}`} onClick={handleLogout}>
+					<a className={`${styles['feature-item']} ant-menu-submenu-inline`} onClick={handleLogout}>
+						<span className={`${styles['ant-menu-submenu-title']}`}>
 							<>
 								<ButtonMenu
 									className={`${styles['feature-button']}`}
@@ -137,8 +141,8 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 								/>
 								Logout
 							</>
-						</a>
-					</div>
+						</span>
+					</a>
 				</div>
 			</div>
 		</div>

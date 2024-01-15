@@ -554,7 +554,7 @@ dispatch(
           onCancel: handleAnalyticDetailClose,
         }}
         onLoading={
-          articleData.type == "geo" ? geoList.loading : article.loading
+          articleData.type == "geo" ? geoList.loading : article?.loading
         }
         data={
           articleData.type == "geo"
@@ -568,7 +568,7 @@ dispatch(
                   };
                 })
               : []
-            : article.result.data
+            : article?.result?.data
             ? article.result.data.map((item) => {
                 return {
                   id: item.article_id,
@@ -583,12 +583,12 @@ dispatch(
           showSizeChanger: true,
           total:
             articleData.type == "geo"
-              ? geoList.result.recordsTotal
-              : article.result.recordsTotal,
+              ? geoList?.result?.recordsTotal
+              : article?.result?.recordsTotal,
           showTotal: (total) => `Total ${total} data`,
           defaultPageSize: articleData.maxSize
-            ? article.maxSize
-            : article.max_size,
+            ? article?.maxSize
+            : article?.max_size,
           defaultCurrent: articleData.page + 1,
           onChange: (page, pageSize) =>
             handleAnalyticDetail({
@@ -637,7 +637,7 @@ dispatch(
                     // style={{ height: "100%" }}
                     // bodyStyle={{ height: "100%" }}
                     data={
-                      mediaListCount.result.data
+                      mediaListCount?.result?.data
                         ? mediaListCount.result.data.map((item, index) => {
                             return item;
                           })
@@ -648,7 +648,7 @@ dispatch(
                       <div
                         className={styles2['list-item']}
                         >
-                        {mediaListCount.result.data ? 
+                        {mediaListCount?.result?.data ? 
                           <div className={styles2['item-total']}>{mediaListCount?.result?.data[0]?.total + mediaListCount?.result?.data[1]?.total + mediaListCount.result?.data[2]?.total}
                           </div>
                           :
