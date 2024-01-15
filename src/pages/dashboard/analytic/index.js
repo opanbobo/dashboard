@@ -1855,19 +1855,19 @@ const Analytic = (pagination) => {
         <Row>
         {
           filter.result.tonee === 1 ?
-          <Col xs={24} md={24} lg={8} xl={8}>
+          <Col xs={24}>
             <Card title={'Positive'}>
               <ModalChartHiddenPositive/>
             </Card>
           </Col>
           : filter.result.tonee === 0 ?
-          <Col xs={24} md={24} lg={8} xl={8}>
+          <Col xs={24}>
             <Card title={'Neutral'}>
               <ModalChartHiddenNeutral/>
             </Card>
           </Col>
           : filter.result.tonee === -1 ?
-          <Col xs={24} md={24} lg={8} xl={8}>
+          <Col xs={24}>
             <Card title={'negative'}>
               <ModalChartHiddenNegative/>
             </Card>

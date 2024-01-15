@@ -392,8 +392,8 @@ const DefaultLayout = ({
   useEffect(() => {
     dispatch(getFilterCategory());
     dispatch(getFilterMedia());
-    // dispatch(getFilterSubCategory(filter.result.category_set));
-    // dispatch(getFilterSubMedia(filter.result.user_media_type_id));
+    dispatch(getFilterSubCategory(filter.result.category_set));
+    dispatch(getFilterSubMedia(filter.result.user_media_type_id));
   }, []);
 
   const userToken = localStorage.getItem("userToken");

@@ -321,13 +321,6 @@ const ACTION_HANDLERS = {
 	},
 	[types.LOAD_ANALYTIC_ARTICLE_NEUTRAL]: (state) => {
 		return {
-			...state,
-			articlePositive: {
-				...state.articlePositive,
-				error: null,
-				loading: true,
-				loaded: false,
-			},
 			articleNeutral: {
 				...state.articleNeutral,
 				error: null,
