@@ -958,6 +958,11 @@ const Analytic = (pagination) => {
                       // colors: ['#36414c', '#1990ff', '#06d6a0', '#ff6b6b', '#ffe66d', '#e76f51', '#495867'],
                       markers: LineOptions.markers,
                       xaxis: {
+                        labels: {
+                          style: {
+                            colors: "#ffffff"
+                          }
+                        },
                         categories:
                           mediaVisibility?.result?.data?.length > 0
                             ? mediaVisibility?.result?.data[0].category_id_per_day.buckets.map(
@@ -967,7 +972,23 @@ const Analytic = (pagination) => {
                               )
                             : [],
                       },
-                      legend: LineOptions.legend,
+                      yaxis: {
+                        labels: {
+                          style: {
+                            colors: "#ffffff" // Set the color of y-axis labels to white
+                          }
+                        },
+                        axisBorder: {
+                          show: true,
+                          color: "#ffffff" // Set the color of the y-axis border to white
+                        },
+                      },
+                      legend: {
+                        labels: {
+                          colors: "#ffffff", // Set the color of legend text to white
+                        },
+                        ...LineOptions.legend, // Include other legend options if needed
+                      },
                       tooltip: {
                         theme: 'dark', // Mengatur tema tooltip ke tema gelap
                         fillSeriesColor: false, // Untuk mengisi warna tooltip
@@ -995,6 +1016,11 @@ const Analytic = (pagination) => {
                       labels: mediaVisibility?.result?.data
                         ? mediaVisibility?.result?.data.map((item) => item.key)
                         : [],
+                      legend: {
+                        labels: {
+                          colors: "#ffffff", // Set the color of legend series text to white
+                        },
+                      },  
                     },
                     chartOptions: {
                       type: "pie",
@@ -1054,6 +1080,10 @@ const Analytic = (pagination) => {
                         },
                       },
                       legend: BarHorizontal.legend,
+                      theme: {
+                        mode: 'dark', // Change the theme mode to dark
+                        palette: 'palette1', // Choose a palette that suits your needs
+                      },
                     },
                   }}
                 />
@@ -1081,6 +1111,9 @@ const Analytic = (pagination) => {
                           : [],
                       },
                       legend: BarHorizontal.legend,
+                      theme: {
+                        mode: 'dark', // Change the theme mode to dark
+                      },
                     },
                   }}
                 />
@@ -1121,6 +1154,9 @@ const Analytic = (pagination) => {
                           : [],
                       },
                       legend: BarHorizontal.legend,
+                      theme: {
+                        mode: 'dark', // Change the theme mode to dark
+                      },
                     },
                   }}
                 />
@@ -1163,6 +1199,9 @@ const Analytic = (pagination) => {
                             }
                           },
                         },
+                      },
+                      theme: {
+                        mode: 'dark', // Change the theme mode to dark
                       },
                     },
                   }}
