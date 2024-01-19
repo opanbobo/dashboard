@@ -85,9 +85,9 @@ const ModalChartList = ({
 													}}
 												>
 													<div style={{ fontWeight: 600, textTransform: 'initial' }}>
-														{item.media.length > 0 ? item.media : 'undefined'}
+														{item?.media?.length > 0 ? item.media : 'undefined'}
 													</div>
-													<div>{item.datee.length > 0 ? item.datee.split('T').join(' ') : 'undefined'}</div>
+													<div>{item?.datee?.length > 0 ? item.datee.split('T').join(' ') : 'undefined'}</div>
 												</div>
 												<div style={textEllipis}>{item.content}</div>
 											</Col>
