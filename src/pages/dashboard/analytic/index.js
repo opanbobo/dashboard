@@ -1071,6 +1071,11 @@ const Analytic = (pagination) => {
                               (bucket) => bucket.key_as_string
                             )
                           : [],
+                        labels: {
+                          style: {
+                            colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                          },
+                        },
                       },
                       yaxis: {
                         labels: {
@@ -1109,6 +1114,11 @@ const Analytic = (pagination) => {
                         categories: toneMedia?.result?.data
                           ? toneMedia?.result?.data.map((item) => item.media_name)
                           : [],
+                        labels: {
+                          style: {
+                            colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                          },
+                        },
                       },
                       legend: BarHorizontal.legend,
                       theme: {
@@ -1446,6 +1456,11 @@ const Analytic = (pagination) => {
                           (bucket) => bucket.key_as_string
                         )
                       : [],
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
                   },
                   yaxis: {
                     labels: {
@@ -1537,6 +1552,11 @@ const Analytic = (pagination) => {
                     categories: toneMedia.result.data
                       ? toneMedia.result.data.map((item) => item.media_name)
                       : [],
+                    labels: {
+                      style: {
+                        colors: '#FFFFFF', // Ubah warna teks label sumbu-y menjadi putih
+                      },
+                    },
                   },
                   yaxis: {
                     labels: {
