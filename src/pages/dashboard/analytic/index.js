@@ -226,44 +226,6 @@ const Analytic = (pagination) => {
   }
   
   const loadedFetch = (body) => {
-    const bodyDateStart = body.data.x;
-    let bodyDateEnd = body.data.x;
-    const tempD = new Date(body.data.x);
-
-    const bodyDateStartY = body.data.y;
-    let bodyDateEndY = body.data.y;
-    const tempDY = new Date(body.data.y);
-
-    const d1 = new Date(filter.result.start_date);
-    const d2 = new Date(filter.result.end_date);
-
-    if (Math.abs(d1 - d2) / 86400000 > 31) {
-      if (body.type !== "tonality") {
-        let month = body.data.x.split("-");
-
-        const lastDayOfMonth = new Date(
-          tempD.getFullYear(),
-          tempD.getMonth() + 1,
-          0
-        ).getDate();
-        month[2] = lastDayOfMonth;
-        month = month.join("-");
-        bodyDateEnd = month;
-      } else {
-        let monthY = body.data.y.split("-");
-
-        const lastDayOfMonthY = new Date(
-          tempDY.getFullYear(),
-          tempDY.getMonth() + 1,
-          0
-        ).getDate();
-
-        monthY[2] = lastDayOfMonthY;
-        monthY = monthY.join("-");
-        bodyDateEndY = monthY;
-      }
-    }
-
     if (body.type == "article-positive") {
       dispatch(
         getAnalyticArticlePositive({
@@ -593,7 +555,6 @@ const Analytic = (pagination) => {
   };
 
   const ModalChartHiddenNeutral = () => {
-    console.log(analytic);
     return (
       articleNeutral?.result?.data ?
         <InsideBox
@@ -632,7 +593,6 @@ const Analytic = (pagination) => {
   };
 
   const ModalChartHiddenNegative = () => {
-    console.log(analytic);
     return (
       articleNegative?.result?.data ?
         <InsideBox
@@ -671,30 +631,28 @@ const Analytic = (pagination) => {
   };
 
   const ModalChart = () => {
-    console.log(articleData);
     return (
-      articleData?.result?.data ?
         <Popchart
           onDetailClick={(e) => {
             setArticleDetail(e);
             setDetailOpen(true);
           }}
-          onLoading={article.loading}
+          onLoading={article?.loading}
           modal={{
             title: `Article List ${
-              articleData.desc
+              articleData?.desc
                 ? "(" +
-                  Object.keys(articleData.desc).map(
-                    (key) => key + ": " + articleData.desc[key]
+                  Object.keys(articleData?.desc).map(
+                    (key) => key + ": " + articleData?.desc[key]
                   ) +
                   ")"
                 : ""
             }`,
-            visible: modal && !article.loading,
+            visible: modal && !article?.loading,
             close: () => setModal(false),
           }}
           data={
-            article.result.data?.map((item) => {
+            article?.result?.data?.map((item) => {
               return {
                 id: item.article_id,
                 title: item.title,
@@ -705,10 +663,10 @@ const Analytic = (pagination) => {
           }
           pagination={{
             showSizeChanger: true,
-            total: article.result.recordsTotal || 0,
-            showTotal: (total) => `Total ${article.result.recordsTotal} data`,
-            defaultPageSize: articleData.maxSize || 0,
-            defaultCurrent: articleData.page + 1 || 0,
+            total: article?.result?.recordsTotal || 0,
+            showTotal: (total) => `Total ${article?.result?.recordsTotal} data`,
+            defaultPageSize: articleData?.maxSize || 0,
+            defaultCurrent: articleData?.page + 1 || 0,
             onChange: (page, pageSize) =>
               handleClikable({
                 ...articleData,
@@ -717,7 +675,6 @@ const Analytic = (pagination) => {
               }),
           }}
         />
-      : null
     );
   };
 
