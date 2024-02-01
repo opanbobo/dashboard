@@ -883,9 +883,7 @@ dispatch(
         charts={{
           data: toneMedia.result.data || [],
           onDonutClick: function (index, config) {
-          console.log(index, config.globals.selectedDataPoints, 'fcks 2');
-
-          if (config.globals.selectedDataPoints && config.globals.selectedDataPoints[0] && config.globals.selectedDataPoints[0][0] !== undefined) {
+          if (config.globals.selectedDataPoints[0][0] !== undefined) {
               handleAnalyticDetail({
                 type: "media",
                 page: 0,

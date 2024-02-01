@@ -34,8 +34,7 @@ const MediaTone = ({ className, charts, activeTone, ...props }) => {
           colors: ['#0bbd91', '#df6264', '#1b81e2'],
           width: 100,
           tooltip: {
-            theme: 'light',
-            fillSeriesColor: true,
+            enabled: false
           },
           legend: {
             position: 'top',
