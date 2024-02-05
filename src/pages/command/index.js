@@ -318,7 +318,12 @@ dispatch(
       maxSize: body.maxSize,
       page: body.page,
       media_id: toneMedia.result.data[body.data.x].media_id,
-      tone: `${body.data.y - 1}`,
+      tone: 
+        body.data.y === 2
+          ? 0
+          : body.data.y === 0
+          ? 1
+          : -1
     })
   );
 
@@ -327,10 +332,10 @@ dispatch(
     desc: {
       media: toneMedia.result.data[body.data.x].media_name,
       tone:
-        body.data.y - 1 === 1
-          ? "Positive"
-          : body.data.y === 0
+        body.data.y === 2
           ? "Neutral"
+          : body.data.y === 0
+          ? "Positive"
           : "Negative",
     },
   });
@@ -879,11 +884,13 @@ dispatch(
                           borderRadius: 3,
                         }}>
      <MediaTone
-        activeTone={filter.result.tonee === 1 ? "Positive" : filter.result.tonee === 0 ? "Neutral" : filter.result.tonee === -1 ? "Negative" : undefined}
+        activeTone={filter.result.tonee === 0 ? "Positive" : filter.result.tonee === 2 ? "Neutral" : filter.result.tonee === 1 ? "Negative" : undefined}
         charts={{
           data: toneMedia.result.data || [],
           onDonutClick: function (index, config) {
+            console.log(toneMedia.result.data);
           if (config.globals.selectedDataPoints[0][0] !== undefined) {
+              console.log(config.globals.selectedDataPoints[0][0]);
               handleAnalyticDetail({
                 type: "media",
                 page: 0,
@@ -898,7 +905,6 @@ dispatch(
             }
           },
           chartOptions: {
-            labels: ['Positive', 'Negative', 'Neutral'],
             width: 100,
             tooltip: {
               theme: 'light',

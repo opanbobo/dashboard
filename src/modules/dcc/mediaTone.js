@@ -7,8 +7,22 @@ const MediaTone = ({ className, charts, activeTone, ...props }) => {
   return (
     <Row>
       {data.map((item, index) => {
-        const total = item.tones.reduce((sum, tone) => sum + Object.values(tone)[0], 0);
-        const percentages = item.tones.map((tone) => (Object.values(tone)[0] / total) * 100);
+        // Calculate total sum of magnitudes
+        const total = item.tones.reduce((sum, tone) => {
+          const value = Object.values(tone)[0];
+          return sum + Math.abs(value); // Use absolute value to handle negative magnitudes
+        }, 0);
+
+        // Calculate percentages based on total sum of magnitudes
+        let percentages;
+        if (activeTone !== undefined) {
+          percentages = item.tones.map((tone) => {
+            const value = Object.values(tone)[0];
+            return (Object.keys(tone)[0] === activeTone) ? (Math.abs(value) / total) * 100 : 0;
+          });
+        } else {
+          percentages = item.tones.map((tone) => (Math.abs(Object.values(tone)[0]) / total) * 100);
+        }
 
         const chartOptions = {
           chart: {
@@ -16,7 +30,7 @@ const MediaTone = ({ className, charts, activeTone, ...props }) => {
             events: {
               click: function (e, chart, config) {
                 onDonutClick(index, config);
-                console.log(config, 'tae');
+                console.log(item.tones);
               },
             },
           },
@@ -30,8 +44,8 @@ const MediaTone = ({ className, charts, activeTone, ...props }) => {
               color: '#fff',
             },
           },
-          labels: ['Neutral', 'Negative', 'Positive'],
-          colors: ['#0bbd91', '#df6264', '#1b81e2'],
+          labels: ['Positive', 'Negative', 'Neutral'], // Adjust label order here
+          colors: ['#1b81e2', '#df6264', '#0bbd91'], // Adjust colors order if necessary
           width: 100,
           tooltip: {
             enabled: false
@@ -81,18 +95,6 @@ const MediaTone = ({ className, charts, activeTone, ...props }) => {
             })),
           },
         };
-
-        if(activeTone !== undefined) {
-          console.log(activeTone);
-          const activeIndex = chartOptions.labels.indexOf(activeTone);
-          percentages.forEach((percentage, i) => {
-            if (i !== activeIndex) {
-              percentages[i] = 0;
-            }
-          });
-        }else{
-          percentages = item.tones.map((tone) => (Object.values(tone)[0] / total) * 100);
-        }
 
         return (
           <Col xl={12} md={12} key={index}>
