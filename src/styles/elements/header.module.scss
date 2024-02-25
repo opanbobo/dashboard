@@ -28,7 +28,7 @@
 					border: none;
 					border-radius: 6px;
 					background: none;
-				  color: #fff;
+				  color: #30bcec;
 
 					&-search {
 						background: rgba($color: color(blue, base), $alpha: 0.2);
@@ -67,6 +67,7 @@
 	.head-anticon-menu{
 		cursor: pointer;
 		font-size: 20px;
+		color: #30bcec;
 	}
 
 }
