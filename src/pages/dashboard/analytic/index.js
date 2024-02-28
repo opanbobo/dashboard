@@ -166,7 +166,7 @@ const Analytic = (pagination) => {
 
   useEffect(() => {
     dataPointSelectionPositive();
-    dataPointSelectionNetral();
+    dataPointSelectionNeutral();
     dataPointSelectionNegative();
 
   }, [])
@@ -211,7 +211,7 @@ const Analytic = (pagination) => {
     });
   }
 
-  const dataPointSelectionNetral = (e, chart, config) => {
+  const dataPointSelectionNeutral = (e, chart, config) => {
     return loadedFetch({
       type: "article-neutral",
       page: 0,
@@ -227,61 +227,67 @@ const Analytic = (pagination) => {
   
   const loadedFetch = (body) => {
     if (body.type == "article-positive") {
-      dispatch(
-        getAnalyticArticlePositive({
-          ...filter.result,
-          tone: 1,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-      
-      setArticleDataPositive({
-        ...body,
-        desc: {
-          Tone: "Positive"
-        },
-      });
+      setTimeout(() => {
+        dispatch(
+          getAnalyticArticlePositive({
+            ...filter.result,
+            tone: 1,
+            start_date: filter.result.start_date,
+            end_date: filter.result.end_date,
+            page: body.page,
+            maxSize: body.maxSize,
+          })
+        );
+        
+        setArticleDataPositive({
+          ...body,
+          desc: {
+            Tone: "Positive"
+          },
+        });
+      }, 100);
 
     } else if (body.type == "article-negative") {
-      dispatch(
-        getAnalyticArticleNegative({
-          ...filter.result,
-          tone: -1,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleDataNegative({
-        ...body,
-        desc: {
-          Tone: "Negative"
-        },
-      });
+      setTimeout(() => {
+        dispatch(
+          getAnalyticArticleNegative({
+            ...filter.result,
+            tone: -1,
+            start_date: filter.result.start_date,
+            end_date: filter.result.end_date,
+            page: body.page,
+            maxSize: body.maxSize,
+          })
+        );
+        
+        setArticleDataNegative({
+          ...body,
+          desc: {
+            Tone: "Negative"
+          },
+        });
+      }, 100);
 
     } else if (body.type == "article-neutral") {
-      dispatch(
-        getAnalyticArticleNeutral({
-          ...filter.result,
-          tone: 0,
-          start_date: filter.result.start_date,
-          end_date: filter.result.end_date,
-          page: body.page,
-          maxSize: body.maxSize,
-        })
-      );
-
-      setArticleDataNeutral({
-        ...body,
-        desc: {
-          Tone: "Neutral"
-        },
-      });
+      setTimeout(() => {
+        dispatch(
+          getAnalyticArticleNeutral({
+            ...filter.result,
+            tone: 0,
+            start_date: filter.result.start_date,
+            end_date: filter.result.end_date,
+            page: body.page,
+            maxSize: body.maxSize,
+          })
+        );
+        
+        setArticleDataNeutral({
+          ...body,
+          desc: {
+            Tone: "Neutral"
+          },
+        });
+      }, 100);
     }
 
     setModalHidden(true);
@@ -582,7 +588,7 @@ const Analytic = (pagination) => {
             onChange: (page, pageSize) =>
               loadedFetch({
                 ...articleDataNeutral,
-                type: "article-neutral",
+                type: "article-Neutral",
                 page: page - 1,
                 maxSize: pageSize,
               }),
@@ -618,9 +624,9 @@ const Analytic = (pagination) => {
             defaultPageSize: articleDataNegative.maxSize || 0,
             defaultCurrent: articleDataNegative.page + 1 || 0,
             onChange: (page, pageSize) =>
-              handleClikable({
+              loadedFetch({
                 ...articleDataNegative,
-                type: "article-negative",
+                type: "article-Negative",
                 page: page - 1,
                 maxSize: pageSize,
               }),

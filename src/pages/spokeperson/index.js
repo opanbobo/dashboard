@@ -492,7 +492,7 @@ const Spokeperson = () => {
                         name: "neutral",
                         data: spokepersonStatistic.result.data
                           ? spokepersonStatistic.result.data.map((item) => {
-                              return item.count.netral;
+                              return item.count.neutral;
                             })
                           : [],
                       },
@@ -774,7 +774,7 @@ const Spokeperson = () => {
                     name: "neutral",
                     data: spokepersonStatistic.result.data
                       ? spokepersonStatistic.result.data.map((item) => {
-                          return item.count.netral;
+                          return item.count.neutral;
                         })
                       : [],
                   },
