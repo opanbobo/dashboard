@@ -154,22 +154,19 @@ const Analytic = (pagination) => {
 
     dispatch(getEWS(filter.result));
 
-    // coverageTonality.result.data
-    // ? coverageTonality.result.data.chart_bar
-    //     .sort((a, b) => (a.key > b.key && 1) || -1)
-    //     .map((item) => {
-    //       return item.doc_count;
-    //     })
-    // : [],
+    dataPointSelectionPositive(filter.result);
+    dataPointSelectionNeutral(filter.result);
+    dataPointSelectionNegative(filter.result);
+
+    coverageTonality.result.data
+    ? coverageTonality.result.data.chart_bar
+        .sort((a, b) => (a.key > b.key && 1) || -1)
+        .map((item) => {
+          return item.doc_count;
+        })
+    : []
   
   },[filter])
-
-  useEffect(() => {
-    dataPointSelectionPositive();
-    dataPointSelectionNeutral();
-    dataPointSelectionNegative();
-
-  }, [])
 
   useEffect(() => {
     setTimeout(() => {
