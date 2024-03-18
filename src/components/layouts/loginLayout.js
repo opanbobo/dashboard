@@ -21,7 +21,7 @@ const LoginLayout = ({ children, logo }) => {
 		<div className={styles['layout-auth']}>
 			<div className={styles['auth-head']}>
 				{/* <MainHeader logo={logoType == LogoArta ? logoType : 'https://admin.antara-insight.id/asset/images/company/agraria.png'} loginHeader showToggleMenu={false}/> */}
-				<Image src={Logos} alt='login logo' width={150} height={150}/>
+				<Image src={Logos} alt='login logo' />
 			</div>
 			<div className={styles["head-item-toolbar"]}>
           <div className={styles["toolbar-item"]}>

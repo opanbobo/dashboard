@@ -19,7 +19,7 @@ const SpokeList = ({ className, title, data, ...props }) => {
 								<Image
 									src={item.image}
 									layout='fill'
-									objectFit='cover'
+									objectFit='contain'
 									alt='headLogo'
 									height={120}
 									width={120}

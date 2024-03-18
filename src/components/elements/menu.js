@@ -48,7 +48,7 @@ const Menu = ({ className, feature, data, logo, onClick, ...props }) => {
 		<div className={`${styles['menu-wrapper']} ${className}`} {...props}>
 			<div className={styles['menu-head']}>
 				<div className={styles['head-item']}>
-					<Image src={logo} objectFit='cover' alt='headLogo' height={100} width={100} priority='true' />
+					<Image src={logo} objectFit='contain' alt='headLogo' height={100} width={100} priority='true' />
 				</div>
         <CloseOutlined className={styles["close-menu"]} onClick={onClick}/>
 			</div>
