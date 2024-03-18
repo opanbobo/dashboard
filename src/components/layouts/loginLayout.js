@@ -1,7 +1,7 @@
 import styles from 'styles/layout/login.module.scss';
 import { MainHeader, Image, Button } from 'components';
 
-import Logos from 'assets/images/logo-icon.png';
+import Logos from 'assets/images/ivo.png';
 import LogoArta from 'assets/images/asp.png';
 import Tirto from 'assets/images/tirto.png';
 import vector from 'assets/images/vectorLogin.png';

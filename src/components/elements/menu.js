@@ -11,7 +11,7 @@ import Image from 'next/image';
 const { Panel } = Collapse;
 
 import breakPointOberver from 'constant/mediaQuery';
-import logotai from '../../../public/images/logo-icon.png';
+import logotai from '../../../public/images/ivo.png';
 
 const breakPoints = {
 	tablet: '(min-width: 300px) and (max-width: 1023px)',

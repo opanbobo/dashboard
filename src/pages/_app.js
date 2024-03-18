@@ -8,7 +8,7 @@ import { useStore } from "store";
 import { notification } from "components";
 
 import ClientLogo from "assets/images/mock-logo.png";
-import staticLogo from "assets/images/logo-icon.png";
+import staticLogo from "assets/images/ivo.png";
 
 import DefaultLayout from "components/layouts/default";
 import LoginLayout from "components/layouts/loginLayout";
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
   const showHeader = router.pathname == "/command" ? true : true;
   const addClass = router.pathname == "/command" ? true : false;
   const showLogo =
-    router.pathname == "/admin" ? "/static/logo-icon.png" : ClientLogo;
+    router.pathname == "/admin" ? "/static/ivo.png" : ClientLogo;
   const store = useStore(pageProps.initialReduxState);
   const [log, setLog] = useState(false);
 

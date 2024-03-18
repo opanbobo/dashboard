@@ -18,7 +18,7 @@ import { routes, feature } from "constant/routes";
 // import 'moment/locale/id';
 // import locale from 'antd/es/date-picker/locale/id_ID';
 
-import Logo from "assets/images/logo-icon.png";
+import Logo from "assets/images/ivo.png";
 import LogoArta from "assets/images/asp.png";
 import styles from "styles/layout/default.module.scss";
 import { filtertoneMock } from "constant/mock/data";
