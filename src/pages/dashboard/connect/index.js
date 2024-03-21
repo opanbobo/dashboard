@@ -198,7 +198,7 @@ const Connect = () => {
 			<Row>
 				<Col span={24}>
 					<Row>
-						<Col span={12}>
+						<Col span={12} className="text-black">
 							<Form.Item>
 								<label htmlFor='headline'>Headline</label>
 								<Input
@@ -232,7 +232,7 @@ const Connect = () => {
 											})
 										}
 										value={upload.client_email}
-										placeholder='cc AI-connect'
+										placeholder=''
 									/>
 								</Form.Item>
 							) : null}
@@ -290,7 +290,7 @@ const Connect = () => {
 								/>
 							</Form.Item>
 						</Col>
-						<Col span={12}>
+						<Col span={12} className="text-black">
 							<Form.Item>
 								<label htmlFor='radio'>Media Select</label>
 								<MediaSelect
@@ -318,7 +318,7 @@ const Connect = () => {
 						</Col>
 					</Row>
 				</Col>
-				<Col span={24}>
+				<Col span={24} className="text-black">
 					<Form.Item>
 						<label htmlFor='radio'>Content</label>
 						{/* <ReactQuill theme="snow" defaultValue={upload.content} onChange={(e) =>

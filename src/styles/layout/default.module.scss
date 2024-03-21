@@ -16,6 +16,8 @@
 		overflow: hidden;
 	}
 
+
+
 	// YUDI
 	// grid-template: 1fr / 60px 1fr;
 	grid-template: 1fr/156px 1fr;
@@ -202,6 +204,15 @@
 	
 	:global{
 
+		.text-black{
+			label{
+				color: #000 !important;
+			}
+			.ant-form input[type="file"] {
+				color: #000 !important;
+			}
+			
+		}
 		.ant-table-tbody > tr > td{
 			background-color: #2b2d3e;
 		}
@@ -281,7 +292,7 @@
 		}
 
 		.ant-checkbox + span, .ant-col-24{
-			color: #fff;
+			// color: #fff;
 		}
 		.ant-card-small > .ant-card-head > .ant-card-head-wrapper > .ant-card-head-title{
 			color: #fff;
